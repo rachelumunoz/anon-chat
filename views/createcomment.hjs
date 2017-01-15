@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Create Zone</h1>
+    <form action="/api/comment" method="post">
+      <input type="text" name="username" placeholder="username"></br>
+      <input type="text" name="body" placeholder="comment"></br>
+      <input type="Submit" value="Create Comment">
+    </form>
+  </body>
+</html>
