@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Comment from '../presentational/Comment'
-import request from 'superagent'
+import {APIManager} from '../../utils'
 
 import styles from './styles'
 
@@ -21,36 +21,32 @@ class Comments extends Component {
   }
 
   componentDidMount(){
-    request
-      .get('/api/comment')
-      .query(null)
-      .set('Accept', 'application/json')
-      .end((err, res)=>{
-        if (err){
-          alert("err" + err)
+    APIManager.get('/api/comment', null, (err, res)=>{
+      if (err){
+          alert("err" + err.message)
           return
         }
-
-        let results = res.body.results
-
-        this.setState({
-          list: results
+      this.setState({
+          list: res.body.results
         })
-      })
+    })
   }
 
   submitComment(){
-    console.log(JSON.stringify(this.state.comment))
-
+    // console.log(JSON.stringify(this.state.comment))
     let updatedList = Object.assign([], this.state.list)
     updatedList.push(this.state.comment)
+
+    this.refs.username.value = ''
+    this.refs.body.value = ''
+    
     this.setState({
       list: updatedList
     })
   }
 
   updateUsername(){
-    console.log(this.refs.username.value)
+    // console.log(this.refs.username.value)
     
     let updatedComment = Object.assign({}, this.state.comment)
     updatedComment['username'] = this.refs.username.value
@@ -61,7 +57,6 @@ class Comments extends Component {
   }
 
   updateBody(){
-    console.log(this.refs.body.value)
     let updatedComment = Object.assign({}, this.state.comment)
     updatedComment['body'] = this.refs.body.value
     this.setState({

@@ -21540,7 +21540,7 @@
 	
 	var _Zones2 = _interopRequireDefault(_Zones);
 	
-	var _Comments = __webpack_require__(189);
+	var _Comments = __webpack_require__(191);
 	
 	var _Comments2 = _interopRequireDefault(_Comments);
 	
@@ -21610,9 +21610,7 @@
 	
 	var _Zone2 = _interopRequireDefault(_Zone);
 	
-	var _superagent = __webpack_require__(182);
-	
-	var _superagent2 = _interopRequireDefault(_superagent);
+	var _utils = __webpack_require__(182);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21646,38 +21644,44 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 	
-	      _superagent2.default.get('/api/zone').query(null).set('Accept', 'application/json').end(function (err, res) {
+	      _utils.APIManager.get('/api/zone', null, function (err, res) {
 	        if (err) {
-	          alert('err' + err);
+	          console.log('error', err.message);
 	          return;
 	        }
-	        var results = res.body.results;
 	
 	        _this2.setState({
-	          list: results
+	          list: res.body.results
 	        });
 	      });
 	    }
 	  }, {
 	    key: 'addZone',
 	    value: function addZone() {
+	      var _this3 = this;
+	
 	      var updatedZone = Object.assign({}, this.state.zone);
 	      updatedZone['name'] = this.refs.zoneName.value;
-	      updatedZone['zipCodes'] = this.refs.zipCodes.value;
+	      updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",");
 	
-	      var updatedZones = Object.assign([], this.state.list);
-	      updatedZones.push(updatedZone);
-	
-	      this.refs.zoneName.value = '';
-	      this.refs.zipCodes.value = '';
-	
-	      this.setState({
-	        list: updatedZones
+	      _utils.APIManager.post('/api/zone', updatedZone, function (err, res) {
+	        if (err) {
+	          console.log('error', err.mesesage);
+	          return;
+	        }
+	        var updatedZones = Object.assign([], _this3.state.list);
+	        updatedZones.push(updatedZone);
+	        _this3.setState({
+	          list: updatedZones
+	        });
+	        _this3.refs.zoneName.value = '';
+	        _this3.refs.zipCodes.value = '';
 	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	
 	      var listItems = this.state.list.map(function (zone, i) {
 	        return _react2.default.createElement(
 	          'div',
@@ -21833,6 +21837,82 @@
 /* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.APIManager = undefined;
+	
+	var _APIManager = __webpack_require__(183);
+	
+	var _APIManager2 = _interopRequireDefault(_APIManager);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.APIManager = _APIManager2.default;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _superagent = __webpack_require__(184);
+	
+	var _superagent2 = _interopRequireDefault(_superagent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	
+	  get: function get(url, params, callback) {
+	    _superagent2.default.get(url).query(params).set('Accept', 'application/json').end(function (err, res) {
+	      if (err) {
+	        callback({ message: err }, null);
+	        return;
+	      }
+	
+	      var confirmation = res.body.confirmation;
+	      if (confirmation !== 'success') {
+	        callback(res.body.message, null);
+	        return;
+	      }
+	      callback(null, res);
+	    });
+	  },
+	
+	  post: function post(url, body, callback) {
+	    _superagent2.default.post(url).send(body).set('Accept', 'application/json').end(function (err, res) {
+	      if (err) {
+	        callback(err, null);
+	        return;
+	      }
+	
+	      var confirmation = res.body.confirmation;
+	      if (confirmation !== 'success') {
+	        callback({ message: res.body.message }, null);
+	        return;
+	      }
+	
+	      callback(null, res);
+	    });
+	  },
+	
+	  put: function put() {},
+	
+	  delete: function _delete() {}
+	
+	};
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * Root reference for iframes.
 	 */
@@ -21847,11 +21927,11 @@
 	  root = this;
 	}
 	
-	var Emitter = __webpack_require__(183);
-	var RequestBase = __webpack_require__(184);
-	var isObject = __webpack_require__(185);
-	var isFunction = __webpack_require__(186);
-	var ResponseBase = __webpack_require__(187);
+	var Emitter = __webpack_require__(185);
+	var RequestBase = __webpack_require__(186);
+	var isObject = __webpack_require__(187);
+	var isFunction = __webpack_require__(188);
+	var ResponseBase = __webpack_require__(189);
 	
 	/**
 	 * Noop.
@@ -22745,7 +22825,7 @@
 
 
 /***/ },
-/* 183 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -22914,13 +22994,13 @@
 
 
 /***/ },
-/* 184 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(185);
+	var isObject = __webpack_require__(187);
 	
 	/**
 	 * Expose `RequestBase`.
@@ -23462,7 +23542,7 @@
 
 
 /***/ },
-/* 185 */
+/* 187 */
 /***/ function(module, exports) {
 
 	/**
@@ -23481,7 +23561,7 @@
 
 
 /***/ },
-/* 186 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23491,7 +23571,7 @@
 	 * @return {Boolean}
 	 * @api private
 	 */
-	var isObject = __webpack_require__(185);
+	var isObject = __webpack_require__(187);
 	
 	function isFunction(fn) {
 	  var tag = isObject(fn) ? Object.prototype.toString.call(fn) : '';
@@ -23502,7 +23582,7 @@
 
 
 /***/ },
-/* 187 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -23510,7 +23590,7 @@
 	 * Module dependencies.
 	 */
 	
-	var utils = __webpack_require__(188);
+	var utils = __webpack_require__(190);
 	
 	/**
 	 * Expose `ResponseBase`.
@@ -23641,7 +23721,7 @@
 
 
 /***/ },
-/* 188 */
+/* 190 */
 /***/ function(module, exports) {
 
 	
@@ -23715,7 +23795,7 @@
 
 
 /***/ },
-/* 189 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23730,15 +23810,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Comment = __webpack_require__(190);
+	var _Comment = __webpack_require__(192);
 	
 	var _Comment2 = _interopRequireDefault(_Comment);
 	
-	var _superagent = __webpack_require__(182);
+	var _utils = __webpack_require__(182);
 	
-	var _superagent2 = _interopRequireDefault(_superagent);
-	
-	var _styles = __webpack_require__(191);
+	var _styles = __webpack_require__(193);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -23775,26 +23853,26 @@
 	    value: function componentDidMount() {
 	      var _this2 = this;
 	
-	      _superagent2.default.get('/api/comment').query(null).set('Accept', 'application/json').end(function (err, res) {
+	      _utils.APIManager.get('/api/comment', null, function (err, res) {
 	        if (err) {
-	          alert("err" + err);
+	          alert("err" + err.message);
 	          return;
 	        }
-	
-	        var results = res.body.results;
-	
 	        _this2.setState({
-	          list: results
+	          list: res.body.results
 	        });
 	      });
 	    }
 	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
-	      console.log(JSON.stringify(this.state.comment));
-	
+	      // console.log(JSON.stringify(this.state.comment))
 	      var updatedList = Object.assign([], this.state.list);
 	      updatedList.push(this.state.comment);
+	
+	      this.refs.username.value = '';
+	      this.refs.body.value = '';
+	
 	      this.setState({
 	        list: updatedList
 	      });
@@ -23802,7 +23880,7 @@
 	  }, {
 	    key: 'updateUsername',
 	    value: function updateUsername() {
-	      console.log(this.refs.username.value);
+	      // console.log(this.refs.username.value)
 	
 	      var updatedComment = Object.assign({}, this.state.comment);
 	      updatedComment['username'] = this.refs.username.value;
@@ -23814,7 +23892,6 @@
 	  }, {
 	    key: 'updateBody',
 	    value: function updateBody() {
-	      console.log(this.refs.body.value);
 	      var updatedComment = Object.assign({}, this.state.comment);
 	      updatedComment['body'] = this.refs.body.value;
 	      this.setState({
@@ -23875,7 +23952,7 @@
 	exports.default = Comments;
 
 /***/ },
-/* 190 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23949,7 +24026,7 @@
 	exports.default = Comment;
 
 /***/ },
-/* 191 */
+/* 193 */
 /***/ function(module, exports) {
 
 	'use strict';
