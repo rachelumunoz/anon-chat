@@ -21669,8 +21669,10 @@
 	          console.log('error', err.mesesage);
 	          return;
 	        }
+	
 	        var updatedZones = Object.assign([], _this3.state.list);
-	        updatedZones.push(updatedZone);
+	        updatedZones.push(res.body.result);
+	
 	        _this3.setState({
 	          list: updatedZones
 	        });
@@ -23839,8 +23841,7 @@
 	    _this.state = {
 	      comment: {
 	        username: '',
-	        body: '',
-	        timestamp: ''
+	        body: ''
 	      },
 	      zone: 'Zone 1',
 	      list: []
@@ -23866,22 +23867,28 @@
 	  }, {
 	    key: 'submitComment',
 	    value: function submitComment() {
-	      // console.log(JSON.stringify(this.state.comment))
-	      var updatedList = Object.assign([], this.state.list);
-	      updatedList.push(this.state.comment);
+	      var _this3 = this;
 	
 	      this.refs.username.value = '';
 	      this.refs.body.value = '';
 	
-	      this.setState({
-	        list: updatedList
+	      _utils.APIManager.post('/api/comment', this.state.comment, function (err, res) {
+	        if (err) {
+	          console.log('error', err.message);
+	          return;
+	        }
+	
+	        var updatedList = Object.assign([], _this3.state.list);
+	        updatedList.push(res.body.result);
+	
+	        _this3.setState({
+	          list: updatedList
+	        });
 	      });
 	    }
 	  }, {
 	    key: 'updateUsername',
 	    value: function updateUsername() {
-	      // console.log(this.refs.username.value)
-	
 	      var updatedComment = Object.assign({}, this.state.comment);
 	      updatedComment['username'] = this.refs.username.value;
 	

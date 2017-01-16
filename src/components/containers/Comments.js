@@ -12,8 +12,7 @@ class Comments extends Component {
     this.state = {
       comment: {
         username: '',
-        body: '',
-        timestamp: ''
+        body: ''
       },
       zone: 'Zone 1',
       list: []
@@ -33,21 +32,26 @@ class Comments extends Component {
   }
 
   submitComment(){
-    // console.log(JSON.stringify(this.state.comment))
-    let updatedList = Object.assign([], this.state.list)
-    updatedList.push(this.state.comment)
-
     this.refs.username.value = ''
     this.refs.body.value = ''
     
-    this.setState({
-      list: updatedList
+    APIManager.post('/api/comment', this.state.comment, (err, res)=>{
+      if (err){
+        console.log('error', err.message)
+        return
+      }
+
+      let updatedList = Object.assign([], this.state.list)
+      updatedList.push(res.body.result)
+
+      this.setState({
+        list: updatedList
+      })
     })
+
   }
 
   updateUsername(){
-    // console.log(this.refs.username.value)
-    
     let updatedComment = Object.assign({}, this.state.comment)
     updatedComment['username'] = this.refs.username.value
     

@@ -25,8 +25,6 @@ module.exports = {
   },
 
   create: function(params, callback){
-    
-
     // var zips = params["zipCodes"].split(',');
     // var newZips = []
     

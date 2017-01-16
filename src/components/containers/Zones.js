@@ -39,8 +39,10 @@ class Zones extends Component{
         console.log('error', err.mesesage)
         return
       }
+      
       let updatedZones = Object.assign([], this.state.list)
-      updatedZones.push(updatedZone)
+      updatedZones.push(res.body.result)
+      
       this.setState({
         list: updatedZones
       })
