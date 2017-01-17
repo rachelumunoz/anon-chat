@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Zone from '../presentational/Zone'
+import {Zone, ZoneForm} from '../presentational'
 import {APIManager} from '../../utils'
 
 class Zones extends Component{
@@ -29,12 +29,8 @@ class Zones extends Component{
     })
   }
 
-  addZone(){
-    let updatedZone = Object.assign({}, this.state.zone)
-    updatedZone['name'] = this.refs.zoneName.value
-    updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",")
-
-    APIManager.post('/api/zone', updatedZone, (err, res)=>{
+  addZone(zone){
+    APIManager.post('/api/zone', zone, (err, res)=>{
       if(err){
         console.log('error', err.mesesage)
         return
@@ -46,13 +42,10 @@ class Zones extends Component{
       this.setState({
         list: updatedZones
       })
-      this.refs.zoneName.value = ''
-      this.refs.zipCodes.value = ''
     })
   }
 
   render(){
-    
 
     const listItems = this.state.list.map((zone, i)=>{
       return (
@@ -65,9 +58,7 @@ class Zones extends Component{
     return (
       <div>
         
-        <input  ref="zoneName" className="form-group" type="text" placeholder="name" />
-        <input  ref="zipCodes" className="form-group" type="text" placeholder="zipcode" /><br/>
-        <button onClick={this.addZone.bind(this)} className="btn btn-primary"> Add Zone </button>
+        <ZoneForm handleSubmit={this.addZone.bind(this)} />
         
         <ol>
           {listItems}

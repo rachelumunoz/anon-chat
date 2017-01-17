@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Comment from '../presentational/Comment'
+import {Comment, CommentForm} from '../presentational'
 import {APIManager} from '../../utils'
 
 import styles from './styles'
@@ -10,10 +10,6 @@ class Comments extends Component {
     super()
 
     this.state = {
-      comment: {
-        username: '',
-        body: ''
-      },
       zone: 'Zone 1',
       list: []
     }
@@ -31,11 +27,8 @@ class Comments extends Component {
     })
   }
 
-  submitComment(){
-    this.refs.username.value = ''
-    this.refs.body.value = ''
-    
-    APIManager.post('/api/comment', this.state.comment, (err, res)=>{
+  submitComment(comment){
+    APIManager.post('/api/comment', comment, (err, res)=>{
       if (err){
         console.log('error', err.message)
         return
@@ -48,26 +41,8 @@ class Comments extends Component {
         list: updatedList
       })
     })
-
   }
 
-  updateUsername(){
-    let updatedComment = Object.assign({}, this.state.comment)
-    updatedComment['username'] = this.refs.username.value
-    
-    this.setState({
-      comment: updatedComment
-    })
-  }
-
-  updateBody(){
-    let updatedComment = Object.assign({}, this.state.comment)
-    updatedComment['body'] = this.refs.body.value
-    this.setState({
-      comment: updatedComment
-    })
-  }
-  
   render(){
     const renderComments = this.state.list.map((comment, i)=>{
       return (
@@ -83,17 +58,8 @@ class Comments extends Component {
         <div> 
           {renderComments}
         </div>
-
         <div>
-          
-            <div className="form-group">
-              <input onChange={this.updateUsername.bind(this)} ref="username" type="text" name="username" placeholder="Username"/>
-            </div>
-            <div className="form-group">
-              <input onChange={this.updateBody.bind(this)} ref="body" type="text" name="body" placeholder="Comment" />
-            </div>
-            <button onClick={this.submitComment.bind(this)} className="btn btn-primary">Create Comment </button>
-
+          <CommentForm handleSubmit={this.submitComment.bind(this)}/>
         </div>
       </div>
     )
