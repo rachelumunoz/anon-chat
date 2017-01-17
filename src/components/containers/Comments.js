@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Comment, CommentForm, SimpleMap} from '../presentational'
+import {Comment, CommentForm, Map} from '../presentational'
 import {APIManager} from '../../utils'
 
 import styles from './styles'
@@ -46,21 +46,32 @@ class Comments extends Component {
   render(){
     const renderComments = this.state.list.map((comment, i)=>{
       return (
-          <div  key={i} style={styles.comments.container}>
+          <div  key={i} style={styles.container}>
             <Comment comment={comment}/>
           </div>
         )
     })
 
+    const location = {
+      lat: 40.7575285,
+      lng: -73.9884469
+    }
+
     return (
       <div> 
-        <h1>{this.state.zone} Comments</h1>
-        <div> 
+        <h1 style={styles.title}> {this.state.zone} Comments</h1>
+        <div style={styles.oneHalf}> 
+          <CommentForm handleSubmit={this.submitComment.bind(this)}/>
           {renderComments}
         </div>
-        <div>
-          <CommentForm handleSubmit={this.submitComment.bind(this)}/>
+        <div style={styles.oneHalf}>
+          <div style={{width:'auto', height: 600, background: 'red'}}>
+            <Map center={location}/>
+          </div>
         </div>
+
+      
+
       </div>
     )
   }
