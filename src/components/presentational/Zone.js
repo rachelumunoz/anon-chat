@@ -4,11 +4,17 @@ import styles from './styles'
 
 class Zone extends Component {
   
+  onSelectTitle(e){
+    e.preventDefault()
+    this.props.select(this.props.index)
+  }
+
   render(){
-    var {name , zipCodes, numComments, key} = this.props.zone
+    const {name, zipCodes, numComments} = this.props.zone
+    const title = this.props.isSelected ? <a style={styles.zone.a} href="#"> {name} </a>: <a  href="#"> {name} </a>
     return(
       <div style={styles.zone.container}>
-        <h2> <a style={styles.zone.a}href="#"> {name} </a></h2>
+        <h2 onClick={this.onSelectTitle.bind(this)}> {title} </h2>
         <p> zipcodes: {zipCodes} </p>
         <p> {numComments} comments</p>
       </div>
