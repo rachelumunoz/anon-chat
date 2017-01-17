@@ -1,8 +1,35 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import 'https://fonts.googleapis.com/css?family=Lato';
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+ol {
+  list-style: none;
+}
+.container {
+  width: 100%;
+  margin: auto 0;
+}
+
+.one-fourth {
+  width: 25%;
+  float: left;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.three-fourth {
+  width: 75%;
+  float: left;
+  padding: 10px;
+  border: 1px solid red;
+
 }

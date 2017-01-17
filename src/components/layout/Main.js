@@ -7,16 +7,14 @@ import Comments from '../containers/Comments'
 class Main extends Component {
   render(){
     return (
-       <div className="container ">
-        <div className="row">
-          <div className="col-md-4">
-            <Zones />
-          </div>
-          <div className="col-md-8 text-center">
-            <Comments />
-          </div>
+      <div className="container">
+        <div className="one-fourth">
+          <Zones />
         </div>
-       </div>
+        <div className="three-fourth">
+          <Comments />
+        </div> 
+      </div>
     )
   }
 }
