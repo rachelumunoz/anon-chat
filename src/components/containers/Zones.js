@@ -1,6 +1,11 @@
 import React, {Component} from 'react'
 import {Zone, ZoneForm} from '../presentational'
+import {connect} from 'react-redux'
+import {Link} from 'react-router'
+
+import {fetchZones} from '../../actions'
 import {APIManager} from '../../utils'
+
 
 class Zones extends Component{
   constructor(){
@@ -12,17 +17,21 @@ class Zones extends Component{
     }
   }
 
-  componentDidMount(){
-    APIManager.get('/api/zone', null, (err, res)=>{
-      if(err){
-        console.log('error', err.message)
-        return
-      }
+  componentWillMount(){
+    this.props.fetchZones()
+  }
 
-      this.setState({
-        list: res.body.results
-      })
-    })
+  componentDidMount(){
+    // APIManager.get('/api/zone', null, (err, res)=>{
+    //   if(err){
+    //     console.log('error', err.message)
+    //     return
+    //   }
+
+    //   this.setState({
+    //     list: res.body.results
+    //   })
+    // })
   }
 
   addZone(zone){
@@ -49,9 +58,8 @@ class Zones extends Component{
     //if when selected in zone component, pass id, can pass to main, which then can pass down to comments, about current selected zone
   }
 
-  render(){
-
-    const listItems = this.state.list.map((zone, i)=>{
+  renderZones(){
+    return this.props.zones.map((zone, i)=>{
       console.log(zone)
 
       let selected = (i === this.state.selected)
@@ -61,14 +69,17 @@ class Zones extends Component{
         </div>
       )
     })
+    
+  }
 
+  render(){
     return (
       <div>
         
         <ZoneForm handleSubmit={this.addZone.bind(this)} />
         
         <ol>
-          {listItems}
+          {this.renderZones()}
         </ol>
 
       </div>
@@ -76,4 +87,9 @@ class Zones extends Component{
   }
 }
 
-export default Zones
+
+function mapStateToProps(state){
+  return { zones: state.zones.all}
+}
+
+export default connect(mapStateToProps, {fetchZones})(Zones)

@@ -5,18 +5,17 @@ import Comments from '../containers/Comments'
 import { Nav} from '../presentational'
 
 
-
 class Main extends Component {
   render(){
     return (
-      <div className="container">
-        <Nav/>
+      <div>
         <div className="one-fourth">
           <Zones />
         </div>
+
         <div className="three-fourth">
           <Comments />
-        </div> 
+        </div>
       </div>
     )
   }
