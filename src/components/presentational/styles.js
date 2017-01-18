@@ -3,6 +3,10 @@ export default {
     container : {
       padding: 12, 
       backgroundColor: '#f9f9f9'
+    },
+    commentForm: {
+      marginBottom: 50,
+      border: '1px solid red'
     }
   },
   zone: {
@@ -11,9 +15,9 @@ export default {
       background: '#f9f9f9', 
       marginTop:12
     },
-    a: {
-      color: 'black', 
-      textDecoration: 'none'
+    selected: {
+      color: 'red',
+      fontSize: 22
     }
   }
 }

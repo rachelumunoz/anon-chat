@@ -4,7 +4,6 @@ import {APIManager} from '../../utils'
 
 import styles from './styles'
 
-
 class Comments extends Component {
   constructor(){
     super()
@@ -61,11 +60,11 @@ class Comments extends Component {
       <div> 
         <h1 style={styles.title}> {this.state.zone} Comments</h1>
         <div style={styles.oneHalf}> 
-          <CommentForm handleSubmit={this.submitComment.bind(this)}/>
+          <CommentForm handleSubmit={this.submitComment.bind(this)} />
           {renderComments}
         </div>
         <div style={styles.oneHalf}>
-          <div style={{width:'auto', height: 600, background: 'red'}}>
+          <div style={styles.map}>
             <Map center={location}/>
           </div>
         </div>

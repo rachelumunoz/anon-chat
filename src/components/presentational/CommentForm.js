@@ -1,4 +1,5 @@
 import React, {Component}  from 'react' 
+import styles from './styles'
 
 class CommentForm extends Component{
   constructor(){
@@ -24,12 +25,12 @@ class CommentForm extends Component{
 
   render(){
     return (
-      <div>
-        <div className="form-group">
+      <div style={styles.comments.commentForm}>
+        <div>
           <input ref="username" type="text" name="username" placeholder="Username"/>
         </div>
-        <div className="form-group">
-          <input ref="body" type="text" name="body" placeholder="Comment" />
+        <div>
+          <input className="comment-box" ref="body" type="text" name="body" placeholder="Comment" />
         </div>
         <button onClick={this.updateComment.bind(this)} className="btn btn-primary">Create Comment </button>
       </div>

@@ -21544,6 +21544,8 @@
 	
 	var _Comments2 = _interopRequireDefault(_Comments);
 	
+	var _presentational = __webpack_require__(180);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21567,6 +21569,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
+	        _react2.default.createElement(_presentational.Nav, null),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'one-fourth' },
@@ -21670,6 +21673,8 @@
 	      this.setState({
 	        selected: index
 	      });
+	      //know index of current zone
+	      //if when selected in zone component, pass id, can pass to main, which then can pass down to comments, about current selected zone
 	    }
 	  }, {
 	    key: 'render',
@@ -21677,6 +21682,8 @@
 	      var _this4 = this;
 	
 	      var listItems = this.state.list.map(function (zone, i) {
+	        console.log(zone);
+	
 	        var selected = i === _this4.state.selected;
 	        return _react2.default.createElement(
 	          'div',
@@ -21717,7 +21724,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ZoneForm = exports.Zone = exports.Map = exports.CommentForm = exports.Comment = undefined;
+	exports.ZoneForm = exports.Zone = exports.Map = exports.Nav = exports.CommentForm = exports.Comment = undefined;
 	
 	var _Comment = __webpack_require__(181);
 	
@@ -21727,13 +21734,17 @@
 	
 	var _CommentForm2 = _interopRequireDefault(_CommentForm);
 	
-	var _Zone = __webpack_require__(183);
+	var _Zone = __webpack_require__(184);
 	
 	var _Zone2 = _interopRequireDefault(_Zone);
 	
 	var _ZoneForm = __webpack_require__(185);
 	
 	var _ZoneForm2 = _interopRequireDefault(_ZoneForm);
+	
+	var _Nav = __webpack_require__(245);
+	
+	var _Nav2 = _interopRequireDefault(_Nav);
 	
 	var _Map = __webpack_require__(186);
 	
@@ -21743,6 +21754,7 @@
 	
 	exports.Comment = _Comment2.default;
 	exports.CommentForm = _CommentForm2.default;
+	exports.Nav = _Nav2.default;
 	exports.Map = _Map2.default;
 	exports.Zone = _Zone2.default;
 	exports.ZoneForm = _ZoneForm2.default;
@@ -21811,7 +21823,8 @@
 	          ' ',
 	          timestamp,
 	          ' '
-	        )
+	        ),
+	        _react2.default.createElement('hr', null)
 	      );
 	    }
 	  }]);
@@ -21836,6 +21849,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _styles = __webpack_require__(183);
+	
+	var _styles2 = _interopRequireDefault(_styles);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21878,16 +21895,16 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { style: _styles2.default.comments.commentForm },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'form-group' },
+	          null,
 	          _react2.default.createElement('input', { ref: 'username', type: 'text', name: 'username', placeholder: 'Username' })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'form-group' },
-	          _react2.default.createElement('input', { ref: 'body', type: 'text', name: 'body', placeholder: 'Comment' })
+	          null,
+	          _react2.default.createElement('input', { className: 'comment-box', ref: 'body', type: 'text', name: 'body', placeholder: 'Comment' })
 	        ),
 	        _react2.default.createElement(
 	          'button',
@@ -21905,6 +21922,39 @@
 
 /***/ },
 /* 183 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  comments: {
+	    container: {
+	      padding: 12,
+	      backgroundColor: '#f9f9f9'
+	    },
+	    commentForm: {
+	      marginBottom: 50,
+	      border: '1px solid red'
+	    }
+	  },
+	  zone: {
+	    container: {
+	      padding: 16,
+	      background: '#f9f9f9',
+	      marginTop: 12
+	    },
+	    selected: {
+	      color: 'red',
+	      fontSize: 22
+	    }
+	  }
+	};
+
+/***/ },
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21919,7 +21969,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _styles = __webpack_require__(184);
+	var _styles = __webpack_require__(183);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -21956,7 +22006,7 @@
 	
 	      var title = this.props.isSelected ? _react2.default.createElement(
 	        'a',
-	        { style: _styles2.default.zone.a, href: '#' },
+	        { style: _styles2.default.zone.selected, href: '#' },
 	        ' ',
 	        name,
 	        ' '
@@ -21999,35 +22049,6 @@
 	}(_react.Component);
 	
 	exports.default = Zone;
-
-/***/ },
-/* 184 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  comments: {
-	    container: {
-	      padding: 12,
-	      backgroundColor: '#f9f9f9'
-	    }
-	  },
-	  zone: {
-	    container: {
-	      padding: 16,
-	      background: '#f9f9f9',
-	      marginTop: 12
-	    },
-	    a: {
-	      color: 'black',
-	      textDecoration: 'none'
-	    }
-	  }
-	};
 
 /***/ },
 /* 185 */
@@ -28579,7 +28600,7 @@
 	          { style: _styles2.default.oneHalf },
 	          _react2.default.createElement(
 	            'div',
-	            { style: { width: 'auto', height: 600, background: 'red' } },
+	            { style: _styles2.default.map },
 	            _react2.default.createElement(_presentational.Map, { center: location })
 	          )
 	        )
@@ -28616,8 +28637,63 @@
 	  oneHalf: {
 	    width: '50%',
 	    float: 'left'
-	  }
+	  },
+	  map: {
+	    width: 'auto',
+	    height: 600,
+	    padding: 10
+	  },
+	  comments: {}
 	};
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Nav = function (_Component) {
+	  _inherits(Nav, _Component);
+	
+	  function Nav() {
+	    _classCallCheck(this, Nav);
+	
+	    return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+	  }
+	
+	  _createClass(Nav, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'h1',
+	        null,
+	        ' Nav'
+	      );
+	    }
+	  }]);
+	
+	  return Nav;
+	}(_react.Component);
+	
+	exports.default = Nav;
 
 /***/ }
 /******/ ]);

@@ -9,6 +9,7 @@ class Comment extends Component {
         <p> {body} </p>
         <h3> {username} </h3>
         <p> {timestamp} </p>
+        <hr/>
       </div>
     )
   }

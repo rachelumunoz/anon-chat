@@ -13,6 +13,13 @@ export default {
   oneHalf:{
     width: '50%',
     float: 'left'
+  },
+  map: {
+    width:'auto', 
+    height: 600, 
+    padding: 10
+  },
+  comments: {
   }
 }
 
