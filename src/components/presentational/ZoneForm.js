@@ -7,7 +7,7 @@ class ZoneForm extends Component {
 
     this.state = {
       zone: {
-        name: '',
+        title: '',
         zipCodes: ''
       }
     }
@@ -15,7 +15,8 @@ class ZoneForm extends Component {
 
   addZone(){
     let updatedZone = Object.assign({}, this.state.zone)
-    updatedZone['name'] = this.refs.zoneName.value
+   
+   updatedZone['title'] = this.refs.zoneName.value
     updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",")
 
     this.refs.zoneName.value = ''
@@ -27,9 +28,9 @@ class ZoneForm extends Component {
   render(){
     return (
       <div>
-        <input ref="zoneName" className="form-group" type="text" placeholder="name" />
-        <input ref="zipCodes" className="form-group" type="text" placeholder="zipcode" /><br/>
-        <button onClick={this.addZone.bind(this)} className="btn btn-primary"> Add Zone </button>
+        <input ref="zoneName" type="text" placeholder="title" />
+        <input ref="zipCodes" type="text" placeholder="zipcode" /><br/>
+        <button onClick={this.addZone.bind(this)}> Add Zone </button>
       </div>
     )
   }

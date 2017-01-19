@@ -33,6 +33,10 @@ ol {
   border: 1px solid red;
 }
 
+.one-half {
+  width: 50%;
+  float: left;
+}
 
 hr{
    border-width: 1px;

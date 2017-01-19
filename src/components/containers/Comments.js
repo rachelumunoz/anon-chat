@@ -27,19 +27,21 @@ class Comments extends Component {
   }
 
   submitComment(comment){
-    APIManager.post('/api/comment', comment, (err, res)=>{
-      if (err){
-        console.log('error', err.message)
-        return
-      }
+    // APIManager.post('/api/comment', comment, (err, res)=>{
+    //   if (err){
+    //     console.log('error', err.message)
+    //     return
+    //   }
 
-      let updatedList = Object.assign([], this.state.list)
-      updatedList.push(res.body.result)
+    //   let updatedList = Object.assign([], this.state.list)
+    //   updatedList.push(res.body.result)
 
-      this.setState({
-        list: updatedList
-      })
-    })
+    //   this.setState({
+    //     list: updatedList
+    //   })
+    // })
+
+    console.log(comment)
   }
 
   render(){

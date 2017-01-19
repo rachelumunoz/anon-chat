@@ -21,7 +21,7 @@ class Zones extends Component{
     this.props.fetchZones()
   }
 
-  componentDidMount(){
+  // componentDidMount(){
     // APIManager.get('/api/zone', null, (err, res)=>{
     //   if(err){
     //     console.log('error', err.message)
@@ -32,7 +32,7 @@ class Zones extends Component{
     //     list: res.body.results
     //   })
     // })
-  }
+  // }
 
   addZone(zone){
     APIManager.post('/api/zone', zone, (err, res)=>{
@@ -50,10 +50,11 @@ class Zones extends Component{
     })
   }
 
-  selectZone(index){
-    this.setState({
-      selected: index
-    })
+  selectZone(index, objectId){
+    // this.setState({
+    //   selected: index
+    // })
+    console.log(index, objectId)
     //know index of current zone
     //if when selected in zone component, pass id, can pass to main, which then can pass down to comments, about current selected zone
   }
@@ -62,10 +63,17 @@ class Zones extends Component{
     return this.props.zones.map((zone, i)=>{
       console.log(zone)
 
-      let selected = (i === this.state.selected)
+      // let selected = (i === this.state.selected)
+      
       return (
-        <div key={i} >
-          <li><Zone index={i} select={this.selectZone.bind(this)} isSelected={selected} zone={zone}/> </li>
+        <div key={zone._id} >
+          <li>
+            <Link to={`zone/${zone._id}`}>
+              {zone.title}
+            </Link> 
+            <p>{zone.zipCodes}</p>
+            <p>comments: {zone.numComments}</p>
+          </li>
         </div>
       )
     })
@@ -76,8 +84,8 @@ class Zones extends Component{
     return (
       <div>
         
-        <ZoneForm handleSubmit={this.addZone.bind(this)} />
-        
+        {/*<ZoneForm handleSubmit={this.addZone.bind(this)} />*/}
+        <h1>Zone search</h1>
         <ol>
           {this.renderZones()}
         </ol>

@@ -1,11 +1,14 @@
-import React, { Component } from 'react'
-// import ReactDom from 'react-dom'
-import Main from './Main'
+import React, {Component} from 'react'
+
+import Zones from '../containers/Zones'
+import Comments from '../containers/Comments'
+import { Nav} from '../presentational'
 
 export default class App extends Component {
   render(){
     return (
       <div> 
+        <Nav/>
         {this.props.children}
       </div>
     )
