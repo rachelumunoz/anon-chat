@@ -39589,10 +39589,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CLEAR_COMMENT_FORM = exports.CREATE_COMMENT = exports.FETCH_ZONES = exports.FETCH_ZONE = undefined;
+	exports.CLEAR_COMMENT_FORM = exports.CREATE_COMMENT = exports.FETCH_COMMENTS = exports.FETCH_ZONES = exports.FETCH_ZONE = undefined;
 	exports.fetchZones = fetchZones;
 	exports.fetchZone = fetchZone;
 	exports.createComment = createComment;
+	exports.fetchComments = fetchComments;
 	
 	var _axios = __webpack_require__(478);
 	
@@ -39602,6 +39603,7 @@
 	
 	var FETCH_ZONE = exports.FETCH_ZONE = 'FETCH_ZONE';
 	var FETCH_ZONES = exports.FETCH_ZONES = 'FETCH_ZONES';
+	var FETCH_COMMENTS = exports.FETCH_COMMENTS = 'FETCH_COMMENTS';
 	var CREATE_COMMENT = exports.CREATE_COMMENT = 'CREATE_COMMENT';
 	var CLEAR_COMMENT_FORM = exports.CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM';
 	
@@ -39629,6 +39631,15 @@
 	  var request = _axios2.default.post(ROOT_URL + '/comment', props);
 	  return {
 	    type: CREATE_COMMENT,
+	    payload: request
+	  };
+	}
+	
+	function fetchComments(id) {
+	  var request = _axios2.default.get(ROOT_URL + '/zone/' + id + '/comments');
+	
+	  return {
+	    type: FETCH_COMMENTS,
 	    payload: request
 	  };
 	}
@@ -41138,7 +41149,7 @@
 	
 	var _index = __webpack_require__(477);
 	
-	var INITIAL_STATE = { all: [], zone: null };
+	var INITIAL_STATE = { all: [], zone: null, comments: [] };
 	
 	function ZonesReducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
@@ -41146,10 +41157,14 @@
 	
 	  switch (action.type) {
 	    case _index.FETCH_ZONE:
-	      console.log(action.payload.data);
+	
 	      return _extends({}, state, { zone: action.payload.data.result });
 	    case _index.FETCH_ZONES:
 	      return _extends({}, state, { all: action.payload.data.results });
+	    case _index.FETCH_COMMENTS:
+	      console.log('==========FETCH_COMMENTS acion=============');
+	      console.log(action.payload.data);
+	      return _extends({}, state, { comments: action.payload.data.results.comments });
 	    default:
 	      return state;
 	  }
@@ -41376,7 +41391,7 @@
 	    key: 'renderZones',
 	    value: function renderZones() {
 	      return this.props.zones.map(function (zone, i) {
-	        console.log(zone);
+	        // console.log(zone)
 	
 	        // let selected = (i === this.state.selected)
 	
@@ -41603,25 +41618,18 @@
 	
 	    return _this;
 	  }
+	  // updateComment(){
+	  //   let updatedComment = Object.assign({}, this.state.comment)
+	  //   updatedComment['body'] = this.refs.body.value
+	  //   updatedComment['username'] = this.refs.username.value
+	
+	  //   this.refs.username.value = ''
+	  //   this.refs.body.value = ''
+	  //   this.props.handleSubmit(updatedComment)
+	  // }
+	
 	
 	  _createClass(CommentForm, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	
-	      console.log(this.props);
-	    }
-	    // updateComment(){
-	    //   let updatedComment = Object.assign({}, this.state.comment)
-	    //   updatedComment['body'] = this.refs.body.value
-	    //   updatedComment['username'] = this.refs.username.value
-	
-	    //   this.refs.username.value = ''
-	    //   this.refs.body.value = ''
-	    //   this.props.handleSubmit(updatedComment)
-	    // }
-	
-	
-	  }, {
 	    key: 'submitComment',
 	    value: function submitComment(props) {
 	      // const { createComment, reset } = this.props;
@@ -46112,8 +46120,17 @@
 	  _createClass(Zone, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      console.log('zone will mount');
 	      this.props.fetchZone(this.props.params.id);
+	      // console.log('past fetch zone')
+	      // console.log("==============================")
+	      this.props.fetchComments(this.props.params.id);
+	      // console.log('past fetch comment', this.props.comments)
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      console.log("==========did mount==========");
+	      console.log(this.props);
 	    }
 	  }, {
 	    key: 'onSelectTitle',
@@ -46121,6 +46138,37 @@
 	      e.preventDefault();
 	      console.log(e.target);
 	      // this.props.select(this.props.index, e.target)
+	    }
+	  }, {
+	    key: 'renderComments',
+	    value: function renderComments() {
+	      return this.props.comments.map(function (comment) {
+	        var username = comment.username,
+	            body = comment.body,
+	            timestamp = comment.timestamp,
+	            _id = comment._id;
+	
+	        return _react2.default.createElement(
+	          'div',
+	          { key: _id },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            body
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'span',
+	              null,
+	              username,
+	              ' | ',
+	              timestamp
+	            )
+	          )
+	        );
+	      });
 	    }
 	  }, {
 	    key: 'render',
@@ -46138,6 +46186,7 @@
 	           </div>
 	         </div>
 	        )*/}
+	
 	      var zone = this.props.zone;
 	
 	      if (!zone) {
@@ -46171,7 +46220,8 @@
 	              null,
 	              'Cmments componenet'
 	            ),
-	            _react2.default.createElement(_CommentForm2.default, { id: this.props.params.id })
+	            _react2.default.createElement(_CommentForm2.default, { id: this.props.params.id }),
+	            this.renderComments()
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -46196,10 +46246,15 @@
 	
 	
 	function mapStateToProps(state) {
-	  return { zone: state.zones.zone };
+	  // console.log('=======state========')
+	  // console.log(state)
+	  return {
+	    zone: state.zones.zone,
+	    comments: state.zones.comments
+	  };
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone })(Zone);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone, fetchComments: _actions.fetchComments })(Zone);
 
 /***/ },
 /* 560 */

@@ -61,7 +61,7 @@ class Zones extends Component{
 
   renderZones(){
     return this.props.zones.map((zone, i)=>{
-      console.log(zone)
+      // console.log(zone)
 
       // let selected = (i === this.state.selected)
       

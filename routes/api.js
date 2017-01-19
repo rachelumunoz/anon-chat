@@ -89,7 +89,6 @@ router.post('/:resource', (req, res, next)=>{
   })
 })
 
-
 router.get('/:resource/:id/comments', (req, res, next)=>{
   let resource = req.params.resource;
   let controller = controllers[resource]
@@ -102,7 +101,6 @@ router.get('/:resource/:id/comments', (req, res, next)=>{
       })
       return
     }
-
     res.json({
       confirmation: 'success',
       results

@@ -16,11 +16,6 @@ class CommentForm extends Component{
     }
 
   }
-
-  componentDidMount(){
-
-    console.log(this.props)
-  }
   // updateComment(){
   //   let updatedComment = Object.assign({}, this.state.comment)
   //   updatedComment['body'] = this.refs.body.value
