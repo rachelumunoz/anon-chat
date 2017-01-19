@@ -51,7 +51,7 @@ class Zone extends Component {
        <div className="three-fourth">
         <div className="one-half">
           <h1>Cmments componenet</h1>
-          <CommentForm />
+          <CommentForm id={this.props.params.id}/>
         </div>
         <div className="one-half">
           <h1>map componenet</h1>

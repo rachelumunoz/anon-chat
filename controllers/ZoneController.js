@@ -19,6 +19,8 @@ module.exports = {
         callback(err, null)
         return
       }
+      console.log(zone)
+
 
       callback(null, zone)
     })
@@ -62,5 +64,9 @@ module.exports = {
 
       callback(null, null)
     })
+  },
+
+  findComments: function(id, callback){
+    console.log('from zone controller',id)
   }
 };

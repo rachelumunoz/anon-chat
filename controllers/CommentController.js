@@ -1,4 +1,7 @@
 const Comment = require('../models/Comment');
+const Zone = require('../models/Zone');
+
+
 
 module.exports = {
   
@@ -25,13 +28,34 @@ module.exports = {
   },
 
   create: function(params, callback){
+    console.log(params)
     
+    let zoneId = params['id']
+    //find zone 
+    //add comment id to zone Comment collection
     Comment.create(params, function(err, comment){
       if (err){
         callback(err, null)
         return
       }
-      callback(null, comment)
+      
+      console.log('we at creat cntroller ',comment)
+      
+      Zone.findById(zoneId, (err, res)=>{
+        if (err){
+          callback(err, null)
+          return
+        }
+
+        res.comments.push(comment)
+        res.save((err)=>{
+          if (err){
+            callback(err, null)
+            return
+          }
+          callback(null, comment)
+        })
+      })
     })
   },
 

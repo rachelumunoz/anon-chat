@@ -89,4 +89,24 @@ router.post('/:resource', (req, res, next)=>{
   })
 })
 
+
+router.get('/:resource/:id/comment', (req, res next)=>{
+  let resource = req.params.resource;
+  let controller = controllers[resource]
+  
+  controller.findComments(req.params.id, (err, res)=>{
+    if (err){
+      res.json({
+        confirmation: 'fail',
+        message: err
+      })
+      return
+    }
+    console.log('hello')
+
+  })
+
+})
+
+
 module.exports = router;

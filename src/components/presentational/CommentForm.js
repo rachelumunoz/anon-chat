@@ -14,8 +14,13 @@ class CommentForm extends Component{
       body: '',
       username: ''
     }
+
   }
 
+  componentDidMount(){
+
+    console.log(this.props)
+  }
   // updateComment(){
   //   let updatedComment = Object.assign({}, this.state.comment)
   //   updatedComment['body'] = this.refs.body.value
@@ -29,11 +34,13 @@ class CommentForm extends Component{
 
   submitComment(props){
     // const { createComment, reset } = this.props;
-    // return createComment(props).then(() => {
-    //   reset();
-    // // do other success stuff
+    let updatedProps = Object.assign({}, props)
+    updatedProps['id'] = this.props.id
+    console.log(updatedProps)
+    return createComment(updatedProps)
+    // do other success stuff
     // });
-    console.log(props)
+    
   }
 
 
@@ -47,6 +54,7 @@ class CommentForm extends Component{
   render(){
 
     const { fields: {username, body}, handleSubmit} = this.props
+
     return (
       <form onSubmit={handleSubmit(this.submitComment.bind(this))}>
         <div>
@@ -58,6 +66,7 @@ class CommentForm extends Component{
           <label htmlFor="body">body</label>
           <Field name="body" {...body} component="input" type="text"/>
           <div></div>
+
         </div>
         <button type="submit">Submit</button>
       </form>

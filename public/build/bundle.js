@@ -41600,29 +41600,37 @@
 	      body: '',
 	      username: ''
 	    };
+	
 	    return _this;
 	  }
 	
-	  // updateComment(){
-	  //   let updatedComment = Object.assign({}, this.state.comment)
-	  //   updatedComment['body'] = this.refs.body.value
-	  //   updatedComment['username'] = this.refs.username.value
-	
-	  //   this.refs.username.value = ''
-	  //   this.refs.body.value = ''
-	  //   this.props.handleSubmit(updatedComment)
-	  // }
-	
-	
 	  _createClass(CommentForm, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	
+	      console.log(this.props);
+	    }
+	    // updateComment(){
+	    //   let updatedComment = Object.assign({}, this.state.comment)
+	    //   updatedComment['body'] = this.refs.body.value
+	    //   updatedComment['username'] = this.refs.username.value
+	
+	    //   this.refs.username.value = ''
+	    //   this.refs.body.value = ''
+	    //   this.props.handleSubmit(updatedComment)
+	    // }
+	
+	
+	  }, {
 	    key: 'submitComment',
 	    value: function submitComment(props) {
 	      // const { createComment, reset } = this.props;
-	      // return createComment(props).then(() => {
-	      //   reset();
-	      // // do other success stuff
+	      var updatedProps = Object.assign({}, props);
+	      updatedProps['id'] = this.props.id;
+	      console.log(updatedProps);
+	      return (0, _actions.createComment)(updatedProps);
+	      // do other success stuff
 	      // });
-	      console.log(props);
 	    }
 	
 	    //   this.props.createPost(props)
@@ -41641,6 +41649,7 @@
 	          username = _props$fields.username,
 	          body = _props$fields.body,
 	          handleSubmit = _props.handleSubmit;
+	
 	
 	      return _react2.default.createElement(
 	        'form',
@@ -46162,7 +46171,7 @@
 	              null,
 	              'Cmments componenet'
 	            ),
-	            _react2.default.createElement(_CommentForm2.default, null)
+	            _react2.default.createElement(_CommentForm2.default, { id: this.props.params.id })
 	          ),
 	          _react2.default.createElement(
 	            'div',
