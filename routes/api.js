@@ -90,11 +90,11 @@ router.post('/:resource', (req, res, next)=>{
 })
 
 
-router.get('/:resource/:id/comment', (req, res next)=>{
+router.get('/:resource/:id/comments', (req, res, next)=>{
   let resource = req.params.resource;
   let controller = controllers[resource]
   
-  controller.findComments(req.params.id, (err, res)=>{
+  controller.findComments(req.params.id, (err, results)=>{
     if (err){
       res.json({
         confirmation: 'fail',
@@ -102,8 +102,11 @@ router.get('/:resource/:id/comment', (req, res next)=>{
       })
       return
     }
-    console.log('hello')
 
+    res.json({
+      confirmation: 'success',
+      results
+    })
   })
 
 })

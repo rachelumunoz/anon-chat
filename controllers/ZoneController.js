@@ -67,6 +67,15 @@ module.exports = {
   },
 
   findComments: function(id, callback){
-    console.log('from zone controller',id)
+    Zone
+      .findById(id)
+      .populate('comments')
+      .exec((err, comments)=>{
+        if (err) {
+          callback(err, null)
+          return
+        }
+        callback(null, comments)
+    });
   }
 };
