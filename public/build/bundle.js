@@ -75,7 +75,7 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _reduxPromise = __webpack_require__(574);
+	var _reduxPromise = __webpack_require__(575);
 	
 	var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 	
@@ -41206,7 +41206,7 @@
 	
 	var _presentational = __webpack_require__(508);
 	
-	var _ZonesIndex = __webpack_require__(573);
+	var _ZonesIndex = __webpack_require__(574);
 	
 	var _ZonesIndex2 = _interopRequireDefault(_ZonesIndex);
 	
@@ -41234,7 +41234,7 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _Main = __webpack_require__(572);
+	var _Main = __webpack_require__(573);
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
@@ -41263,7 +41263,7 @@
 	
 	var _Zones2 = _interopRequireDefault(_Zones);
 	
-	var _Comments = __webpack_require__(570);
+	var _Comments = __webpack_require__(571);
 	
 	var _Comments2 = _interopRequireDefault(_Comments);
 	
@@ -41330,7 +41330,7 @@
 	
 	var _actions = __webpack_require__(477);
 	
-	var _utils = __webpack_require__(561);
+	var _utils = __webpack_require__(560);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41497,7 +41497,7 @@
 	
 	var _Zone2 = _interopRequireDefault(_Zone);
 	
-	var _ZoneForm = __webpack_require__(560);
+	var _ZoneForm = __webpack_require__(570);
 	
 	var _ZoneForm2 = _interopRequireDefault(_ZoneForm);
 	
@@ -41814,9 +41814,13 @@
 	
 	      return _react2.default.createElement(_reactGoogleMaps.GoogleMapLoader, {
 	        containerElement: mapContainer,
-	        googleMapElement: _react2.default.createElement(_reactGoogleMaps.GoogleMap, {
-	          defaultZoom: 8,
-	          defaultCenter: this.props.center }) });
+	        googleMapElement: _react2.default.createElement(
+	          _reactGoogleMaps.GoogleMap,
+	          {
+	            defaultZoom: 13,
+	            defaultCenter: this.props.center },
+	          _react2.default.createElement(_reactGoogleMaps.Marker, { position: this.props.center })
+	        ) });
 	    }
 	  }]);
 	
@@ -46119,8 +46123,6 @@
 	
 	var _actions = __webpack_require__(477);
 	
-	var _utils = __webpack_require__(561);
-	
 	var _styles = __webpack_require__(511);
 	
 	var _styles2 = _interopRequireDefault(_styles);
@@ -46132,6 +46134,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import {Geocode} from '../../utils'
+	
 	
 	var Zone = function (_Component) {
 	  _inherits(Zone, _Component);
@@ -46139,11 +46143,16 @@
 	  function Zone() {
 	    _classCallCheck(this, Zone);
 	
-	    return _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).call(this));
+	    return _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).apply(this, arguments));
 	  }
 	
 	  _createClass(Zone, [{
 	    key: 'componentWillMount',
+	
+	    //   static contextTypes = {
+	    //   router: PropTypes.object
+	    // }
+	
 	    value: function componentWillMount() {
 	      this.props.fetchZone(this.props.params.id);
 	      this.props.fetchComments(this.props.params.id);
@@ -46166,15 +46175,20 @@
 	  }, {
 	    key: 'renderMap',
 	    value: function renderMap() {
+	
 	      if (this.state.zone && !this.state.coordinates) {
-	        this.props.getCoordinates(parseInt(this.state.zone.zipCodes[0]));
+	        var zipCode = parseInt(this.state.zone.zipCodes[0]);
+	        this.props.getCoordinates(zipCode);
 	      }
 	
 	      if (this.state.zone && this.state.coordinates) {
+	
 	        return _react2.default.createElement(
 	          'div',
 	          { style: _styles2.default.map },
-	          _react2.default.createElement(_presentational.Map, { center: this.props.coordinates })
+	          _react2.default.createElement(_presentational.Map, {
+	            center: this.props.coordinates
+	          })
 	        );
 	      }
 	    }
@@ -46270,11 +46284,6 @@
 	  return Zone;
 	}(_react.Component);
 	
-	Zone.contextTypes = {
-	  router: _react.PropTypes.object
-	};
-	
-	
 	function mapStateToProps(state) {
 	  return {
 	    zone: state.zones.zone,
@@ -46294,73 +46303,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Geocode = exports.APIManager = undefined;
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _APIManager = __webpack_require__(561);
 	
-	var _react = __webpack_require__(2);
+	var _APIManager2 = _interopRequireDefault(_APIManager);
 	
-	var _react2 = _interopRequireDefault(_react);
+	var _Geocode = __webpack_require__(569);
+	
+	var _Geocode2 = _interopRequireDefault(_Geocode);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ZoneForm = function (_Component) {
-	  _inherits(ZoneForm, _Component);
-	
-	  function ZoneForm() {
-	    _classCallCheck(this, ZoneForm);
-	
-	    var _this = _possibleConstructorReturn(this, (ZoneForm.__proto__ || Object.getPrototypeOf(ZoneForm)).call(this));
-	
-	    _this.state = {
-	      zone: {
-	        title: '',
-	        zipCodes: ''
-	      }
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(ZoneForm, [{
-	    key: 'addZone',
-	    value: function addZone() {
-	      var updatedZone = Object.assign({}, this.state.zone);
-	
-	      updatedZone['title'] = this.refs.zoneName.value;
-	      updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",");
-	
-	      this.refs.zoneName.value = '';
-	      this.refs.zipCodes.value = '';
-	
-	      this.props.handleSubmit(updatedZone);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('input', { ref: 'zoneName', type: 'text', placeholder: 'title' }),
-	        _react2.default.createElement('input', { ref: 'zipCodes', type: 'text', placeholder: 'zipcode' }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.addZone.bind(this) },
-	          ' Add Zone '
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return ZoneForm;
-	}(_react.Component);
-	
-	exports.default = ZoneForm;
+	exports.APIManager = _APIManager2.default;
+	exports.Geocode = _Geocode2.default;
 
 /***/ },
 /* 561 */
@@ -46371,32 +46327,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Geocode = exports.APIManager = undefined;
 	
-	var _APIManager = __webpack_require__(562);
-	
-	var _APIManager2 = _interopRequireDefault(_APIManager);
-	
-	var _Geocode = __webpack_require__(579);
-	
-	var _Geocode2 = _interopRequireDefault(_Geocode);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.APIManager = _APIManager2.default;
-	exports.Geocode = _Geocode2.default;
-
-/***/ },
-/* 562 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _superagent = __webpack_require__(563);
+	var _superagent = __webpack_require__(562);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -46444,7 +46376,7 @@
 	};
 
 /***/ },
-/* 563 */
+/* 562 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -46461,11 +46393,11 @@
 	  root = this;
 	}
 	
-	var Emitter = __webpack_require__(564);
-	var RequestBase = __webpack_require__(565);
-	var isObject = __webpack_require__(566);
-	var isFunction = __webpack_require__(567);
-	var ResponseBase = __webpack_require__(568);
+	var Emitter = __webpack_require__(563);
+	var RequestBase = __webpack_require__(564);
+	var isObject = __webpack_require__(565);
+	var isFunction = __webpack_require__(566);
+	var ResponseBase = __webpack_require__(567);
 	
 	/**
 	 * Noop.
@@ -47359,7 +47291,7 @@
 
 
 /***/ },
-/* 564 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -47528,13 +47460,13 @@
 
 
 /***/ },
-/* 565 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(566);
+	var isObject = __webpack_require__(565);
 	
 	/**
 	 * Expose `RequestBase`.
@@ -48076,7 +48008,7 @@
 
 
 /***/ },
-/* 566 */
+/* 565 */
 /***/ function(module, exports) {
 
 	/**
@@ -48095,7 +48027,7 @@
 
 
 /***/ },
-/* 567 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48105,7 +48037,7 @@
 	 * @return {Boolean}
 	 * @api private
 	 */
-	var isObject = __webpack_require__(566);
+	var isObject = __webpack_require__(565);
 	
 	function isFunction(fn) {
 	  var tag = isObject(fn) ? Object.prototype.toString.call(fn) : '';
@@ -48116,7 +48048,7 @@
 
 
 /***/ },
-/* 568 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -48124,7 +48056,7 @@
 	 * Module dependencies.
 	 */
 	
-	var utils = __webpack_require__(569);
+	var utils = __webpack_require__(568);
 	
 	/**
 	 * Expose `ResponseBase`.
@@ -48255,7 +48187,7 @@
 
 
 /***/ },
-/* 569 */
+/* 568 */
 /***/ function(module, exports) {
 
 	
@@ -48329,7 +48261,131 @@
 
 
 /***/ },
+/* 569 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _axios = __webpack_require__(478);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  getLatLng: function getLatLng(encodedZip) {
+	    var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedZip;
+	
+	    var coordinates = new Promise(function (resolve, reject) {
+	
+	      _axios2.default.get(geocodeUrl).then(function (response) {
+	        var lat = parseFloat(response.data.results[0].geometry.bounds.northeast.lat);
+	        var lng = parseFloat(response.data.results[0].geometry.bounds.northeast.lng);
+	
+	        if (typeof lat === 'number') {
+	          resolve({ location: { lat: lat, lng: lng } });
+	        } else {
+	          reject('something went wrong');
+	        }
+	
+	        // return callback(null, {location: {lat, lng}}
+	        // return new Promise ((resolve, reject)=>{
+	        //   if (typeof lat !== 'number'){
+	        //     reject('Not found')
+	        //   }else {
+	        //     resolve({location: {lat, lng}})
+	        //   }
+	        // })
+	      });
+	    });
+	    return coordinates;
+	  }
+	
+	};
+
+/***/ },
 /* 570 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ZoneForm = function (_Component) {
+	  _inherits(ZoneForm, _Component);
+	
+	  function ZoneForm() {
+	    _classCallCheck(this, ZoneForm);
+	
+	    var _this = _possibleConstructorReturn(this, (ZoneForm.__proto__ || Object.getPrototypeOf(ZoneForm)).call(this));
+	
+	    _this.state = {
+	      zone: {
+	        title: '',
+	        zipCodes: ''
+	      }
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(ZoneForm, [{
+	    key: 'addZone',
+	    value: function addZone() {
+	      var updatedZone = Object.assign({}, this.state.zone);
+	
+	      updatedZone['title'] = this.refs.zoneName.value;
+	      updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",");
+	
+	      this.refs.zoneName.value = '';
+	      this.refs.zipCodes.value = '';
+	
+	      this.props.handleSubmit(updatedZone);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('input', { ref: 'zoneName', type: 'text', placeholder: 'title' }),
+	        _react2.default.createElement('input', { ref: 'zipCodes', type: 'text', placeholder: 'zipcode' }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.addZone.bind(this) },
+	          ' Add Zone '
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ZoneForm;
+	}(_react.Component);
+	
+	exports.default = ZoneForm;
+
+/***/ },
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48346,9 +48402,9 @@
 	
 	var _presentational = __webpack_require__(508);
 	
-	var _utils = __webpack_require__(561);
+	var _utils = __webpack_require__(560);
 	
-	var _styles = __webpack_require__(571);
+	var _styles = __webpack_require__(572);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -48460,7 +48516,7 @@
 	exports.default = Comments;
 
 /***/ },
-/* 571 */
+/* 572 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -48493,7 +48549,7 @@
 	};
 
 /***/ },
-/* 572 */
+/* 573 */
 /***/ function(module, exports) {
 
 	// import React, {Component} from 'react'
@@ -48524,7 +48580,7 @@
 	"use strict";
 
 /***/ },
-/* 573 */
+/* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48545,7 +48601,7 @@
 	
 	var _presentational = __webpack_require__(508);
 	
-	var _styles = __webpack_require__(571);
+	var _styles = __webpack_require__(572);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -48602,7 +48658,7 @@
 	exports.default = ZonesIndex;
 
 /***/ },
-/* 574 */
+/* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48613,7 +48669,7 @@
 	
 	exports['default'] = promiseMiddleware;
 	
-	var _fluxStandardAction = __webpack_require__(575);
+	var _fluxStandardAction = __webpack_require__(576);
 	
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -48640,7 +48696,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 575 */
+/* 576 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48651,7 +48707,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _lodashIsplainobject = __webpack_require__(576);
+	var _lodashIsplainobject = __webpack_require__(577);
 	
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 	
@@ -48670,7 +48726,7 @@
 	}
 
 /***/ },
-/* 576 */
+/* 577 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48681,9 +48737,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(577),
+	var baseFor = __webpack_require__(578),
 	    isArguments = __webpack_require__(454),
-	    keysIn = __webpack_require__(578);
+	    keysIn = __webpack_require__(579);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -48779,7 +48835,7 @@
 
 
 /***/ },
-/* 577 */
+/* 578 */
 /***/ function(module, exports) {
 
 	/**
@@ -48833,7 +48889,7 @@
 
 
 /***/ },
-/* 578 */
+/* 579 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48969,53 +49025,6 @@
 	
 	module.exports = keysIn;
 
-
-/***/ },
-/* 579 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _axios = __webpack_require__(478);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-	  getLatLng: function getLatLng(encodedZip) {
-	    var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedZip;
-	
-	    var coordinates = new Promise(function (resolve, reject) {
-	
-	      _axios2.default.get(geocodeUrl).then(function (response) {
-	        var lat = parseFloat(response.data.results[0].geometry.bounds.northeast.lat);
-	        var lng = parseFloat(response.data.results[0].geometry.bounds.northeast.lng);
-	
-	        if (typeof lat === 'number') {
-	          resolve({ location: { lat: lat, lng: lng } });
-	        } else {
-	          reject('something went wrong');
-	        }
-	
-	        // return callback(null, {location: {lat, lng}}
-	        // return new Promise ((resolve, reject)=>{
-	        //   if (typeof lat !== 'number'){
-	        //     reject('Not found')
-	        //   }else {
-	        //     resolve({location: {lat, lng}})
-	        //   }
-	        // })
-	      });
-	    });
-	    return coordinates;
-	  }
-	
-	};
 
 /***/ }
 /******/ ]);

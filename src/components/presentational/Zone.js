@@ -5,19 +5,15 @@ import CommentForm from './CommentForm'
 import {Map} from '../presentational'
 
 import {fetchZone, fetchComments, getCoordinates} from '../../actions'
-import {Geocode} from '../../utils'
+// import {Geocode} from '../../utils'
 import styles from './styles'
 
 
 class Zone extends Component {
-    static contextTypes = {
-    router: PropTypes.object
-  }
+  //   static contextTypes = {
+  //   router: PropTypes.object
+  // }
   
-  constructor(){
-    super()
-  }
-
   componentWillMount(){
     this.props.fetchZone(this.props.params.id)
     this.props.fetchComments(this.props.params.id)
@@ -38,14 +34,21 @@ class Zone extends Component {
   }
 
   renderMap(){
+    
     if (this.state.zone && !this.state.coordinates){
-      this.props.getCoordinates(parseInt(this.state.zone.zipCodes[0]))
+      let zipCode = parseInt(this.state.zone.zipCodes[0])
+      this.props.getCoordinates(zipCode)
     }
 
     if(this.state.zone && this.state.coordinates){
+        
+
+
       return (
         <div style={styles.map}>
-          <Map center={this.props.coordinates}/>
+          <Map 
+            center={this.props.coordinates}
+          />
         </div>
       )
     }
