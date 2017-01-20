@@ -2,8 +2,10 @@ import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import CommentForm from './CommentForm'
+import {Map} from '../presentational'
 
-import {fetchZone, fetchComments} from '../../actions'
+import {fetchZone, fetchComments, getCoordinates} from '../../actions'
+import {Geocode} from '../../utils'
 import styles from './styles'
 
 
@@ -11,25 +13,42 @@ class Zone extends Component {
     static contextTypes = {
     router: PropTypes.object
   }
+  
+  constructor(){
+    super()
+  }
 
   componentWillMount(){
     this.props.fetchZone(this.props.params.id)
-    // console.log('past fetch zone')
-    // console.log("==============================")
     this.props.fetchComments(this.props.params.id)
-    // console.log('past fetch comment', this.props.comments)
-
   }
 
-  componentDidMount(){
-    console.log("==========did mount==========")
-    console.log(this.props)
+  componentWillReceiveProps(nextProps){
+    if (nextProps.zone !== this.props.zone){
+      this.setState({
+        zone: nextProps.zone
+      });
+    }  
+
+    if (nextProps.coordinates !== this.props.coordinates){
+      this.setState({
+        coordinates: nextProps.coordinates
+      })
+    }
   }
-  
-  onSelectTitle(e){
-    e.preventDefault()
-    console.log(e.target)
-    // this.props.select(this.props.index, e.target)
+
+  renderMap(){
+    if (this.state.zone && !this.state.coordinates){
+      this.props.getCoordinates(parseInt(this.state.zone.zipCodes[0]))
+    }
+
+    if(this.state.zone && this.state.coordinates){
+      return (
+        <div style={styles.map}>
+          <Map center={this.props.coordinates}/>
+        </div>
+      )
+    }
   }
 
   renderComments(){
@@ -49,22 +68,6 @@ class Zone extends Component {
   }
 
   render(){
-    {/*const {title, zipCodes, numComments, _id, isSelected } = this.props.zone
-
-    return (
-     <div>
-        <div className="one-fourth"> 
-          Zones Component
-        </div>
-        <div className="three-fourth">
-          <div>
-           sdfsdfds
-          </div>
-        </div>
-      </div>
-    )*/}
-
-
     const {zone} = this.props
     if(!zone){
       return <div>Loading...</div>
@@ -83,6 +86,7 @@ class Zone extends Component {
         </div>
         <div className="one-half">
           <h1>map componenet</h1>
+          <div>{this.renderMap()}</div>
         </div>
        </div>
       </div>
@@ -91,12 +95,11 @@ class Zone extends Component {
 }
 
 function mapStateToProps(state){
-  // console.log('=======state========')
-  // console.log(state)
   return {
       zone: state.zones.zone,
-      comments: state.zones.comments
+      comments: state.zones.comments,
+      coordinates: state.zones.coordinates
     }
 }
 
-export default connect(mapStateToProps, {fetchZone, fetchComments})(Zone)
+export default connect(mapStateToProps, {fetchZone, fetchComments, getCoordinates})(Zone)

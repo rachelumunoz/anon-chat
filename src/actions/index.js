@@ -3,6 +3,7 @@ import axios from 'axios'
 export const FETCH_ZONE = 'FETCH_ZONE'
 export const FETCH_ZONES = 'FETCH_ZONES'
 export const FETCH_COMMENTS = 'FETCH_COMMENTS'
+export const GET_COORDINATES = 'GET_COORDINATES'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM'
 
@@ -40,6 +41,17 @@ export function fetchComments(id){
 
   return {
     type: FETCH_COMMENTS,
+    payload: request
+  }
+}
+
+export function getCoordinates(encodedZip){
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedZip}`
+
+  const request = axios.get(geocodeUrl)
+
+  return {
+    type: GET_COORDINATES,
     payload: request
   }
 }

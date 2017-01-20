@@ -19,6 +19,11 @@ export default {
       color: 'red',
       fontSize: 22
     }
+  },
+  map: {
+    width:'auto', 
+    height: 600, 
+    padding: 10
   }
 }
 

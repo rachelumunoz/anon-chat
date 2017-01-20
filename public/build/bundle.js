@@ -39589,11 +39589,12 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CLEAR_COMMENT_FORM = exports.CREATE_COMMENT = exports.FETCH_COMMENTS = exports.FETCH_ZONES = exports.FETCH_ZONE = undefined;
+	exports.CLEAR_COMMENT_FORM = exports.CREATE_COMMENT = exports.GET_COORDINATES = exports.FETCH_COMMENTS = exports.FETCH_ZONES = exports.FETCH_ZONE = undefined;
 	exports.fetchZones = fetchZones;
 	exports.fetchZone = fetchZone;
 	exports.createComment = createComment;
 	exports.fetchComments = fetchComments;
+	exports.getCoordinates = getCoordinates;
 	
 	var _axios = __webpack_require__(478);
 	
@@ -39604,6 +39605,7 @@
 	var FETCH_ZONE = exports.FETCH_ZONE = 'FETCH_ZONE';
 	var FETCH_ZONES = exports.FETCH_ZONES = 'FETCH_ZONES';
 	var FETCH_COMMENTS = exports.FETCH_COMMENTS = 'FETCH_COMMENTS';
+	var GET_COORDINATES = exports.GET_COORDINATES = 'GET_COORDINATES';
 	var CREATE_COMMENT = exports.CREATE_COMMENT = 'CREATE_COMMENT';
 	var CLEAR_COMMENT_FORM = exports.CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM';
 	
@@ -39640,6 +39642,17 @@
 	
 	  return {
 	    type: FETCH_COMMENTS,
+	    payload: request
+	  };
+	}
+	
+	function getCoordinates(encodedZip) {
+	  var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedZip;
+	
+	  var request = _axios2.default.get(geocodeUrl);
+	
+	  return {
+	    type: GET_COORDINATES,
 	    payload: request
 	  };
 	}
@@ -41149,7 +41162,7 @@
 	
 	var _index = __webpack_require__(477);
 	
-	var INITIAL_STATE = { all: [], zone: null, comments: [] };
+	var INITIAL_STATE = { all: [], zone: null, comments: [], location: {} };
 	
 	function ZonesReducer() {
 	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : INITIAL_STATE;
@@ -41162,9 +41175,12 @@
 	    case _index.FETCH_ZONES:
 	      return _extends({}, state, { all: action.payload.data.results });
 	    case _index.FETCH_COMMENTS:
-	      console.log('==========FETCH_COMMENTS acion=============');
-	      console.log(action.payload.data);
 	      return _extends({}, state, { comments: action.payload.data.results.comments });
+	    case _index.GET_COORDINATES:
+	      // console.log(action.payload)
+	      var lat = parseFloat(action.payload.data.results[0].geometry.bounds.northeast.lat);
+	      var lng = parseFloat(action.payload.data.results[0].geometry.bounds.northeast.lng);
+	      return _extends({}, state, { coordinates: { lat: lat, lng: lng } });
 	    default:
 	      return state;
 	  }
@@ -41748,6 +41764,11 @@
 	      color: 'red',
 	      fontSize: 22
 	    }
+	  },
+	  map: {
+	    width: 'auto',
+	    height: 600,
+	    padding: 10
 	  }
 	};
 
@@ -46094,7 +46115,11 @@
 	
 	var _CommentForm2 = _interopRequireDefault(_CommentForm);
 	
+	var _presentational = __webpack_require__(508);
+	
 	var _actions = __webpack_require__(477);
+	
+	var _utils = __webpack_require__(561);
 	
 	var _styles = __webpack_require__(511);
 	
@@ -46114,30 +46139,44 @@
 	  function Zone() {
 	    _classCallCheck(this, Zone);
 	
-	    return _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).call(this));
 	  }
 	
 	  _createClass(Zone, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      this.props.fetchZone(this.props.params.id);
-	      // console.log('past fetch zone')
-	      // console.log("==============================")
 	      this.props.fetchComments(this.props.params.id);
-	      // console.log('past fetch comment', this.props.comments)
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      console.log("==========did mount==========");
-	      console.log(this.props);
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.zone !== this.props.zone) {
+	        this.setState({
+	          zone: nextProps.zone
+	        });
+	      }
+	
+	      if (nextProps.coordinates !== this.props.coordinates) {
+	        this.setState({
+	          coordinates: nextProps.coordinates
+	        });
+	      }
 	    }
 	  }, {
-	    key: 'onSelectTitle',
-	    value: function onSelectTitle(e) {
-	      e.preventDefault();
-	      console.log(e.target);
-	      // this.props.select(this.props.index, e.target)
+	    key: 'renderMap',
+	    value: function renderMap() {
+	      if (this.state.zone && !this.state.coordinates) {
+	        this.props.getCoordinates(parseInt(this.state.zone.zipCodes[0]));
+	      }
+	
+	      if (this.state.zone && this.state.coordinates) {
+	        return _react2.default.createElement(
+	          'div',
+	          { style: _styles2.default.map },
+	          _react2.default.createElement(_presentational.Map, { center: this.props.coordinates })
+	        );
+	      }
 	    }
 	  }, {
 	    key: 'renderComments',
@@ -46173,20 +46212,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      {/*const {title, zipCodes, numComments, _id, isSelected } = this.props.zone
-	        return (
-	        <div>
-	           <div className="one-fourth"> 
-	             Zones Component
-	           </div>
-	           <div className="three-fourth">
-	             <div>
-	              sdfsdfds
-	             </div>
-	           </div>
-	         </div>
-	        )*/}
-	
 	      var zone = this.props.zone;
 	
 	      if (!zone) {
@@ -46230,6 +46255,11 @@
 	              'h1',
 	              null,
 	              'map componenet'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              this.renderMap()
 	            )
 	          )
 	        )
@@ -46246,15 +46276,14 @@
 	
 	
 	function mapStateToProps(state) {
-	  // console.log('=======state========')
-	  // console.log(state)
 	  return {
 	    zone: state.zones.zone,
-	    comments: state.zones.comments
+	    comments: state.zones.comments,
+	    coordinates: state.zones.coordinates
 	  };
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone, fetchComments: _actions.fetchComments })(Zone);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone, fetchComments: _actions.fetchComments, getCoordinates: _actions.getCoordinates })(Zone);
 
 /***/ },
 /* 560 */
@@ -46342,15 +46371,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.APIManager = undefined;
+	exports.Geocode = exports.APIManager = undefined;
 	
 	var _APIManager = __webpack_require__(562);
 	
 	var _APIManager2 = _interopRequireDefault(_APIManager);
 	
+	var _Geocode = __webpack_require__(579);
+	
+	var _Geocode2 = _interopRequireDefault(_Geocode);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.APIManager = _APIManager2.default;
+	exports.Geocode = _Geocode2.default;
 
 /***/ },
 /* 562 */
@@ -48935,6 +48969,53 @@
 	
 	module.exports = keysIn;
 
+
+/***/ },
+/* 579 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _axios = __webpack_require__(478);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  getLatLng: function getLatLng(encodedZip) {
+	    var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedZip;
+	
+	    var coordinates = new Promise(function (resolve, reject) {
+	
+	      _axios2.default.get(geocodeUrl).then(function (response) {
+	        var lat = parseFloat(response.data.results[0].geometry.bounds.northeast.lat);
+	        var lng = parseFloat(response.data.results[0].geometry.bounds.northeast.lng);
+	
+	        if (typeof lat === 'number') {
+	          resolve({ location: { lat: lat, lng: lng } });
+	        } else {
+	          reject('something went wrong');
+	        }
+	
+	        // return callback(null, {location: {lat, lng}}
+	        // return new Promise ((resolve, reject)=>{
+	        //   if (typeof lat !== 'number'){
+	        //     reject('Not found')
+	        //   }else {
+	        //     resolve({location: {lat, lng}})
+	        //   }
+	        // })
+	      });
+	    });
+	    return coordinates;
+	  }
+	
+	};
 
 /***/ }
 /******/ ]);
