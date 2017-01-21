@@ -15,15 +15,17 @@ class Comments extends Component {
   }
 
   componentDidMount(){
-    APIManager.get('/api/comment', null, (err, res)=>{
-      if (err){
-          alert("err" + err.message)
-          return
-        }
-      this.setState({
-          list: res.body.results
-        })
-    })
+    // APIManager.get('/api/comment', null, (err, res)=>{
+    //   if (err){
+    //       alert("err" + err.message)
+    //       return
+    //     }
+    //   this.setState({
+    //       list: res.body.results
+    //     })
+    // })
+
+    
   }
 
   submitComment(comment){
@@ -62,7 +64,7 @@ class Comments extends Component {
       <div> 
         <h1 style={styles.title}> {this.state.zone} Comments</h1>
         <div style={styles.oneHalf}> 
-          <CommentForm handleSubmit={this.submitComment.bind(this)} />
+          <CommentForm />
           {renderComments}
         </div>
         <div style={styles.oneHalf}>

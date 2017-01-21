@@ -28,35 +28,33 @@ module.exports = {
   },
 
   create: function(params, callback){
-    console.log(params)
-    
     let zoneId = params['id']
-    //find zone 
-    //add comment id to zone Comment collection
-    Comment.create(params, function(err, comment){
+    
+    const comment = Comment.create(params, (err, comment)=>{
       if (err){
         callback(err, null)
         return
       }
-      
-      console.log('we at creat cntroller ',comment)
-      
-      Zone.findById(zoneId, (err, res)=>{
-        if (err){
-          callback(err, null)
-          return
-        }
-
-        res.comments.push(comment)
-        res.save((err)=>{
+      return comment
+    })
+    
+    comment.then(res=>{
+      Zone.findByIdAndUpdate(zoneId, {
+          $inc: {numComments: 1},
+          $push: {comments: res},
+          safe: true, 
+          upsert: true
+        }, (err, res)=>{
           if (err){
-            callback(err, null)
+            console.log('error from updating zone', err)
             return
           }
-          callback(null, comment)
+          console.log('success update',res)
+          return res
         })
-      })
     })
+    .then(res =>callback(null, res))
+    .catch(e => callback(e, null))
   },
 
   update: function(id, params, callback){
@@ -71,7 +69,7 @@ module.exports = {
   },
   
   destroy: function(id, callback){
-    Comment.findByIdAndRemove(id, function(err){
+    Comment.findByIdAndRemove(id, (err)=>{
       if(err){
         callback(err, null)
         return

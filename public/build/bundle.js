@@ -28811,8 +28811,6 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _redux = __webpack_require__(186);
 	
 	var _reduxForm = __webpack_require__(271);
@@ -28827,17 +28825,7 @@
 	
 	var rootReducer = (0, _redux.combineReducers)({
 	  zones: _ZonesReducer2.default,
-	  form: _reduxForm.reducer.plugin({
-	    CommentForm: function CommentForm(state, action) {
-	      // 
-	      switch (action.type) {
-	        case _actions.CLEAR_COMMENT_FORM:
-	          return _extends({}, state, { body: {}, username: {} });
-	        default:
-	          return state;
-	      }
-	    }
-	  })
+	  form: _reduxForm.reducer
 	});
 	
 	exports.default = rootReducer;
@@ -41595,13 +41583,13 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRedux = __webpack_require__(179);
 	
 	var _reduxForm = __webpack_require__(271);
 	
@@ -41631,40 +41619,27 @@
 	      body: '',
 	      username: ''
 	    };
-	
 	    return _this;
 	  }
-	  // updateComment(){
-	  //   let updatedComment = Object.assign({}, this.state.comment)
-	  //   updatedComment['body'] = this.refs.body.value
-	  //   updatedComment['username'] = this.refs.username.value
 	
-	  //   this.refs.username.value = ''
-	  //   this.refs.body.value = ''
-	  //   this.props.handleSubmit(updatedComment)
+	  // updateComment(){
+	  // let updatedComment = Object.assign({}, this.state.comment)
+	  // updatedComment['body'] = this.refs.body.value
+	  // updatedComment['username'] = this.refs.username.value
+	
+	  // this.refs.username.value = ''
+	  // this.refs.body.value = ''
+	  // this.props.handleSubmit(updatedComment)
 	  // }
 	
-	
 	  _createClass(CommentForm, [{
-	    key: 'submitComment',
-	    value: function submitComment(props) {
-	      // const { createComment, reset } = this.props;
+	    key: 'handleSubmit',
+	    value: function handleSubmit(props) {
 	      var updatedProps = Object.assign({}, props);
 	      updatedProps['id'] = this.props.id;
-	      console.log(updatedProps);
-	      return (0, _actions.createComment)(updatedProps);
-	      // do other success stuff
-	      // });
+	
+	      this.props.createComment(updatedProps);
 	    }
-	
-	    //   this.props.createPost(props)
-	    //     .then(()=>{
-	    //       //return of promise blog post has been created, navigate to the index
-	    //       // this.context.router.push('/')
-	
-	    //     })
-	    // }
-	
 	  }, {
 	    key: 'render',
 	    value: function render() {
@@ -41672,12 +41647,13 @@
 	          _props$fields = _props.fields,
 	          username = _props$fields.username,
 	          body = _props$fields.body,
-	          handleSubmit = _props.handleSubmit;
+	          handleSubmit = _props.handleSubmit,
+	          reset = _props.reset;
 	
 	
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: handleSubmit(this.submitComment.bind(this)) },
+	        { onSubmit: handleSubmit(this.handleSubmit.bind(this)) },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -41686,7 +41662,7 @@
 	            { htmlFor: 'username' },
 	            'username'
 	          ),
-	          _react2.default.createElement(_reduxForm.Field, _extends({ name: 'username' }, username, { component: 'input', type: 'text' })),
+	          _react2.default.createElement(_reduxForm.Field, { name: 'username', component: 'input', type: 'text' }),
 	          _react2.default.createElement('div', null)
 	        ),
 	        _react2.default.createElement(
@@ -41697,7 +41673,7 @@
 	            { htmlFor: 'body' },
 	            'body'
 	          ),
-	          _react2.default.createElement(_reduxForm.Field, _extends({ name: 'body' }, body, { component: 'input', type: 'text' })),
+	          _react2.default.createElement(_reduxForm.Field, { name: 'body', component: 'input', type: 'text' }),
 	          _react2.default.createElement('div', null)
 	        ),
 	        _react2.default.createElement(
@@ -41712,27 +41688,27 @@
 	  return CommentForm;
 	}(_react.Component);
 	
-	function validate(values) {
-	  var errors = {};
+	// function validate(values){
+	//   const errors = {}
 	
-	  if (!values.username) {
-	    errors.username = 'Enter a username';
-	  }
+	//   if(!values.username){
+	//     errors.username = 'Enter a username'
+	//   }
 	
-	  if (!values.body) {
-	    errors.body = 'Enter a comment';
-	  }
+	//   if(!values.body){
+	//     errors.body = 'Enter a comment'
+	//   }
 	
-	  return errors;
-	}
+	//   return errors
+	// }
 	
-	// export default CommentForm
-	exports.default = (0, _reduxForm.reduxForm)({
+	
+	CommentForm = (0, _reduxForm.reduxForm)({
 	  form: 'CommentForm',
-	  fields: ['username', 'body'],
-	  validate: validate
+	  fields: ['username', 'body']
+	})(CommentForm);
 	
-	}, null, { createComment: _actions.createComment })(CommentForm);
+	exports.default = CommentForm = (0, _reactRedux.connect)(null, { createComment: _actions.createComment })(CommentForm);
 
 /***/ },
 /* 511 */
@@ -48434,17 +48410,17 @@
 	  _createClass(Comments, [{
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
+	      // APIManager.get('/api/comment', null, (err, res)=>{
+	      //   if (err){
+	      //       alert("err" + err.message)
+	      //       return
+	      //     }
+	      //   this.setState({
+	      //       list: res.body.results
+	      //     })
+	      // })
 	
-	      _utils.APIManager.get('/api/comment', null, function (err, res) {
-	        if (err) {
-	          alert("err" + err.message);
-	          return;
-	        }
-	        _this2.setState({
-	          list: res.body.results
-	        });
-	      });
+	
 	    }
 	  }, {
 	    key: 'submitComment',
@@ -48494,7 +48470,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { style: _styles2.default.oneHalf },
-	          _react2.default.createElement(_presentational.CommentForm, { handleSubmit: this.submitComment.bind(this) }),
+	          _react2.default.createElement(_presentational.CommentForm, null),
 	          renderComments
 	        ),
 	        _react2.default.createElement(

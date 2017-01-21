@@ -1,65 +1,50 @@
-import React, {Component, PropTypes}  from 'react' 
+import React, {Component}  from 'react' 
+import {connect} from 'react-redux'
 import { Field, reduxForm } from 'redux-form';
 import {createComment} from '../../actions'
-
 import styles from './styles'
 
 class CommentForm extends Component{
 
-
   constructor(){
     super()
-
     this.state = {
       body: '',
       username: ''
     }
-
   }
-  // updateComment(){
-  //   let updatedComment = Object.assign({}, this.state.comment)
-  //   updatedComment['body'] = this.refs.body.value
-  //   updatedComment['username'] = this.refs.username.value
 
-  //   this.refs.username.value = ''
-  //   this.refs.body.value = ''
-  //   this.props.handleSubmit(updatedComment)
+  // updateComment(){
+    // let updatedComment = Object.assign({}, this.state.comment)
+    // updatedComment['body'] = this.refs.body.value
+    // updatedComment['username'] = this.refs.username.value
+
+    // this.refs.username.value = ''
+    // this.refs.body.value = ''
+    // this.props.handleSubmit(updatedComment)
   // }
 
-
-  submitComment(props){
-    // const { createComment, reset } = this.props;
+  handleSubmit(props){
     let updatedProps = Object.assign({}, props)
     updatedProps['id'] = this.props.id
-    console.log(updatedProps)
-    return createComment(updatedProps)
-    // do other success stuff
-    // });
     
+    this.props.createComment(updatedProps)
   }
 
-
-  //   this.props.createPost(props)
-  //     .then(()=>{
-  //       //return of promise blog post has been created, navigate to the index
-  //       // this.context.router.push('/')
-
-  //     })
-  // }
   render(){
 
-    const { fields: {username, body}, handleSubmit} = this.props
+    const { fields: {username, body}, handleSubmit, reset} = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.submitComment.bind(this))}>
+      <form onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
         <div>
           <label htmlFor="username">username</label>
-          <Field name="username" {...username} component="input" type="text"/>
+          <Field name="username" component="input" type="text"/>
           <div></div>
         </div>
         <div>
           <label htmlFor="body">body</label>
-          <Field name="body" {...body} component="input" type="text"/>
+          <Field name="body" component="input" type="text"/>
           <div></div>
 
         </div>
@@ -69,24 +54,24 @@ class CommentForm extends Component{
   }
 }
 
-function validate(values){
-  const errors = {}
+// function validate(values){
+//   const errors = {}
 
-  if(!values.username){
-    errors.username = 'Enter a username'
-  }
+//   if(!values.username){
+//     errors.username = 'Enter a username'
+//   }
 
-  if(!values.body){
-    errors.body = 'Enter a comment'
-  }
+//   if(!values.body){
+//     errors.body = 'Enter a comment'
+//   }
 
-  return errors
-}
+//   return errors
+// }
 
-// export default CommentForm
-export default reduxForm({
+
+CommentForm = reduxForm({
   form: 'CommentForm',
-  fields: ['username', 'body'],
-  validate
- 
-}, null, {createComment})(CommentForm)
+  fields: ['username', 'body']
+})(CommentForm);
+
+export default CommentForm = connect(null, {createComment})(CommentForm);

@@ -7,16 +7,7 @@ import ZonesReducer from './ZonesReducer'
 
 const rootReducer = combineReducers({
   zones: ZonesReducer,
-  form: formReducer.plugin({
-    CommentForm: (state, action) => { // 
-      switch(action.type) {
-        case CLEAR_COMMENT_FORM:
-          return {...state, body:{}, username:{}}
-        default:
-          return state;
-      }
-    }
-  })
+  form: formReducer
 });
 
 export default rootReducer;
