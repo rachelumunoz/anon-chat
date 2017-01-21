@@ -41534,10 +41534,10 @@
 	  _createClass(Comment, [{
 	    key: 'render',
 	    value: function render() {
-	      var _props$comment = this.props.comment,
-	          username = _props$comment.username,
-	          body = _props$comment.body,
-	          timestamp = _props$comment.timestamp;
+	      var _props = this.props,
+	          username = _props.username,
+	          body = _props.body,
+	          timestamp = _props.timestamp;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -46091,11 +46091,9 @@
 	
 	var _reactRedux = __webpack_require__(179);
 	
-	var _CommentForm = __webpack_require__(510);
-	
-	var _CommentForm2 = _interopRequireDefault(_CommentForm);
-	
 	var _presentational = __webpack_require__(508);
+	
+	var _containers = __webpack_require__(581);
 	
 	var _actions = __webpack_require__(477);
 	
@@ -46110,6 +46108,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import CommentForm from './CommentForm'
+	
 	// import {Geocode} from '../../utils'
 	
 	
@@ -46131,7 +46131,7 @@
 	
 	    value: function componentWillMount() {
 	      this.props.fetchZone(this.props.params.id);
-	      this.props.fetchComments(this.props.params.id);
+	      // this.props.fetchComments(this.props.params.id)
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',
@@ -46230,13 +46230,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'one-half' },
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              'Cmments componenet'
-	            ),
-	            _react2.default.createElement(_CommentForm2.default, { id: this.props.params.id }),
-	            this.renderComments()
+	            _react2.default.createElement(_containers.Comments, { id: this.props.params.id })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -46263,12 +46257,11 @@
 	function mapStateToProps(state) {
 	  return {
 	    zone: state.zones.zone,
-	    comments: state.zones.comments,
 	    coordinates: state.zones.coordinates
 	  };
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone, fetchComments: _actions.fetchComments, getCoordinates: _actions.getCoordinates })(Zone);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone, getCoordinates: _actions.getCoordinates })(Zone);
 
 /***/ },
 /* 560 */
@@ -48378,7 +48371,9 @@
 	
 	var _presentational = __webpack_require__(508);
 	
-	var _utils = __webpack_require__(560);
+	var _actions = __webpack_require__(477);
+	
+	var _reactRedux = __webpack_require__(179);
 	
 	var _styles = __webpack_require__(572);
 	
@@ -48391,6 +48386,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import {APIManager} from '../../utils'
+	
 	
 	var Comments = function (_Component) {
 	  _inherits(Comments, _Component);
@@ -48408,19 +48405,9 @@
 	  }
 	
 	  _createClass(Comments, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      // APIManager.get('/api/comment', null, (err, res)=>{
-	      //   if (err){
-	      //       alert("err" + err.message)
-	      //       return
-	      //     }
-	      //   this.setState({
-	      //       list: res.body.results
-	      //     })
-	      // })
-	
-	
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.props.fetchComments(this.props.id);
 	    }
 	  }, {
 	    key: 'submitComment',
@@ -48444,44 +48431,19 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var renderComments = this.state.list.map(function (comment, i) {
+	      var renderComments = this.props.comments.map(function (comment) {
 	        return _react2.default.createElement(
 	          'div',
-	          { key: i, style: _styles2.default.container },
-	          _react2.default.createElement(_presentational.Comment, { comment: comment })
+	          { key: comment._id },
+	          _react2.default.createElement(_presentational.Comment, comment)
 	        );
 	      });
-	
-	      var location = {
-	        lat: 40.7575285,
-	        lng: -73.9884469
-	      };
 	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(
-	          'h1',
-	          { style: _styles2.default.title },
-	          ' ',
-	          this.state.zone,
-	          ' Comments'
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { style: _styles2.default.oneHalf },
-	          _react2.default.createElement(_presentational.CommentForm, null),
-	          renderComments
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { style: _styles2.default.oneHalf },
-	          _react2.default.createElement(
-	            'div',
-	            { style: _styles2.default.map },
-	            _react2.default.createElement(_presentational.Map, { center: location })
-	          )
-	        )
+	        _react2.default.createElement(_presentational.CommentForm, null),
+	        renderComments
 	      );
 	    }
 	  }]);
@@ -48489,7 +48451,13 @@
 	  return Comments;
 	}(_react.Component);
 	
-	exports.default = Comments;
+	function mapStateToProps(state) {
+	  return {
+	    comments: state.zones.comments
+	  };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchComments: _actions.fetchComments })(Comments);
 
 /***/ },
 /* 572 */
@@ -49001,6 +48969,36 @@
 	
 	module.exports = keysIn;
 
+
+/***/ },
+/* 580 */,
+/* 581 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.ZonesIndex = exports.Zones = exports.Comments = undefined;
+	
+	var _Comments = __webpack_require__(571);
+	
+	var _Comments2 = _interopRequireDefault(_Comments);
+	
+	var _Zones = __webpack_require__(507);
+	
+	var _Zones2 = _interopRequireDefault(_Zones);
+	
+	var _ZonesIndex = __webpack_require__(574);
+	
+	var _ZonesIndex2 = _interopRequireDefault(_ZonesIndex);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.Comments = _Comments2.default;
+	exports.Zones = _Zones2.default;
+	exports.ZonesIndex = _ZonesIndex2.default;
 
 /***/ }
 /******/ ]);

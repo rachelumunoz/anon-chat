@@ -1,10 +1,12 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
-import CommentForm from './CommentForm'
-import {Map} from '../presentational'
+// import CommentForm from './CommentForm'
 
-import {fetchZone, fetchComments, getCoordinates} from '../../actions'
+import {Map, CommentForm} from '../presentational'
+import {Comments} from '../containers'
+
+import {fetchZone, getCoordinates} from '../../actions'
 // import {Geocode} from '../../utils'
 import styles from './styles'
 
@@ -16,7 +18,7 @@ class Zone extends Component {
   
   componentWillMount(){
     this.props.fetchZone(this.props.params.id)
-    this.props.fetchComments(this.props.params.id)
+    // this.props.fetchComments(this.props.params.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -42,8 +44,6 @@ class Zone extends Component {
 
     if(this.state.zone && this.state.coordinates){
         
-
-
       return (
         <div style={styles.map}>
           <Map 
@@ -83,9 +83,10 @@ class Zone extends Component {
        </div>
        <div className="three-fourth">
         <div className="one-half">
-          <h1>Cmments componenet</h1>
-          <CommentForm id={this.props.params.id}/>
-          {this.renderComments()}
+          
+           { /*<CommentForm id={this.props.params.id}/> */}
+          <Comments id={this.props.params.id} />
+          { /*{this.renderComments()} */}
         </div>
         <div className="one-half">
           <h1>map componenet</h1>
@@ -100,9 +101,8 @@ class Zone extends Component {
 function mapStateToProps(state){
   return {
       zone: state.zones.zone,
-      comments: state.zones.comments,
       coordinates: state.zones.coordinates
     }
 }
 
-export default connect(mapStateToProps, {fetchZone, fetchComments, getCoordinates})(Zone)
+export default connect(mapStateToProps, {fetchZone, getCoordinates})(Zone)

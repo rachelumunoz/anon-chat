@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
-import {Comment, CommentForm, Map} from '../presentational'
-import {APIManager} from '../../utils'
+import {Comment, CommentForm} from '../presentational'
+// import {APIManager} from '../../utils'
+import {fetchComments} from '../../actions'
+import {connect} from 'react-redux'
 
 import styles from './styles'
 
@@ -14,18 +16,8 @@ class Comments extends Component {
     }
   }
 
-  componentDidMount(){
-    // APIManager.get('/api/comment', null, (err, res)=>{
-    //   if (err){
-    //       alert("err" + err.message)
-    //       return
-    //     }
-    //   this.setState({
-    //       list: res.body.results
-    //     })
-    // })
-
-    
+  componentWillMount(){
+    this.props.fetchComments(this.props.id)
   }
 
   submitComment(comment){
@@ -47,37 +39,28 @@ class Comments extends Component {
   }
 
   render(){
-    const renderComments = this.state.list.map((comment, i)=>{
+    const renderComments = this.props.comments.map((comment)=>{
       return (
-          <div  key={i} style={styles.container}>
-            <Comment comment={comment}/>
-          </div>
-        )
+        <div key={comment._id}>
+          <Comment {...comment}/>
+        </div>
+      )
     })
 
-    const location = {
-      lat: 40.7575285,
-      lng: -73.9884469
-    }
 
     return (
-      <div> 
-        <h1 style={styles.title}> {this.state.zone} Comments</h1>
-        <div style={styles.oneHalf}> 
-          <CommentForm />
-          {renderComments}
-        </div>
-        <div style={styles.oneHalf}>
-          <div style={styles.map}>
-            <Map center={location}/>
-          </div>
-        </div>
-
-      
-
-      </div>
+       <div> 
+        <CommentForm />
+        {renderComments}
+      </div>  
     )
   }
 }
 
-export default Comments
+function mapStateToProps(state){
+  return {
+      comments: state.zones.comments,
+    }
+}
+
+export default connect(mapStateToProps, { fetchComments})(Comments)
