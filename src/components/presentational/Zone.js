@@ -1,13 +1,10 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
-// import CommentForm from './CommentForm'
 
 import {Map, CommentForm} from '../presentational'
 import {Comments} from '../containers'
-
 import {fetchZone, getCoordinates} from '../../actions'
-// import {Geocode} from '../../utils'
 import styles from './styles'
 
 
@@ -83,10 +80,7 @@ class Zone extends Component {
        </div>
        <div className="three-fourth">
         <div className="one-half">
-          
-           { /*<CommentForm id={this.props.params.id}/> */}
-          <Comments id={this.props.params.id} />
-          { /*{this.renderComments()} */}
+          <Comments zoneId={this.props.params.id} />
         </div>
         <div className="one-half">
           <h1>map componenet</h1>

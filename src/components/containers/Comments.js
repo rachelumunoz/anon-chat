@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Comment, CommentForm} from '../presentational'
-// import {APIManager} from '../../utils'
-import {fetchComments} from '../../actions'
+import {fetchComments, createComment} from '../../actions'
 import {connect} from 'react-redux'
 
 import styles from './styles'
@@ -17,10 +16,23 @@ class Comments extends Component {
   }
 
   componentWillMount(){
-    this.props.fetchComments(this.props.id)
+    this.props.fetchComments(this.props.zoneId)
   }
 
-  submitComment(comment){
+  componentWillReceiveProps(nextProps){
+    if(nextProps.comments !== this.props.comments){
+      console.log('it changed',nextProps)
+    }
+
+  }
+
+  handleSubmit(props){
+    let updatedProps = Object.assign({}, props)
+    updatedProps['id'] = this.props.id
+    
+    console.log('in handle subit')
+    this.props.createComment(updatedProps)
+
     // APIManager.post('/api/comment', comment, (err, res)=>{
     //   if (err){
     //     console.log('error', err.message)
@@ -35,10 +47,19 @@ class Comments extends Component {
     //   })
     // })
 
-    console.log(comment)
+    // console.log(props)
   }
 
+  // renderComments(){
+  //   if(!this.props.comments.length){
+  //     console.log('nada')
+  //   }
+    
+
+  // }
+
   render(){
+    
     const renderComments = this.props.comments.map((comment)=>{
       return (
         <div key={comment._id}>
@@ -47,10 +68,9 @@ class Comments extends Component {
       )
     })
 
-
     return (
        <div> 
-        <CommentForm />
+        <CommentForm submitO={this.handleSubmit} id={this.props.zoneId}/>
         {renderComments}
       </div>  
     )
@@ -63,4 +83,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { fetchComments})(Comments)
+export default connect(mapStateToProps, { fetchComments, createComment})(Comments)

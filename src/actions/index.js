@@ -10,6 +10,7 @@ export const CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM'
 
 const ROOT_URL = 'http://localhost:3000/api'
 
+
 export function fetchZones(){
   const request = axios.get(`${ROOT_URL}/zone`)
   

@@ -14,29 +14,20 @@ class CommentForm extends Component{
     }
   }
 
-  // updateComment(){
-    // let updatedComment = Object.assign({}, this.state.comment)
-    // updatedComment['body'] = this.refs.body.value
-    // updatedComment['username'] = this.refs.username.value
-
-    // this.refs.username.value = ''
-    // this.refs.body.value = ''
-    // this.props.handleSubmit(updatedComment)
-  // }
-
-  handleSubmit(props){
-    let updatedProps = Object.assign({}, props)
-    updatedProps['id'] = this.props.id
+  // handleSubmit(props){
+  //   let updatedProps = Object.assign({}, props)
+  //   updatedProps['id'] = this.props.id
     
-    this.props.createComment(updatedProps)
-  }
+  //   console.log('in handle subit')
+  //   this.props.createComment(updatedProps)
+  // }
 
   render(){
 
     const { fields: {username, body}, handleSubmit, reset} = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.handleSubmit.bind(this))}>
+      <form onSubmit={handleSubmit(this.props.submitO.bind(this))}>
         <div>
           <label htmlFor="username">username</label>
           <Field name="username" component="input" type="text"/>

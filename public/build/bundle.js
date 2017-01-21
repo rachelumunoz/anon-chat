@@ -41157,8 +41157,12 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
+	    case _index.CREATE_COMMENT:
+	      var newComment = action.payload.data.result;
+	      var originalState = Object.assign({}, state);
+	      var updatedComments = originalState.comments.concat(newComment);
+	      return _extends({}, state, { comments: updatedComments });
 	    case _index.FETCH_ZONE:
-	
 	      return _extends({}, state, { zone: action.payload.data.result });
 	    case _index.FETCH_ZONES:
 	      return _extends({}, state, { all: action.payload.data.results });
@@ -41169,6 +41173,7 @@
 	      var lat = parseFloat(action.payload.data.results[0].geometry.bounds.northeast.lat);
 	      var lng = parseFloat(action.payload.data.results[0].geometry.bounds.northeast.lng);
 	      return _extends({}, state, { coordinates: { lat: lat, lng: lng } });
+	
 	    default:
 	      return state;
 	  }
@@ -41622,25 +41627,15 @@
 	    return _this;
 	  }
 	
-	  // updateComment(){
-	  // let updatedComment = Object.assign({}, this.state.comment)
-	  // updatedComment['body'] = this.refs.body.value
-	  // updatedComment['username'] = this.refs.username.value
+	  // handleSubmit(props){
+	  //   let updatedProps = Object.assign({}, props)
+	  //   updatedProps['id'] = this.props.id
 	
-	  // this.refs.username.value = ''
-	  // this.refs.body.value = ''
-	  // this.props.handleSubmit(updatedComment)
+	  //   console.log('in handle subit')
+	  //   this.props.createComment(updatedProps)
 	  // }
 	
 	  _createClass(CommentForm, [{
-	    key: 'handleSubmit',
-	    value: function handleSubmit(props) {
-	      var updatedProps = Object.assign({}, props);
-	      updatedProps['id'] = this.props.id;
-	
-	      this.props.createComment(updatedProps);
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _props = this.props,
@@ -41653,7 +41648,7 @@
 	
 	      return _react2.default.createElement(
 	        'form',
-	        { onSubmit: handleSubmit(this.handleSubmit.bind(this)) },
+	        { onSubmit: handleSubmit(this.props.submitO.bind(this)) },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -46108,10 +46103,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import CommentForm from './CommentForm'
-	
-	// import {Geocode} from '../../utils'
-	
 	
 	var Zone = function (_Component) {
 	  _inherits(Zone, _Component);
@@ -46230,7 +46221,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'one-half' },
-	            _react2.default.createElement(_containers.Comments, { id: this.props.params.id })
+	            _react2.default.createElement(_containers.Comments, { zoneId: this.props.params.id })
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -48386,8 +48377,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import {APIManager} from '../../utils'
-	
 	
 	var Comments = function (_Component) {
 	  _inherits(Comments, _Component);
@@ -48407,11 +48396,24 @@
 	  _createClass(Comments, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.fetchComments(this.props.id);
+	      this.props.fetchComments(this.props.zoneId);
 	    }
 	  }, {
-	    key: 'submitComment',
-	    value: function submitComment(comment) {
+	    key: 'componentWillReceiveProps',
+	    value: function componentWillReceiveProps(nextProps) {
+	      if (nextProps.comments !== this.props.comments) {
+	        console.log('it changed', nextProps);
+	      }
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(props) {
+	      var updatedProps = Object.assign({}, props);
+	      updatedProps['id'] = this.props.id;
+	
+	      console.log('in handle subit');
+	      this.props.createComment(updatedProps);
+	
 	      // APIManager.post('/api/comment', comment, (err, res)=>{
 	      //   if (err){
 	      //     console.log('error', err.message)
@@ -48426,11 +48428,21 @@
 	      //   })
 	      // })
 	
-	      console.log(comment);
+	      // console.log(props)
 	    }
+	
+	    // renderComments(){
+	    //   if(!this.props.comments.length){
+	    //     console.log('nada')
+	    //   }
+	
+	
+	    // }
+	
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	
 	      var renderComments = this.props.comments.map(function (comment) {
 	        return _react2.default.createElement(
 	          'div',
@@ -48442,7 +48454,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_presentational.CommentForm, null),
+	        _react2.default.createElement(_presentational.CommentForm, { submitO: this.handleSubmit, id: this.props.zoneId }),
 	        renderComments
 	      );
 	    }
@@ -48457,7 +48469,7 @@
 	  };
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchComments: _actions.fetchComments })(Comments);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchComments: _actions.fetchComments, createComment: _actions.createComment })(Comments);
 
 /***/ },
 /* 572 */

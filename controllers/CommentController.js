@@ -28,6 +28,8 @@ module.exports = {
   },
 
   create: function(params, callback){
+    
+    console.log('dese params',params)
     let zoneId = params['id']
     
     const comment = Comment.create(params, (err, comment)=>{
@@ -38,25 +40,22 @@ module.exports = {
       return comment
     })
     
-    comment.then(res=>{
+    comment.then(comment=>{
       Zone.findByIdAndUpdate(zoneId, {
           $inc: {numComments: 1},
-          $push: {comments: res},
+          $push: {comments: comment},
           safe: true, 
           upsert: true
         }, (err, res)=>{
           if (err){
-            console.log('error from updating zone', err)
-            return
+            callback(err, null)
           }
-          console.log('success update',res)
-          return res
+          return callback(null, res)
         })
     })
-    .then(res =>callback(null, res))
-    .catch(e => callback(e, null))
   },
 
+  // desperately needs promise refactoring
   update: function(id, params, callback){
     Comment.findByIdAndUpdate(id, params, {new: true}, function(err, comment){
       if(err){
