@@ -32,7 +32,7 @@ class Comments extends Component {
 
   handleSubmit(props, dispatch){
 
-    console.log(props)
+    console.log('in handle submit')
     let updatedProps = Object.assign({}, props)
     updatedProps['id'] = this.props.id
 

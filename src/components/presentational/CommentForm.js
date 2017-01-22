@@ -1,53 +1,41 @@
-import React, {Component}  from 'react' 
-import {connect} from 'react-redux'
-import { Field, reduxForm } from 'redux-form';
+import React from 'react'
+import { Field, reduxForm } from 'redux-form'
 import styles from './styles'
 
-class CommentForm extends Component{
 
-  render(){
-    const { fields: {username, body}, handleSubmit } = this.props
+const required = value => value ? undefined : 'Required'
 
-    return (
-      <form onSubmit={handleSubmit(this.props.submitComment.bind(this))}>
-        <div>
-          <label htmlFor="username">username</label>
-          <Field name="username" component="input" type="text"/>
-          <div>
-            {username.touched ? username.error: ''}
-          </div>
-        </div>
-        <div>
-          <label htmlFor="body">body</label>
-          <Field name="body" component="input" type="text"/>
-          <div></div>
 
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-    );
-  }
+const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+  <div>
+    <label>{label}</label>
+    <div>
+      <input {...input} placeholder={label} type={type}/>
+      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)
+
+const CommentForm = (props) => {
+  const { handleSubmit, pristine, reset, submitting, submitComment } = props
+
+  return (
+    <form onSubmit={handleSubmit(submitComment.bind(this))}>
+      <Field name="username" type="text"
+        component={renderField} label="Username"
+        validate={required} 
+      />
+      <Field name="body" type="text"
+        component={renderField} label="body"
+        validate={required}
+      />
+      <div>
+        <button type="submit" disabled={submitting}>Submit</button>
+      </div>
+    </form>
+  )
 }
 
-function validate(values){
-  const errors = {}
-
-  if(!values.username){
-    errors.username = 'Enter a username'
-  }
-
-  if(!values.body){
-    errors.body = 'Enter a comment'
-  }
-
-  return errors
-}
-
-
-CommentForm = reduxForm({
-  form: 'CommentForm',
-  fields: ['username', 'body'],
-  validate
-})(CommentForm);
-
-export default CommentForm 
+export default reduxForm({
+  form: 'CommentForm' // a unique identifier for this form
+})(CommentForm)
