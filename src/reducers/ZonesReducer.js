@@ -1,4 +1,4 @@
-import {FETCH_ZONES, FETCH_ZONE, FETCH_COMMENTS, GET_COORDINATES, CREATE_COMMENT, CREATE_ZONE_COMMENT} from '../actions/index'
+import {FETCH_ZONES, FETCH_ZONE, FETCH_COMMENTS, GET_COORDINATES, CREATE_COMMENT, CREATE_ZONE_COMMENT, ACCOUNT_SAVE_SUCCESS} from '../actions/index'
 
 const INITIAL_STATE = {all: [], zone: null, comments: [], location: {} }
 
@@ -7,7 +7,7 @@ export default function ZonesReducer(state=INITIAL_STATE, action){
     // case CREATE_COMMENT:
     //   let newComments = action.payload.data.result.comments 
     //   return {...state, comments: newComments}
-
+   
     case CREATE_ZONE_COMMENT:
       console.log("-=-=-=-=-==zones reduce create zone comment-==-=-=-=")
       console.log(action.payload)

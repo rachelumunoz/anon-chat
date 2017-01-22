@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {reducer as formReducer} from 'redux-form'
-import {CLEAR_COMMENT_FORM} from '../actions';
+import {ACCOUNT_SAVE_SUCCESS} from '../actions';
 
 import ZonesReducer from './ZonesReducer'
 

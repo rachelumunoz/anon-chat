@@ -1,21 +1,21 @@
 import React, {Component}  from 'react' 
 import {connect} from 'react-redux'
 import { Field, reduxForm } from 'redux-form';
-// import {createComment} from '../../actions'
 import styles from './styles'
 
 class CommentForm extends Component{
 
   render(){
-
-    const { fields: {username, body}, handleSubmit, reset} = this.props
+    const { fields: {username, body}, handleSubmit } = this.props
 
     return (
       <form onSubmit={handleSubmit(this.props.submitComment.bind(this))}>
         <div>
           <label htmlFor="username">username</label>
           <Field name="username" component="input" type="text"/>
-          <div></div>
+          <div>
+            {username.touched ? username.error: ''}
+          </div>
         </div>
         <div>
           <label htmlFor="body">body</label>
@@ -29,24 +29,25 @@ class CommentForm extends Component{
   }
 }
 
-// function validate(values){
-//   const errors = {}
+function validate(values){
+  const errors = {}
 
-//   if(!values.username){
-//     errors.username = 'Enter a username'
-//   }
+  if(!values.username){
+    errors.username = 'Enter a username'
+  }
 
-//   if(!values.body){
-//     errors.body = 'Enter a comment'
-//   }
+  if(!values.body){
+    errors.body = 'Enter a comment'
+  }
 
-//   return errors
-// }
+  return errors
+}
 
 
 CommentForm = reduxForm({
   form: 'CommentForm',
-  fields: ['username', 'body']
+  fields: ['username', 'body'],
+  validate
 })(CommentForm);
 
 export default CommentForm 

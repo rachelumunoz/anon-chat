@@ -7,7 +7,7 @@ export const GET_COORDINATES = 'GET_COORDINATES'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM'
 export const CREATE_ZONE_COMMENT = 'CREATE_ZONE_COMMENT'
-
+// export const ACCOUNT_SAVE_SUCCESS = 'ACCOUNT_SAVE_SUCCESS'
 
 const ROOT_URL = 'http://localhost:3000/api'
 
@@ -66,3 +66,6 @@ export function createZoneComment(zoneId, props){
     payload: request
   }
 }
+
+
+

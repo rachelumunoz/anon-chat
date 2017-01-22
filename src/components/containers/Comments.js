@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {Comment, CommentForm} from '../presentational'
-import {fetchComments, createComment, createZoneComment} from '../../actions'
+import {fetchComments, createZoneComment} from '../../actions'
 import {connect} from 'react-redux'
+import {reset} from 'redux-form';
 
 import styles from './styles'
 
@@ -17,8 +18,6 @@ class Comments extends Component {
 
   componentWillMount(){
     this.props.fetchComments(this.props.zoneId)
-    console.log("-=-=-=-=-==-=-=-=-=--=-==")
-    console.log(this.props)
   }
 
   // to see when receive props
@@ -28,27 +27,20 @@ class Comments extends Component {
         this.setState({
           comments: nextProps.comments
         })
-      // console.log('current comments tate receive prosp', this.state)
     }
-
   }
 
-  //default props to set comments
+  handleSubmit(props, dispatch){
 
-
-  //from commentform submit see if comments state updated
-
-  handleSubmit(props){
+    console.log(props)
     let updatedProps = Object.assign({}, props)
     updatedProps['id'] = this.props.id
-    console.log('props', this.props)
-    // this.props.createComment(updatedProps)
+
 
     this.props.createZoneComment(this.props.zoneId, props)
+  
+    dispatch(reset('CommentForm'))
   }
-
-
-  //comments as id's not objects
 
   renderComments(){
     if (this.state.comments.length === 0){
