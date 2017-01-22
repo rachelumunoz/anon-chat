@@ -1,4 +1,6 @@
 const Zone = require('../models/Zone');
+const Comment = require('../models/Comment');
+
 
 module.exports = {
   
@@ -77,5 +79,52 @@ module.exports = {
         }
         callback(null, comments)
     });
+  }, 
+
+  createZoneComment: function(zoneId, params, callback){
+    console.log("-=-=-=zone controller-=--=-=-")
+    console.log('params', params)
+    console.log('zoneid',zoneId)
+
+    //create comment
+    const comment = Comment.create(params, (err, comment)=>{
+      if (err){
+        callback(err, null)
+        return
+      }
+      return comment
+    })
+    
+    comment.then(comment=>{
+      Zone.findByIdAndUpdate(zoneId, {
+          $inc: {numComments: 1},
+          $push: {comments: comment}},{
+          upsert: true,
+          'new': true 
+          }, (err, res)=>{
+          if (err){
+            callback(err, null)
+            return
+          }
+        })
+      Zone
+      .findById(zoneId)
+      .populate('comments')
+      .exec((err, comments)=>{
+        if (err) {
+          callback(err, null)
+          return
+        }
+        callback(null, comments)
+      });
+    })
+    //attach to zone
+    //populate comments as results
+
+
+
   }
+
+
+
 };

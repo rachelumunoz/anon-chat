@@ -6,6 +6,7 @@ export const FETCH_COMMENTS = 'FETCH_COMMENTS'
 export const GET_COORDINATES = 'GET_COORDINATES'
 export const CREATE_COMMENT = 'CREATE_COMMENT'
 export const CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM'
+export const CREATE_ZONE_COMMENT = 'CREATE_ZONE_COMMENT'
 
 
 const ROOT_URL = 'http://localhost:3000/api'
@@ -53,6 +54,15 @@ export function getCoordinates(encodedZip){
 
   return {
     type: GET_COORDINATES,
+    payload: request
+  }
+}
+
+export function createZoneComment(zoneId, props){
+  const request = axios.post(`${ROOT_URL}/zone/${zoneId}/comments`, props)
+
+  return {
+    type: CREATE_ZONE_COMMENT,
     payload: request
   }
 }

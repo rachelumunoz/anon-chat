@@ -39577,12 +39577,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.CLEAR_COMMENT_FORM = exports.CREATE_COMMENT = exports.GET_COORDINATES = exports.FETCH_COMMENTS = exports.FETCH_ZONES = exports.FETCH_ZONE = undefined;
+	exports.CREATE_ZONE_COMMENT = exports.CLEAR_COMMENT_FORM = exports.CREATE_COMMENT = exports.GET_COORDINATES = exports.FETCH_COMMENTS = exports.FETCH_ZONES = exports.FETCH_ZONE = undefined;
 	exports.fetchZones = fetchZones;
 	exports.fetchZone = fetchZone;
 	exports.createComment = createComment;
 	exports.fetchComments = fetchComments;
 	exports.getCoordinates = getCoordinates;
+	exports.createZoneComment = createZoneComment;
 	
 	var _axios = __webpack_require__(478);
 	
@@ -39596,6 +39597,7 @@
 	var GET_COORDINATES = exports.GET_COORDINATES = 'GET_COORDINATES';
 	var CREATE_COMMENT = exports.CREATE_COMMENT = 'CREATE_COMMENT';
 	var CLEAR_COMMENT_FORM = exports.CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM';
+	var CREATE_ZONE_COMMENT = exports.CREATE_ZONE_COMMENT = 'CREATE_ZONE_COMMENT';
 	
 	var ROOT_URL = 'http://localhost:3000/api';
 	
@@ -39641,6 +39643,15 @@
 	
 	  return {
 	    type: GET_COORDINATES,
+	    payload: request
+	  };
+	}
+	
+	function createZoneComment(zoneId, props) {
+	  var request = _axios2.default.post(ROOT_URL + '/zone/' + zoneId + '/comments', props);
+	
+	  return {
+	    type: CREATE_ZONE_COMMENT,
 	    payload: request
 	  };
 	}
@@ -41138,7 +41149,7 @@
 /* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -41157,9 +41168,15 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case _index.CREATE_COMMENT:
-	      var newComments = action.payload.data.result.comments;
-	      return _extends({}, state, { comments: newComments });
+	    // case CREATE_COMMENT:
+	    //   let newComments = action.payload.data.result.comments 
+	    //   return {...state, comments: newComments}
+	
+	    case _index.CREATE_ZONE_COMMENT:
+	      console.log("-=-=-=-=-==zones reduce create zone comment-==-=-=-=");
+	      console.log(action.payload);
+	      return _extends({}, state, { comments: action.payload.data.result.comments });
+	
 	    case _index.FETCH_ZONE:
 	      return _extends({}, state, { zone: action.payload.data.result });
 	    case _index.FETCH_ZONES:
@@ -41589,8 +41606,6 @@
 	
 	var _reduxForm = __webpack_require__(271);
 	
-	var _actions = __webpack_require__(477);
-	
 	var _styles = __webpack_require__(511);
 	
 	var _styles2 = _interopRequireDefault(_styles);
@@ -41602,6 +41617,8 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import {createComment} from '../../actions'
+	
 	
 	var CommentForm = function (_Component) {
 	  _inherits(CommentForm, _Component);
@@ -41680,7 +41697,7 @@
 	  fields: ['username', 'body']
 	})(CommentForm);
 	
-	exports.default = CommentForm = (0, _reactRedux.connect)(null, { createComment: _actions.createComment })(CommentForm);
+	exports.default = CommentForm;
 
 /***/ },
 /* 511 */
@@ -46274,9 +46291,9 @@
 	  _createClass(Comments, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      console.log("wil mount");
 	      this.props.fetchComments(this.props.zoneId);
-	      console.log('current comments tate', this.state.comments);
+	      console.log("-=-=-=-=-==-=-=-=-=--=-==");
+	      console.log(this.props);
 	    }
 	
 	    // to see when receive props
@@ -46285,7 +46302,6 @@
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (nextProps.comments !== this.props.comments) {
-	        console.log("=-=-=-=-=-=-=-=-=-=-=-=-");
 	        console.log('it changed', nextProps);
 	        this.setState({
 	          comments: nextProps.comments
@@ -46304,9 +46320,10 @@
 	    value: function handleSubmit(props) {
 	      var updatedProps = Object.assign({}, props);
 	      updatedProps['id'] = this.props.id;
+	      console.log('props', this.props);
+	      // this.props.createComment(updatedProps)
 	
-	      this.props.createComment(updatedProps);
-	      console.log("comment sent out to reducer");
+	      this.props.createZoneComment(this.props.zoneId, props);
 	    }
 	
 	    //comments as id's not objects
@@ -46341,7 +46358,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_presentational.CommentForm, { submitComment: this.handleSubmit, id: this.props.zoneId }),
+	        _react2.default.createElement(_presentational.CommentForm, { submitComment: this.handleSubmit.bind(this), id: this.props.zoneId }),
 	        this.renderComments()
 	      );
 	    }
@@ -46356,7 +46373,7 @@
 	  };
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchComments: _actions.fetchComments, createComment: _actions.createComment })(Comments);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchComments: _actions.fetchComments, createZoneComment: _actions.createZoneComment })(Comments);
 
 /***/ },
 /* 562 */

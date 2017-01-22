@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Comment, CommentForm} from '../presentational'
-import {fetchComments, createComment} from '../../actions'
+import {fetchComments, createComment, createZoneComment} from '../../actions'
 import {connect} from 'react-redux'
 
 import styles from './styles'
@@ -15,17 +15,15 @@ class Comments extends Component {
     }
   }
 
-
   componentWillMount(){
-    console.log("wil mount")
     this.props.fetchComments(this.props.zoneId)
-    console.log('current comments tate', this.state.comments)
+    console.log("-=-=-=-=-==-=-=-=-=--=-==")
+    console.log(this.props)
   }
 
   // to see when receive props
   componentWillReceiveProps(nextProps){
     if(nextProps.comments !== this.props.comments){
-      console.log("=-=-=-=-=-=-=-=-=-=-=-=-")
       console.log('it changed', nextProps)
         this.setState({
           comments: nextProps.comments
@@ -43,9 +41,10 @@ class Comments extends Component {
   handleSubmit(props){
     let updatedProps = Object.assign({}, props)
     updatedProps['id'] = this.props.id
-    
-    this.props.createComment(updatedProps)
-    console.log("comment sent out to reducer")
+    console.log('props', this.props)
+    // this.props.createComment(updatedProps)
+
+    this.props.createZoneComment(this.props.zoneId, props)
   }
 
 
@@ -70,7 +69,7 @@ class Comments extends Component {
     
     return (
        <div> 
-        <CommentForm submitComment={this.handleSubmit} id={this.props.zoneId}/>
+        <CommentForm submitComment={this.handleSubmit.bind(this)} id={this.props.zoneId}/>
         {this.renderComments()}
       </div>  
     )
@@ -83,4 +82,4 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps, { fetchComments, createComment})(Comments)
+export default connect(mapStateToProps, { fetchComments, createZoneComment})(Comments)

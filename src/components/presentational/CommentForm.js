@@ -1,7 +1,7 @@
 import React, {Component}  from 'react' 
 import {connect} from 'react-redux'
 import { Field, reduxForm } from 'redux-form';
-import {createComment} from '../../actions'
+// import {createComment} from '../../actions'
 import styles from './styles'
 
 class CommentForm extends Component{
@@ -49,4 +49,4 @@ CommentForm = reduxForm({
   fields: ['username', 'body']
 })(CommentForm);
 
-export default CommentForm = connect(null, {createComment})(CommentForm);
+export default CommentForm 

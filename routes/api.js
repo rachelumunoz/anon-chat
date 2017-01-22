@@ -106,7 +106,31 @@ router.get('/:resource/:id/comments', (req, res, next)=>{
       results
     })
   })
+})
 
+router.post('/:resource/:id/comments', (req, res, next)=>{
+  let resource = req.params.resource;
+  let controller = controllers[resource]
+
+  console.log('-===-=-in routes-=-==-=-=-')
+
+  console.log(req.body)
+  controller.createZoneComment(req.params.id, req.body, (err, result)=>{
+    if (err){
+      res.json({
+        confirmation: 'fail',
+        message: err
+      })
+      return
+    }
+
+    console.log(result)
+    res.json({
+      confirmation: 'success',
+      result
+    })
+
+  })
 })
 
 
