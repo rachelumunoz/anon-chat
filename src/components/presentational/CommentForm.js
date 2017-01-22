@@ -6,28 +6,12 @@ import styles from './styles'
 
 class CommentForm extends Component{
 
-  constructor(){
-    super()
-    this.state = {
-      body: '',
-      username: ''
-    }
-  }
-
-  // handleSubmit(props){
-  //   let updatedProps = Object.assign({}, props)
-  //   updatedProps['id'] = this.props.id
-    
-  //   console.log('in handle subit')
-  //   this.props.createComment(updatedProps)
-  // }
-
   render(){
 
     const { fields: {username, body}, handleSubmit, reset} = this.props
 
     return (
-      <form onSubmit={handleSubmit(this.props.submitO.bind(this))}>
+      <form onSubmit={handleSubmit(this.props.submitComment.bind(this))}>
         <div>
           <label htmlFor="username">username</label>
           <Field name="username" component="input" type="text"/>

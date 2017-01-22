@@ -5,10 +5,8 @@ const INITIAL_STATE = {all: [], zone: null, comments: [], location: {} }
 export default function ZonesReducer(state=INITIAL_STATE, action){
   switch(action.type){
     case CREATE_COMMENT:
-      let newComment = action.payload.data.result 
-      let originalState = Object.assign({}, state)
-      let updatedComments = originalState.comments.concat(newComment)
-      return {...state, comments: updatedComments }
+      let newComments = action.payload.data.result.comments 
+      return {...state, comments: newComments}
     case FETCH_ZONE:
       return { ...state, zone: action.payload.data.result }
     case FETCH_ZONES:
@@ -20,8 +18,6 @@ export default function ZonesReducer(state=INITIAL_STATE, action){
       let lat = parseFloat(action.payload.data.results[0].geometry.bounds.northeast.lat)
       let lng = parseFloat(action.payload.data.results[0].geometry.bounds.northeast.lng)
       return {...state, coordinates: {lat, lng}}
-
-
     default:
       return state
   }

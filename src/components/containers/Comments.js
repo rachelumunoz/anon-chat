@@ -6,72 +6,72 @@ import {connect} from 'react-redux'
 import styles from './styles'
 
 class Comments extends Component {
+
   constructor(){
     super()
 
     this.state = {
-      zone: 'Zone 1',
-      list: []
+      comments: []
     }
   }
+
 
   componentWillMount(){
+    console.log("wil mount")
     this.props.fetchComments(this.props.zoneId)
+    console.log('current comments tate', this.state.comments)
   }
 
+  // to see when receive props
   componentWillReceiveProps(nextProps){
     if(nextProps.comments !== this.props.comments){
-      console.log('it changed',nextProps)
+      console.log("=-=-=-=-=-=-=-=-=-=-=-=-")
+      console.log('it changed', nextProps)
+        this.setState({
+          comments: nextProps.comments
+        })
+      // console.log('current comments tate receive prosp', this.state)
     }
 
   }
+
+  //default props to set comments
+
+
+  //from commentform submit see if comments state updated
 
   handleSubmit(props){
     let updatedProps = Object.assign({}, props)
     updatedProps['id'] = this.props.id
     
-    console.log('in handle subit')
     this.props.createComment(updatedProps)
-
-    // APIManager.post('/api/comment', comment, (err, res)=>{
-    //   if (err){
-    //     console.log('error', err.message)
-    //     return
-    //   }
-
-    //   let updatedList = Object.assign([], this.state.list)
-    //   updatedList.push(res.body.result)
-
-    //   this.setState({
-    //     list: updatedList
-    //   })
-    // })
-
-    // console.log(props)
+    console.log("comment sent out to reducer")
   }
 
-  // renderComments(){
-  //   if(!this.props.comments.length){
-  //     console.log('nada')
-  //   }
-    
 
-  // }
+  //comments as id's not objects
+
+  renderComments(){
+    if (this.state.comments.length === 0){
+      return (
+        <div> <h1> Fetching comments</h1></div>
+      )
+    }
+      return this.state.comments.map((comment)=>{
+        return (
+          <div key={comment._id}>
+            <Comment {...comment}/>
+          </div>
+        )
+      })
+  }
 
   render(){
     
-    const renderComments = this.props.comments.map((comment)=>{
-      return (
-        <div key={comment._id}>
-          <Comment {...comment}/>
-        </div>
-      )
-    })
-
     return (
        <div> 
-        <CommentForm submitO={this.handleSubmit} id={this.props.zoneId}/>
-        {renderComments}
+        <CommentForm submitComment={this.handleSubmit} id={this.props.zoneId}/>
+        {this.renderComments()}
       </div>  
     )
   }
@@ -79,8 +79,8 @@ class Comments extends Component {
 
 function mapStateToProps(state){
   return {
-      comments: state.zones.comments,
-    }
+    comments: state.zones.comments,
+  }
 }
 
 export default connect(mapStateToProps, { fetchComments, createComment})(Comments)

@@ -9,13 +9,9 @@ import styles from './styles'
 
 
 class Zone extends Component {
-  //   static contextTypes = {
-  //   router: PropTypes.object
-  // }
   
   componentWillMount(){
     this.props.fetchZone(this.props.params.id)
-    // this.props.fetchComments(this.props.params.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -49,22 +45,6 @@ class Zone extends Component {
         </div>
       )
     }
-  }
-
-  renderComments(){
-    return this.props.comments.map(comment=>{
-      const {username, body, timestamp, _id} = comment
-      return (
-        <div key={_id}> 
-          <p>
-            {body}
-          </p>
-          <div>
-            <span>{username} | {timestamp}</span>
-          </div>
-        </div>
-      )
-    })
   }
 
   render(){

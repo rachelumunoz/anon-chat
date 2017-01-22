@@ -8,14 +8,6 @@ import {APIManager} from '../../utils'
 
 
 class Zones extends Component{
-  constructor(){
-    super()
-
-    this.state = {
-      selected: 0,
-      list: []
-    }
-  }
 
   componentWillMount(){
     this.props.fetchZones()
