@@ -34,12 +34,10 @@ const defaultLocations = [
  ]
 
 const randomDefault = shuffle(defaultLocations)
-console.log(randomDefault[0])
+// console.log(randomDefault[0])
     
 const ZonesIndex = () => {
- 
   return (
-
     <div>
       <div className="one-fourth"> 
         <Zones />
@@ -50,47 +48,7 @@ const ZonesIndex = () => {
         </div>
       </div>
     </div>
-
   )
-
 }
-
-// class ZonesIndex extends Component{
-  
-  
-
-  
-  
-
-
-
-//     // this.setState({
-//     //   location: {lat, lng}
-//     // })
-    
-
-
-//   render(){
-    
-    // const location = {
-    //   lat: 40.7575285,
-    //   lng: -73.9884469
-    // }
-
-//     return (
-//       <div>
-//         <div className="one-fourth"> 
-//           <Zones />
-//         </div>
-//         <div className="three-fourth">
-//           <div style={styles.map}>
-//             <Map center={location}/>
-//           </div>
-//         </div>
-//       </div>
-
-//     )
-//   }
-// }
 
 export default ZonesIndex
