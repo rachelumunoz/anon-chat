@@ -46094,14 +46094,23 @@
 	  function Zone() {
 	    _classCallCheck(this, Zone);
 	
-	    return _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).call(this));
+	
+	    _this.state = {
+	      zone: {
+	        zipCodes: []
+	      }
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Zone, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
 	      console.log('will mount zone');
-	      this.props.fetchZone(this.props.params.id);
+	      this.props.fetchZone(this.props.params.id).then(function (yo) {
+	        return console.log('yo');
+	      });
 	    }
 	  }, {
 	    key: 'componentWillReceiveProps',

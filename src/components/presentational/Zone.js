@@ -9,10 +9,18 @@ import styles from './styles'
 
 
 class Zone extends Component {
-  
+  constructor(){
+    super()
+
+    this.state = {
+      zone: {
+        zipCodes: []
+      }
+    }
+  }
   componentWillMount(){
     console.log('will mount zone')
-    this.props.fetchZone(this.props.params.id)
+    this.props.fetchZone(this.props.params.id).then(yo=>console.log('yo'))
   }
 
   componentWillReceiveProps(nextProps){
