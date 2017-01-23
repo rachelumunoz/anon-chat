@@ -11,7 +11,6 @@ module.exports = {
         callback(err, null)
         return
       }
-
       callback(null, comments)
     })
   },
@@ -39,6 +38,7 @@ module.exports = {
       return comment
     })
     
+
     comment.then(comment=>{
       Zone.findByIdAndUpdate(zoneId, {
           $inc: {numComments: 1},
@@ -50,17 +50,17 @@ module.exports = {
             callback(err, null)
             return
           }
-            
-            
         })
       Zone
       .findById(zoneId)
-      .populate('comments')
+      .populate('comments', null, null, {sort: {'timestamp': -1}})
       .exec((err, comments)=>{
         if (err) {
+          console.log('erre')
           callback(err, null)
           return
         }
+        console.log('fond them')
         callback(null, comments)
       });
     })

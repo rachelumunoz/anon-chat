@@ -5,8 +5,7 @@ export default {
       backgroundColor: '#f9f9f9'
     },
     commentForm: {
-      marginBottom: 50,
-      border: '1px solid red'
+      marginBottom: 50
     }
   },
   zone: {
@@ -24,6 +23,9 @@ export default {
     width:'auto', 
     height: 600, 
     padding: 10
+  },
+  nav:{
+    margin: 25
   }
 }
 

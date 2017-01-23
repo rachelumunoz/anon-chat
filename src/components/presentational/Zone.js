@@ -2,6 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
 
+import Zones from '../containers/Zones'
+
 import {Map, CommentForm} from '../presentational'
 import {Comments} from '../containers'
 import {fetchZone, getCoordinates} from '../../actions'
@@ -64,7 +66,7 @@ class Zone extends Component {
     return (
       <div>
        <div className="one-fourth">
-        <h1>control panel</h1>
+          SOmething here
        </div>
        <div className="three-fourth">
         <div className="one-half">

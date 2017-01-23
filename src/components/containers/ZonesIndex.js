@@ -13,23 +13,24 @@ const defaultLocations = [
       lng: -73.9884469
     },
     {
-      name: 'Los Angeles',
-      lat: 34.0522,
-      lng: 118.2437
+      name: 'New York',
+      lat: 40.7575285,
+      lng: -73.9884469
     },
     {
-      name: 'Austin',
-      lat: 30.2672,
-      lng: 97.7431
+      name: 'New York',
+      lat: 40.7575285,
+      lng: -73.9884469
     },
     {
-      name: 'Boston',
-      lat: 42.3601,
-      lng: 71.0589
-    },{
-      name: 'Columbus',
-      lat: 39.9612,
-      lng: 82.9988
+      name: 'New York',
+      lat: 40.7575285,
+      lng: -73.9884469
+    },
+    {
+      name: 'New York',
+      lat: 40.7575285,
+      lng: -73.9884469
     }
  ]
 

@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router'
 
 import {fetchZones} from '../../actions'
-import {APIManager} from '../../utils'
-
+// import {APIManager} from '../../utils'
+import styles from './styles'
 
 class Zones extends Component{
 
@@ -46,8 +46,8 @@ class Zones extends Component{
       
       return (
         <div key={zone._id} >
-          <li>
-            <Link to={`/zone/${zone._id}`}>
+          <li style={styles.li}>
+            <Link style={styles.a} to={`/zone/${zone._id}`}>
               {zone.title}
             </Link> 
             <p>{zone.zipCodes}</p>
@@ -63,7 +63,7 @@ class Zones extends Component{
     return (
       <div>
         
-        <h1>Zone search</h1>
+        <h1 style={styles.title}>Current Zones</h1>
         <ol>
           {this.renderZones()}
         </ol>

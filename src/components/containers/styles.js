@@ -4,11 +4,10 @@ export default {
     backgroundColor: '#f9f9f9'
   },
   title:{
-    fontSize: 35
-  },
-  a: {
-    color: 'black', 
-    textDecoration: 'none'
+    fontSize: '200%',
+    marginBottom: 20,
+    letterSpacing: '.1em',
+    textAlign: 'center '
   },
   oneHalf:{
     width: '50%',
@@ -20,6 +19,12 @@ export default {
     padding: 10
   },
   comments: {
+  },
+  li:{
+    margin: 50
+  },
+  a: {
+    fontSize: '150%'
   }
 }
 

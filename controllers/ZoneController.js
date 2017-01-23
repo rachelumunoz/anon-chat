@@ -71,7 +71,7 @@ module.exports = {
   findComments: function(id, callback){
     Zone
       .findById(id)
-      .populate('comments')
+      .populate('comments', null, null, {sort: {'timestamp': -1}})
       .exec((err, comments)=>{
         if (err) {
           callback(err, null)
@@ -82,9 +82,6 @@ module.exports = {
   }, 
 
   createZoneComment: function(zoneId, params, callback){
-    console.log("-=-=-=zone controller-=--=-=-")
-    console.log('params', params)
-    console.log('zoneid',zoneId)
 
     //create comment
     const comment = Comment.create(params, (err, comment)=>{
@@ -109,7 +106,7 @@ module.exports = {
         })
       Zone
       .findById(zoneId)
-      .populate('comments')
+      .populate('comments', null, null, {sort: {'timestamp': -1}})
       .exec((err, comments)=>{
         if (err) {
           callback(err, null)
@@ -118,13 +115,5 @@ module.exports = {
         callback(null, comments)
       });
     })
-    //attach to zone
-    //populate comments as results
-
-
-
   }
-
-
-
 };
