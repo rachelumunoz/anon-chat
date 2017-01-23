@@ -10,11 +10,7 @@ import {APIManager} from '../../utils'
 class Zones extends Component{
 
   componentWillMount(){
-    console.log("-=-=-=-=-=-=com will mount oznes-=-=-=-=-=-=--")
-
-    this.props.fetchZones().then( res => {
-      console.log('it done', res)
-    })
+    this.props.fetchZones()
   }
 
   // addZone(zone){
@@ -67,7 +63,6 @@ class Zones extends Component{
     return (
       <div>
         
-        {/*<ZoneForm handleSubmit={this.addZone.bind(this)} />*/}
         <h1>Zone search</h1>
         <ol>
           {this.renderZones()}

@@ -19,8 +19,7 @@ class Zone extends Component {
     }
   }
   componentWillMount(){
-    console.log('will mount zone')
-    this.props.fetchZone(this.props.params.id).then(yo=>console.log('yo'))
+    this.props.fetchZone(this.props.params.id)
   }
 
   componentWillReceiveProps(nextProps){
@@ -37,14 +36,8 @@ class Zone extends Component {
     }
   }
 
-  componentWillUnmount(){
-    console.log('zone unmounting')
-
-  }
-
   renderMap(){
     
-    console.log('zone state', this.state)
     if (this.state.zone && !this.state.coordinates){
       let zipCode = parseInt(this.state.zone.zipCodes[0])
       this.props.getCoordinates(zipCode)
