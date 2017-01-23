@@ -10,37 +10,28 @@ import {APIManager} from '../../utils'
 class Zones extends Component{
 
   componentWillMount(){
-    this.props.fetchZones()
-  }
+    console.log("-=-=-=-=-=-=com will mount oznes-=-=-=-=-=-=--")
 
-  // componentDidMount(){
-    // APIManager.get('/api/zone', null, (err, res)=>{
-    //   if(err){
-    //     console.log('error', err.message)
-    //     return
-    //   }
-
-    //   this.setState({
-    //     list: res.body.results
-    //   })
-    // })
-  // }
-
-  addZone(zone){
-    APIManager.post('/api/zone', zone, (err, res)=>{
-      if(err){
-        console.log('error', err.mesesage)
-        return
-      }
-      
-      let updatedZones = Object.assign([], this.state.list)
-      updatedZones.push(res.body.result)
-      
-      this.setState({
-        list: updatedZones
-      })
+    this.props.fetchZones().then( res => {
+      console.log('it done', res)
     })
   }
+
+  // addZone(zone){
+  //   APIManager.post('/api/zone', zone, (err, res)=>{
+  //     if(err){
+  //       console.log('error', err.mesesage)
+  //       return
+  //     }
+      
+  //     let updatedZones = Object.assign([], this.state.list)
+  //     updatedZones.push(res.body.result)
+      
+  //     this.setState({
+  //       list: updatedZones
+  //     })
+  //   })
+  // }
 
   selectZone(index, objectId){
     // this.setState({
@@ -60,7 +51,7 @@ class Zones extends Component{
       return (
         <div key={zone._id} >
           <li>
-            <Link to={`zone/${zone._id}`}>
+            <Link to={`/zone/${zone._id}`}>
               {zone.title}
             </Link> 
             <p>{zone.zipCodes}</p>

@@ -41224,7 +41224,7 @@
 	  _reactRouter.Route,
 	  { path: '/', component: _layout.App },
 	  _react2.default.createElement(_reactRouter.IndexRoute, { component: _ZonesIndex2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: 'zone/:id', component: _presentational.Zone })
+	  _react2.default.createElement(_reactRouter.Route, { path: "zone/:id", component: _presentational.Zone })
 	);
 
 /***/ },
@@ -41338,7 +41338,7 @@
 	
 	var _actions = __webpack_require__(477);
 	
-	var _utils = __webpack_require__(565);
+	var _utils = __webpack_require__(564);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41360,41 +41360,29 @@
 	  _createClass(Zones, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
-	      this.props.fetchZones();
-	    }
+	      console.log("-=-=-=-=-=-=com will mount oznes-=-=-=-=-=-=--");
 	
-	    // componentDidMount(){
-	    // APIManager.get('/api/zone', null, (err, res)=>{
-	    //   if(err){
-	    //     console.log('error', err.message)
-	    //     return
-	    //   }
-	
-	    //   this.setState({
-	    //     list: res.body.results
-	    //   })
-	    // })
-	    // }
-	
-	  }, {
-	    key: 'addZone',
-	    value: function addZone(zone) {
-	      var _this2 = this;
-	
-	      _utils.APIManager.post('/api/zone', zone, function (err, res) {
-	        if (err) {
-	          console.log('error', err.mesesage);
-	          return;
-	        }
-	
-	        var updatedZones = Object.assign([], _this2.state.list);
-	        updatedZones.push(res.body.result);
-	
-	        _this2.setState({
-	          list: updatedZones
-	        });
+	      this.props.fetchZones().then(function (res) {
+	        console.log('it done', res);
 	      });
 	    }
+	
+	    // addZone(zone){
+	    //   APIManager.post('/api/zone', zone, (err, res)=>{
+	    //     if(err){
+	    //       console.log('error', err.mesesage)
+	    //       return
+	    //     }
+	
+	    //     let updatedZones = Object.assign([], this.state.list)
+	    //     updatedZones.push(res.body.result)
+	
+	    //     this.setState({
+	    //       list: updatedZones
+	    //     })
+	    //   })
+	    // }
+	
 	  }, {
 	    key: 'selectZone',
 	    value: function selectZone(index, objectId) {
@@ -41421,7 +41409,7 @@
 	            null,
 	            _react2.default.createElement(
 	              _reactRouter.Link,
-	              { to: 'zone/' + zone._id },
+	              { to: '/zone/' + zone._id },
 	              zone.title
 	            ),
 	            _react2.default.createElement(
@@ -41499,7 +41487,7 @@
 	
 	var _Zone2 = _interopRequireDefault(_Zone);
 	
-	var _ZoneForm = __webpack_require__(564);
+	var _ZoneForm = __webpack_require__(574);
 	
 	var _ZoneForm2 = _interopRequireDefault(_ZoneForm);
 	
@@ -46011,6 +45999,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(209);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46032,9 +46022,25 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        ' Nav'
+	        _react2.default.createElement(
+	          'nav',
+	          null,
+	          _react2.default.createElement(
+	            'ul',
+	            null,
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                _reactRouter.IndexLink,
+	                { to: '/', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+	                ' Home '
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
@@ -46094,6 +46100,7 @@
 	  _createClass(Zone, [{
 	    key: 'componentWillMount',
 	    value: function componentWillMount() {
+	      console.log('will mount zone');
 	      this.props.fetchZone(this.props.params.id);
 	    }
 	  }, {
@@ -46112,9 +46119,15 @@
 	      }
 	    }
 	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      console.log('zone unmounting');
+	    }
+	  }, {
 	    key: 'renderMap',
 	    value: function renderMap() {
 	
+	      console.log('zone state', this.state);
 	      if (this.state.zone && !this.state.coordinates) {
 	        var zipCode = parseInt(this.state.zone.zipCodes[0]);
 	        this.props.getCoordinates(zipCode);
@@ -46406,6 +46419,8 @@
 	
 	var _presentational = __webpack_require__(508);
 	
+	var _utils = __webpack_require__(564);
+	
 	var _styles = __webpack_require__(562);
 	
 	var _styles2 = _interopRequireDefault(_styles);
@@ -46418,13 +46433,15 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// require('./styles.css')
+	
 	var ZonesIndex = function (_Component) {
 	  _inherits(ZonesIndex, _Component);
 	
 	  function ZonesIndex() {
 	    _classCallCheck(this, ZonesIndex);
 	
-	    return _possibleConstructorReturn(this, (ZonesIndex.__proto__ || Object.getPrototypeOf(ZonesIndex)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (ZonesIndex.__proto__ || Object.getPrototypeOf(ZonesIndex)).call(this));
 	  }
 	
 	  _createClass(ZonesIndex, [{
@@ -46471,73 +46488,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Geocode = exports.APIManager = undefined;
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _APIManager = __webpack_require__(565);
 	
-	var _react = __webpack_require__(2);
+	var _APIManager2 = _interopRequireDefault(_APIManager);
 	
-	var _react2 = _interopRequireDefault(_react);
+	var _Geocode = __webpack_require__(573);
+	
+	var _Geocode2 = _interopRequireDefault(_Geocode);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ZoneForm = function (_Component) {
-	  _inherits(ZoneForm, _Component);
-	
-	  function ZoneForm() {
-	    _classCallCheck(this, ZoneForm);
-	
-	    var _this = _possibleConstructorReturn(this, (ZoneForm.__proto__ || Object.getPrototypeOf(ZoneForm)).call(this));
-	
-	    _this.state = {
-	      zone: {
-	        title: '',
-	        zipCodes: ''
-	      }
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(ZoneForm, [{
-	    key: 'addZone',
-	    value: function addZone() {
-	      var updatedZone = Object.assign({}, this.state.zone);
-	
-	      updatedZone['title'] = this.refs.zoneName.value;
-	      updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",");
-	
-	      this.refs.zoneName.value = '';
-	      this.refs.zipCodes.value = '';
-	
-	      this.props.handleSubmit(updatedZone);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement('input', { ref: 'zoneName', type: 'text', placeholder: 'title' }),
-	        _react2.default.createElement('input', { ref: 'zipCodes', type: 'text', placeholder: 'zipcode' }),
-	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'button',
-	          { onClick: this.addZone.bind(this) },
-	          ' Add Zone '
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return ZoneForm;
-	}(_react.Component);
-	
-	exports.default = ZoneForm;
+	exports.APIManager = _APIManager2.default;
+	exports.Geocode = _Geocode2.default;
 
 /***/ },
 /* 565 */
@@ -46548,32 +46512,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Geocode = exports.APIManager = undefined;
 	
-	var _APIManager = __webpack_require__(566);
-	
-	var _APIManager2 = _interopRequireDefault(_APIManager);
-	
-	var _Geocode = __webpack_require__(574);
-	
-	var _Geocode2 = _interopRequireDefault(_Geocode);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.APIManager = _APIManager2.default;
-	exports.Geocode = _Geocode2.default;
-
-/***/ },
-/* 566 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _superagent = __webpack_require__(567);
+	var _superagent = __webpack_require__(566);
 	
 	var _superagent2 = _interopRequireDefault(_superagent);
 	
@@ -46621,7 +46561,7 @@
 	};
 
 /***/ },
-/* 567 */
+/* 566 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -46638,11 +46578,11 @@
 	  root = this;
 	}
 	
-	var Emitter = __webpack_require__(568);
-	var RequestBase = __webpack_require__(569);
-	var isObject = __webpack_require__(570);
-	var isFunction = __webpack_require__(571);
-	var ResponseBase = __webpack_require__(572);
+	var Emitter = __webpack_require__(567);
+	var RequestBase = __webpack_require__(568);
+	var isObject = __webpack_require__(569);
+	var isFunction = __webpack_require__(570);
+	var ResponseBase = __webpack_require__(571);
 	
 	/**
 	 * Noop.
@@ -47536,7 +47476,7 @@
 
 
 /***/ },
-/* 568 */
+/* 567 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -47705,13 +47645,13 @@
 
 
 /***/ },
-/* 569 */
+/* 568 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(570);
+	var isObject = __webpack_require__(569);
 	
 	/**
 	 * Expose `RequestBase`.
@@ -48253,7 +48193,7 @@
 
 
 /***/ },
-/* 570 */
+/* 569 */
 /***/ function(module, exports) {
 
 	/**
@@ -48272,7 +48212,7 @@
 
 
 /***/ },
-/* 571 */
+/* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48282,7 +48222,7 @@
 	 * @return {Boolean}
 	 * @api private
 	 */
-	var isObject = __webpack_require__(570);
+	var isObject = __webpack_require__(569);
 	
 	function isFunction(fn) {
 	  var tag = isObject(fn) ? Object.prototype.toString.call(fn) : '';
@@ -48293,7 +48233,7 @@
 
 
 /***/ },
-/* 572 */
+/* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -48301,7 +48241,7 @@
 	 * Module dependencies.
 	 */
 	
-	var utils = __webpack_require__(573);
+	var utils = __webpack_require__(572);
 	
 	/**
 	 * Expose `ResponseBase`.
@@ -48432,7 +48372,7 @@
 
 
 /***/ },
-/* 573 */
+/* 572 */
 /***/ function(module, exports) {
 
 	
@@ -48506,7 +48446,7 @@
 
 
 /***/ },
-/* 574 */
+/* 573 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -48522,35 +48462,158 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	  getLatLng: function getLatLng(encodedZip) {
-	    var geocodeUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + encodedZip;
+	  // getLatLng: (encodedZip)=>{
+	  //   var geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedZip}`
 	
-	    var coordinates = new Promise(function (resolve, reject) {
+	  //   var coordinates = new Promise((resolve, reject)=>{
 	
-	      _axios2.default.get(geocodeUrl).then(function (response) {
-	        var lat = parseFloat(response.data.results[0].geometry.bounds.northeast.lat);
-	        var lng = parseFloat(response.data.results[0].geometry.bounds.northeast.lng);
+	  //     axios.get(geocodeUrl).then(response => {
+	  //       const lat = parseFloat(response.data.results[0].geometry.bounds.northeast.lat)
+	  //       const lng = parseFloat(response.data.results[0].geometry.bounds.northeast.lng)
 	
-	        if (typeof lat === 'number') {
-	          resolve({ location: { lat: lat, lng: lng } });
+	  //       if(typeof lat === 'number'){
+	  //         resolve({location: {lat, lng}})
+	  //       }else{
+	  //         reject('something went wrong')
+	  //       }
+	
+	  //       // return callback(null, {location: {lat, lng}}
+	  //       // return new Promise ((resolve, reject)=>{
+	  //       //   if (typeof lat !== 'number'){
+	  //       //     reject('Not found')
+	  //       //   }else {
+	  //       //     resolve({location: {lat, lng}})
+	  //       //   }
+	  //       // })
+	  //     })
+	  //   })
+	  //   return coordinates
+	  // },
+	
+	  getBrowserLocation: function getBrowserLocation() {
+	
+	    function doSomething(pos) {
+	      var lat = pos.coords.latitude;
+	      var lng = pos.coords.longitude;
+	      var location = { lat: lat, lng: lng };
+	      // return location
+	      return new Promise(function (resolve, reject) {
+	        if (location.lat && location.lng) {
+	          resolve(location);
 	        } else {
 	          reject('something went wrong');
 	        }
-	
-	        // return callback(null, {location: {lat, lng}}
-	        // return new Promise ((resolve, reject)=>{
-	        //   if (typeof lat !== 'number'){
-	        //     reject('Not found')
-	        //   }else {
-	        //     resolve({location: {lat, lng}})
-	        //   }
-	        // })
 	      });
-	    });
-	    return coordinates;
+	    }
+	
+	    function success(pos) {
+	      var result = doSomething(pos);
+	
+	      result.then(function (location) {
+	        console.log('in success promise tehn', location);
+	        // return location
+	
+	        return new Promise(function (resolve, reject) {
+	          console.log('retrning promise from sucess');
+	          resolve(location);
+	        });
+	      }).catch(function (e) {
+	        return console.log(e);
+	      });
+	    }
+	
+	    function error() {
+	      return 'error';
+	    }
+	
+	    if (navigator.geolocation) {
+	      console.log(' geolocation true');
+	
+	      navigator.geolocation.watchPosition(success);
+	    } else {
+	      console.log(' geolocation false');
+	    }
+	
+	    // return locationCoords
+	  }
+	};
+
+/***/ },
+/* 574 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ZoneForm = function (_Component) {
+	  _inherits(ZoneForm, _Component);
+	
+	  function ZoneForm() {
+	    _classCallCheck(this, ZoneForm);
+	
+	    var _this = _possibleConstructorReturn(this, (ZoneForm.__proto__ || Object.getPrototypeOf(ZoneForm)).call(this));
+	
+	    _this.state = {
+	      zone: {
+	        title: '',
+	        zipCodes: ''
+	      }
+	    };
+	    return _this;
 	  }
 	
-	};
+	  _createClass(ZoneForm, [{
+	    key: 'addZone',
+	    value: function addZone() {
+	      var updatedZone = Object.assign({}, this.state.zone);
+	
+	      updatedZone['title'] = this.refs.zoneName.value;
+	      updatedZone['zipCodes'] = this.refs.zipCodes.value.split(",");
+	
+	      this.refs.zoneName.value = '';
+	      this.refs.zipCodes.value = '';
+	
+	      this.props.handleSubmit(updatedZone);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement('input', { ref: 'zoneName', type: 'text', placeholder: 'title' }),
+	        _react2.default.createElement('input', { ref: 'zipCodes', type: 'text', placeholder: 'zipcode' }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'button',
+	          { onClick: this.addZone.bind(this) },
+	          ' Add Zone '
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return ZoneForm;
+	}(_react.Component);
+	
+	exports.default = ZoneForm;
 
 /***/ },
 /* 575 */

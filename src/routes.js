@@ -7,9 +7,8 @@ import ZonesIndex from './components/containers/ZonesIndex'
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={ZonesIndex}/>
-    <Route path="zone/:id" component={Zone}/>
+    <Route path={"zone/:id"} component={Zone}/>
     
-
 
 { /*     <Route path="/posts/new" component={PostsNew}/>
     <Route path='/posts/:id' component={PostsShow}/>*/ }

@@ -11,6 +11,7 @@ import styles from './styles'
 class Zone extends Component {
   
   componentWillMount(){
+    console.log('will mount zone')
     this.props.fetchZone(this.props.params.id)
   }
 
@@ -28,8 +29,14 @@ class Zone extends Component {
     }
   }
 
+  componentWillUnmount(){
+    console.log('zone unmounting')
+
+  }
+
   renderMap(){
     
+    console.log('zone state', this.state)
     if (this.state.zone && !this.state.coordinates){
       let zipCode = parseInt(this.state.zone.zipCodes[0])
       this.props.getCoordinates(zipCode)

@@ -1,10 +1,16 @@
 import React, {Component} from 'react'
 import Zones from './Zones'
 import {Map} from '../presentational'
-import styles from './styles'
 
+import {Geocode} from '../../utils'
+import styles from './styles'
+// require('./styles.css')
 
 class ZonesIndex extends Component{
+  constructor(){
+    super()
+  }
+
   render(){
     
     const location = {
