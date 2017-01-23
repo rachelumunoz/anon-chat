@@ -26,6 +26,9 @@ export default {
   },
   nav:{
     margin: 25
+  },
+  commentForm: {
+    padding: '0 35px'
   }
 }
 

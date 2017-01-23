@@ -25,7 +25,6 @@ class Comments extends Component {
   // to see when receive props
   componentWillReceiveProps(nextProps){
     if(nextProps.comments !== this.props.comments){
-      console.log('it changed', nextProps)
         this.setState({
           comments: nextProps.comments
         })

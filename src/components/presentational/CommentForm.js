@@ -8,7 +8,7 @@ const required = value => value ? undefined : 'Required'
 
 const renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
   <div>
-    <label>{label}</label>
+    {/*<label>{label}</label>*/}
     <div>
       <input {...input} placeholder={label} type={type}/>
       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
@@ -20,13 +20,13 @@ const CommentForm = (props) => {
   const { handleSubmit, pristine, reset, submitting, submitComment } = props
 
   return (
-    <form onSubmit={handleSubmit(submitComment.bind(this))}>
+    <form style={styles.commentForm} onSubmit={handleSubmit(submitComment.bind(this))}>
       <Field name="username" type="text"
         component={renderField} label="Username"
         validate={required} 
       />
       <Field name="body" type="text"
-        component={renderField} label="body"
+        component={renderField} label="Comment"
         validate={required}
       />
       <div>

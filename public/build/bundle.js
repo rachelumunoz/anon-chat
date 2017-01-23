@@ -41622,11 +41622,6 @@
 	    'div',
 	    null,
 	    _react2.default.createElement(
-	      'label',
-	      null,
-	      label
-	    ),
-	    _react2.default.createElement(
 	      'div',
 	      null,
 	      _react2.default.createElement('input', _extends({}, input, { placeholder: label, type: type })),
@@ -41653,13 +41648,13 @@
 	
 	  return _react2.default.createElement(
 	    'form',
-	    { onSubmit: handleSubmit(submitComment.bind(undefined)) },
+	    { style: _styles2.default.commentForm, onSubmit: handleSubmit(submitComment.bind(undefined)) },
 	    _react2.default.createElement(_reduxForm.Field, { name: 'username', type: 'text',
 	      component: renderField, label: 'Username',
 	      validate: required
 	    }),
 	    _react2.default.createElement(_reduxForm.Field, { name: 'body', type: 'text',
-	      component: renderField, label: 'body',
+	      component: renderField, label: 'Comment',
 	      validate: required
 	    }),
 	    _react2.default.createElement(
@@ -41715,6 +41710,9 @@
 	  },
 	  nav: {
 	    margin: 25
+	  },
+	  commentForm: {
+	    padding: '0 35px'
 	  }
 	};
 
@@ -46097,6 +46095,10 @@
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
+	var _reactStickydiv = __webpack_require__(691);
+	
+	var _reactStickydiv2 = _interopRequireDefault(_reactStickydiv);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46153,11 +46155,15 @@
 	      if (this.state.zone && this.state.coordinates) {
 	
 	        return _react2.default.createElement(
-	          'div',
-	          { style: _styles2.default.map },
-	          _react2.default.createElement(_presentational.Map, {
-	            center: this.props.coordinates
-	          })
+	          _reactStickydiv2.default,
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { style: _styles2.default.map },
+	            _react2.default.createElement(_presentational.Map, {
+	              center: this.props.coordinates
+	            })
+	          )
 	        );
 	      }
 	    }
@@ -46193,11 +46199,6 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'one-half' },
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              'map componenet'
-	            ),
 	            _react2.default.createElement(
 	              'div',
 	              null,
@@ -46312,7 +46313,6 @@
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      if (nextProps.comments !== this.props.comments) {
-	        console.log('it changed', nextProps);
 	        this.setState({
 	          comments: nextProps.comments
 	        });
@@ -63050,6 +63050,98 @@
 	return zhTw;
 	
 	})));
+
+
+/***/ },
+/* 691 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";var React=__webpack_require__(2),ReactDOM=__webpack_require__(33),util=__webpack_require__(692),SimplePageScrollMixin={componentDidMount:function(){window.addEventListener("scroll",this.onScroll,!1)},componentWillUnmount:function(){window.removeEventListener("scroll",this.onScroll,!1)}},SimpleResizeMixin={componentDidMount:function(){window.addEventListener("resize",this.handleResize)},componentWillUnmount:function(){window.removeEventListener("resize",this.handleResize)}},StickyDiv=React.createClass({mixins:[SimplePageScrollMixin,SimpleResizeMixin],displayName:"StickyDiv",propTypes:{offsetTop:React.PropTypes.number,zIndex:React.PropTypes.number,className:React.PropTypes.string},getInitialState:function(){return{fix:!1,width:null}},getDefaultProps:function(){return{offsetTop:0,className:"",zIndex:9999}},handleResize:function(){this.checkWidth(),this.checkPositions()},onScroll:function(){this.checkWidth(),this.checkPositions()},checkPositions:function(){var e=util.findPosRelativeToViewport(ReactDOM.findDOMNode(this));e[1]<=this.props.offsetTop?this.setState({fix:!0}):this.setState({fix:!1})},checkWidth:function(){var e=null;e=this.refs.duplicate?this.refs.duplicate.getBoundingClientRect().width:this.refs.original.getBoundingClientRect().width,this.state.width!==e&&this.setState({width:e})},componentDidMount:function(){this.checkWidth()},render:function(){var e;return this.state.fix?(e={display:"block",position:"fixed",width:this.state.width?this.state.width+"px":null,top:this.props.offsetTop},React.createElement("div",{style:{zIndex:this.props.zIndex,position:"relative",width:"100%"}},React.createElement("div",{ref:"duplicate",key:"duplicate",style:{visibility:"hidden"}},this.props.children),React.createElement("div",{ref:"original",key:"original",className:this.props.className,style:e},this.props.children))):(e={display:"block",position:"relative"},React.createElement("div",{style:{zIndex:this.props.zIndex,position:"relative",width:"100%"}},React.createElement("div",{ref:"original",key:"original",style:e},this.props.children)))}});module.exports=StickyDiv;
+	//# sourceMappingURL=dist/react-stickydiv.min.js.map
+
+/***/ },
+/* 692 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// findPos() by quirksmode.org
+	// Finds the absolute position of an element on a page
+	var findPos = __webpack_require__(693);
+	exports.findPos = findPos;
+	var getPageScroll = __webpack_require__(694);
+	exports.getPageScroll = getPageScroll;
+	var findPosRelativeToViewport = __webpack_require__(695);
+	exports.findPosRelativeToViewport = findPosRelativeToViewport;
+	
+
+
+/***/ },
+/* 693 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	// findPos() by quirksmode.org
+	// Finds the absolute position of an element on a page
+	module.exports = function (obj) {
+	    var curleft = 0,
+	        curtop = 0;
+	    if (obj.offsetParent) {
+	        do {
+	            curleft += obj.offsetLeft;
+	            curtop += obj.offsetTop;
+	        } while (obj = obj.offsetParent);
+	    }
+	    return [curleft, curtop];
+	};
+	
+
+
+/***/ },
+/* 694 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	// getPageScroll() by quirksmode.org
+	// Finds the scroll position of a page
+	module.exports = function () {
+	    var xScroll, yScroll;
+	    if (self.pageYOffset) {
+	        yScroll = self.pageYOffset;
+	        xScroll = self.pageXOffset;
+	    } else if (document.documentElement && document.documentElement.scrollTop) {
+	        yScroll = document.documentElement.scrollTop;
+	        xScroll = document.documentElement.scrollLeft;
+	    } else if (document.body) {
+	        // all other Explorers
+	        yScroll = document.body.scrollTop;
+	        xScroll = document.body.scrollLeft;
+	    }
+	    return [xScroll, yScroll];
+	};
+	
+
+
+/***/ },
+/* 695 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var findPos = __webpack_require__(693);
+	var getPageScroll = __webpack_require__(694);
+	
+	// Finds the position of an element relative to the viewport.
+	module.exports = function (obj) {
+	    var objPos = findPos(obj);
+	    var scroll = getPageScroll();
+	    return [objPos[0] - scroll[0], objPos[1] - scroll[1]];
+	};
+	
 
 
 /***/ }

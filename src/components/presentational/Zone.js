@@ -9,6 +9,9 @@ import {Comments} from '../containers'
 import {fetchZone, getCoordinates} from '../../actions'
 import styles from './styles'
 
+import StickyDiv from 'react-stickydiv'
+
+
 
 class Zone extends Component {
   constructor(){
@@ -48,11 +51,13 @@ class Zone extends Component {
     if(this.state.zone && this.state.coordinates){
         
       return (
-        <div style={styles.map}>
-          <Map 
-            center={this.props.coordinates}
-          />
-        </div>
+        <StickyDiv>
+          <div style={styles.map}>
+            <Map 
+              center={this.props.coordinates}
+            />
+          </div>
+        </StickyDiv>
       )
     }
   }
@@ -73,7 +78,6 @@ class Zone extends Component {
           <Comments zoneId={this.props.params.id} />
         </div>
         <div className="one-half">
-          <h1>map componenet</h1>
           <div>{this.renderMap()}</div>
         </div>
        </div>

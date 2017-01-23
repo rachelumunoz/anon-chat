@@ -22,6 +22,7 @@
     "react-google-maps": "^4.11.0",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.0-rc5",
+    "react-stickydiv": "^3.4.19",
     "redux": "^3.0.4",
     "redux-form": "latest",
     "redux-promise": "^0.5.3",
