@@ -10,13 +10,11 @@ class Nav extends Component {
       <div >
         <nav style={styles.nav}>
           <ul>
-            <li>
-               <IndexLink to="/" activeClassName="active" activeStyle={{fontWeight: 'bold'}}> Anon Chat </IndexLink>
+            <li style={styles.nav.li}>
+              <Link style={styles.nav.logo} to="/"> Anon Chat </Link>
             </li>
-            
           </ul>
         </nav>
-
       </div>
     )
   }

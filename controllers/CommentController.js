@@ -1,8 +1,6 @@
 const Comment = require('../models/Comment');
 const Zone = require('../models/Zone');
 
-
-
 module.exports = {
   
   find: function(params, callback){

@@ -83,7 +83,6 @@ module.exports = {
 
   createZoneComment: function(zoneId, params, callback){
 
-    //create comment
     const comment = Comment.create(params, (err, comment)=>{
       if (err){
         callback(err, null)

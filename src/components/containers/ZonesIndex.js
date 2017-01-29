@@ -1,55 +1,95 @@
 import React, {Component} from 'react'
-import Zones from './Zones'
+// import Zones from './Zones'
 import {Map} from '../presentational'
 
 import styles from './styles'
-import  shuffle  from 'lodash.shuffle'
+import {connect} from 'react-redux'
+import {getCoordinates, fetchZones} from '../../actions'
 
 
-const defaultLocations = [
-  {
-      name: 'New York',
-      lat: 40.7575285,
-      lng: -73.9884469
-    },
-    {
-      name: 'New York',
-      lat: 40.7575285,
-      lng: -73.9884469
-    },
-    {
-      name: 'New York',
-      lat: 40.7575285,
-      lng: -73.9884469
-    },
-    {
-      name: 'New York',
-      lat: 40.7575285,
-      lng: -73.9884469
-    },
-    {
-      name: 'New York',
-      lat: 40.7575285,
-      lng: -73.9884469
-    }
- ]
-
-const randomDefault = shuffle(defaultLocations)
-// console.log(randomDefault[0])
+class ZonesIndex extends Component{
+  constructor(){
+    super()
     
-const ZonesIndex = () => {
-  return (
-    <div>
-      <div className="one-fourth"> 
-        <Zones />
-      </div>
-      <div className="three-fourth">
-        <div style={styles.map}>
-          <Map center={randomDefault[0]}/>
+    this.state = {
+      zones: [],
+      coordinates: []
+    }
+  }
+
+  componentWillMount(){
+    this.props.fetchZones()
+  }
+
+  componentDidUpdate(prevProps, prevState){
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      zones: nextProps.zones,
+      coordinates: nextProps.coordinates
+    })
+
+
+  }
+
+  zones(){
+    {/*if(this.state.zones.length === 0){
+      return <h1> Loading...from zones index </h1>
+    }*/}
+
+    if ( this.state.zones.length === 0){
+       return <h1> Loading...from zones index </h1>
+    }
+
+    if (this.props.coordinates.length === 0){
+      this.state.zones.map(zone=>{
+        this.props.getCoordinates(zone.zipCodes[0])
+      })
+    }
+
+    // if(this.state.coordinates){
+      const location = {lat: 32.7269669, lng:-117.1647094}
+
+      return (
+        <div>
+          <div style={styles.map}>
+            <div style={styles.map}>
+              <Map center={location} coordinates={this.state.coordinates}/>
+            </div>
+          </div>
         </div>
+      )
+    // }
+
+
+  }
+
+  render(){
+    return (
+      <div>
+        {this.zones()} 
+        <h1> hello</h1>
+
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default ZonesIndex
+
+
+   // let zipCodes = this.state.zones.reduce((a, b)=>{
+   //      this.props.getCoordinates(b.zipCodes[0])
+   //      return a.concat(b.zipCodes[0])
+   //    }, [])
+
+//prps --zones
+
+function mapStateToProps(state){
+    return { 
+    zones: state.zones.all,
+    coordinates: state.zones.coordinates
+  }
+}
+export default connect(mapStateToProps, {fetchZones, getCoordinates})(ZonesIndex)
+

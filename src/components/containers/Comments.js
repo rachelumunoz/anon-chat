@@ -33,7 +33,6 @@ class Comments extends Component {
 
   handleSubmit(props, dispatch){
 
-    console.log('in handle submit')
     let updatedProps = Object.assign({}, props)
     updatedProps['id'] = this.props.id
 
@@ -51,7 +50,7 @@ class Comments extends Component {
     }
       return this.state.comments.map((comment)=>{
         return (
-          <div key={comment._id}>
+          <div style={styles.container}key={comment._id}>
             <Comment {...comment}/>
           </div>
         )

@@ -1,5 +1,12 @@
 export default {
   comments: {
+    comment:{
+      fontSize: '150%',
+      fontWeight: 200,
+      details: {
+        fontWeight: 100
+      }
+    },
     container : {
       padding: 12, 
       backgroundColor: '#f9f9f9'
@@ -25,10 +32,23 @@ export default {
     padding: 10
   },
   nav:{
-    margin: 25
+    backgroundColor: '#f4f8f7',
+    height: 50,
+    width: 'auto', 
+    boxShadow: '0 3px 2px -4px black',
+    marginBottom: 35, 
+    li: {
+      margin: 'auto 15px'
+    } ,
+    logo: {
+      color: 'black',
+      letterSpacing: '0.1em',
+      fontSize: '150%'
+    }
   },
   commentForm: {
-    padding: '0 35px'
+    padding: '0 35px',
+    margin: '0 0 25px 0'
   }
 }
 

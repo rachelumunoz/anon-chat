@@ -1,90 +1,107 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
-
 import Zones from '../containers/Zones'
 
 import {Map, CommentForm} from '../presentational'
 import {Comments} from '../containers'
 import {fetchZone, getCoordinates} from '../../actions'
 import styles from './styles'
-
 import StickyDiv from 'react-stickydiv'
 
-
-
-class Zone extends Component {
+class Zone extends Component{
   constructor(){
     super()
 
     this.state = {
-      zone: {
-        zipCodes: []
-      }
+      zone: {}
     }
   }
-  componentWillMount(){
+
+  componentDidMount(){
     this.props.fetchZone(this.props.params.id)
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.zone !== this.props.zone){
+  componentDidUpdate(prevProps){
+    if (prevProps.zone !== this.props.zone){
       this.setState({
-        zone: nextProps.zone
-      });
+        zone: this.props.zone
+      })
+      console.log('changed zone')
     }  
+  }
 
+
+  // BUG -- update component based on route change
+  componentWillReceiveProps(nextProps){
+    if(nextProps.params.id !== this.props.params.id){
+      this.props.fetchZone(nextProps.params.id)
+    }
+
+    if (nextProps.zone !== this.props.zone){
+      this.setState({ zone: nextProps.zone})
+    }
     if (nextProps.coordinates !== this.props.coordinates){
       this.setState({
         coordinates: nextProps.coordinates
       })
+
     }
   }
 
+
   renderMap(){
-    
-    if (this.state.zone && !this.state.coordinates){
-      let zipCode = parseInt(this.state.zone.zipCodes[0])
+    if (this.props.zone && !this.props.coordinates){
+      let zipCode = this.props.zone.zipCodes[0]
       this.props.getCoordinates(zipCode)
     }
 
+
+
+
     if(this.state.zone && this.state.coordinates){
-        
       return (
         <StickyDiv>
           <div style={styles.map}>
             <Map 
-              center={this.props.coordinates}
+              center={this.state.coordinates}
             />
           </div>
-        </StickyDiv>
+        </StickyDiv> 
       )
     }
+
+  }
+
+
+  getZone(){
+    this.props.fetchZone(this.props.params.id)
   }
 
   render(){
     const {zone} = this.props
+    
     if(!zone){
-      return <div>Loading...</div>
+      return <div>Loading. from zone show..</div>
     }
 
     return (
       <div>
-       <div className="one-fourth">
-          SOmething here
-       </div>
-       <div className="three-fourth">
         <div className="one-half">
           <Comments zoneId={this.props.params.id} />
         </div>
         <div className="one-half">
           <div>{this.renderMap()}</div>
         </div>
-       </div>
       </div>
     )
   }
 }
+
+Zone.propTypes = {
+  zone: React.PropTypes.object
+};
+
 
 function mapStateToProps(state){
   return {
@@ -93,4 +110,9 @@ function mapStateToProps(state){
     }
 }
 
+
+
 export default connect(mapStateToProps, {fetchZone, getCoordinates})(Zone)
+
+
+

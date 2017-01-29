@@ -1,7 +1,8 @@
 export default {
   container : {
     padding: 12, 
-    backgroundColor: '#f9f9f9'
+    backgroundColor: '#f9f9f9',
+    marginBottom: 15
   },
   title:{
     fontSize: '200%',
@@ -23,8 +24,11 @@ export default {
   li:{
     margin: 50
   },
-  a: {
-    fontSize: '150%'
+  h3: {
+    fontSize: '175%'
+  },
+  activeLink: {
+    color: 'black',
   }
 }
 

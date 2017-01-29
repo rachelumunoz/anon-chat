@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import moment from 'moment'
-
+import styles from './styles'
 
 class Comment extends Component {
   
@@ -11,9 +11,8 @@ class Comment extends Component {
 
     return(
       <div style={{margin: 55}}>
-        <p> {body} </p>
-        <h3> {username} </h3>
-        <p> {formattedTime} </p>
+        <p style={styles.comments.comment}> {body} </p>
+        <span style={styles.comments.comment.details}>  {username} &mdash; {formattedTime}</span>
         <hr/>
       </div>
     )
