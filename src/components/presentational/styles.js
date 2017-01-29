@@ -20,10 +20,6 @@ export default {
       padding:16, 
       background: '#f9f9f9', 
       marginTop:12
-    },
-    selected: {
-      color: 'red',
-      fontSize: 22
     }
   },
   map: {
@@ -37,13 +33,17 @@ export default {
     width: 'auto', 
     boxShadow: '0 3px 2px -4px black',
     marginBottom: 35, 
+    ul:{
+      paddingTop: 11
+    },
     li: {
       margin: 'auto 15px'
     } ,
     logo: {
-      color: 'black',
+      color: '#1a2925',
       letterSpacing: '0.1em',
-      fontSize: '150%'
+      fontSize: '150%',
+      paddingTop: 15
     }
   },
   commentForm: {

@@ -40,7 +40,7 @@ class Zone extends Component{
 
     // need check like if nextProps.zone !== this.props.zone?  
     this.setState({
-      zone: nextProps.zone
+      zone: nextProps.zone,
       coordinates: nextProps.coordinates
     })
   }

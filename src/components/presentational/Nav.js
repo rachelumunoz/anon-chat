@@ -9,7 +9,7 @@ class Nav extends Component {
     return (
       <div >
         <nav style={styles.nav}>
-          <ul>
+          <ul style={styles.nav.ul}>
             <li style={styles.nav.li}>
               <Link style={styles.nav.logo} to="/"> Anon Chat </Link>
             </li>

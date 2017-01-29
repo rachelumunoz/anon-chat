@@ -11,8 +11,6 @@ body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   background-color: #feffff;
-  /*#f4f8f7;*/
-  /*background-color: #f2fdfb;*/
   color: #95BEB8;
 }
 
@@ -32,12 +30,14 @@ ol, ul {
 .container {
   width: 100%;
   margin: auto 0;
+  height: 90vh;
 }
 
 .one-fourth {
   width: 25%;
   float: left;
   padding: 10px;
+  height: 100%;
 }
 
 .three-fourth {

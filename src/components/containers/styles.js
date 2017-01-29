@@ -1,4 +1,8 @@
 export default {
+  controlPanel:{
+    backgroundColor: '#f9f9f9',
+    height: '100%'
+  },
   container : {
     padding: 12, 
     backgroundColor: '#f9f9f9',
@@ -8,7 +12,8 @@ export default {
     fontSize: '200%',
     marginBottom: 20,
     letterSpacing: '.1em',
-    textAlign: 'center '
+    textAlign: 'center ',
+    paddingTop: 20
   },
   oneHalf:{
     width: '50%',
@@ -28,7 +33,7 @@ export default {
     fontSize: '175%'
   },
   activeLink: {
-    color: 'black',
+    color: '#1a2925',
   }
 }
 

@@ -44,7 +44,7 @@ class Zones extends Component{
 
   render(){
     return (
-      <div> 
+      <div style={styles.controlPanel}> 
         <ol>
           <h1 style={styles.title}>
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
