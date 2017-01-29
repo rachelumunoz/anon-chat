@@ -14,7 +14,8 @@ class Zone extends Component{
     super()
 
     this.state = {
-      zone: {}
+      zone: {},
+      coordinates: []
     }
   }
 
@@ -27,55 +28,42 @@ class Zone extends Component{
       this.setState({
         zone: this.props.zone
       })
-      console.log('changed zone')
     }  
   }
 
 
   // BUG -- update component based on route change
   componentWillReceiveProps(nextProps){
-    if(nextProps.params.id !== this.props.params.id){
-      this.props.fetchZone(nextProps.params.id)
-    }
+    // if(nextProps.params.id !== this.props.params.id){
+    //   this.props.fetchZone(nextProps.params.id)
+    // }
 
-    if (nextProps.zone !== this.props.zone){
-      this.setState({ zone: nextProps.zone})
-    }
-    if (nextProps.coordinates !== this.props.coordinates){
-      this.setState({
-        coordinates: nextProps.coordinates
-      })
-
-    }
+    // need check like if nextProps.zone !== this.props.zone?  
+    this.setState({
+      zone: nextProps.zone
+      coordinates: nextProps.coordinates
+    })
   }
 
-
   renderMap(){
-    if (this.props.zone && !this.props.coordinates){
+    if (this.props.zone && this.props.coordinates.length === 0){
       let zipCode = this.props.zone.zipCodes[0]
       this.props.getCoordinates(zipCode)
     }
 
-
-
-
-    if(this.state.zone && this.state.coordinates){
+    if(this.state.zone && this.state.coordinates.length > 0){
       return (
         <StickyDiv>
           <div style={styles.map}>
             <Map 
-              center={this.state.coordinates}
+              center={this.state.coordinates[0]}
+              coordinates={this.state.coordinates}
             />
           </div>
         </StickyDiv> 
       )
     }
 
-  }
-
-
-  getZone(){
-    this.props.fetchZone(this.props.params.id)
   }
 
   render(){
@@ -111,8 +99,4 @@ function mapStateToProps(state){
 }
 
 
-
 export default connect(mapStateToProps, {fetchZone, getCoordinates})(Zone)
-
-
-

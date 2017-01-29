@@ -41513,7 +41513,7 @@
 	
 	var _Nav2 = _interopRequireDefault(_Nav);
 	
-	var _Zone = __webpack_require__(670);
+	var _Zone = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./Zone\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _Zone2 = _interopRequireDefault(_Zone);
 	
@@ -56689,12 +56689,7 @@
 	      var mapContainer = _react2.default.createElement('div', { style: { height: '100%', width: '100%' } });
 	
 	      var markers = this.props.coordinates.map(function (coord, i) {
-	        var marker = {
-	          lat: coord.lat,
-	          lng: coord.lng
-	        };
-	
-	        return _react2.default.createElement(_reactGoogleMaps.Marker, { key: i, position: marker });
+	        return _react2.default.createElement(_reactGoogleMaps.Marker, { key: i, position: coord });
 	      });
 	
 	      return _react2.default.createElement(_reactGoogleMaps.GoogleMapLoader, {
@@ -61003,178 +60998,7 @@
 	exports.default = Nav;
 
 /***/ },
-/* 670 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(209);
-	
-	var _reactRedux = __webpack_require__(179);
-	
-	var _Zones = __webpack_require__(671);
-	
-	var _Zones2 = _interopRequireDefault(_Zones);
-	
-	var _presentational = __webpack_require__(509);
-	
-	var _containers = __webpack_require__(507);
-	
-	var _actions = __webpack_require__(477);
-	
-	var _styles = __webpack_require__(622);
-	
-	var _styles2 = _interopRequireDefault(_styles);
-	
-	var _reactStickydiv = __webpack_require__(673);
-	
-	var _reactStickydiv2 = _interopRequireDefault(_reactStickydiv);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Zone = function (_Component) {
-	  _inherits(Zone, _Component);
-	
-	  function Zone() {
-	    _classCallCheck(this, Zone);
-	
-	    var _this = _possibleConstructorReturn(this, (Zone.__proto__ || Object.getPrototypeOf(Zone)).call(this));
-	
-	    _this.state = {
-	      zone: {}
-	    };
-	    return _this;
-	  }
-	
-	  _createClass(Zone, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.props.fetchZone(this.props.params.id);
-	    }
-	  }, {
-	    key: 'componentDidUpdate',
-	    value: function componentDidUpdate(prevProps) {
-	      if (prevProps.zone !== this.props.zone) {
-	        this.setState({
-	          zone: this.props.zone
-	        });
-	        console.log('changed zone');
-	      }
-	    }
-	
-	    // BUG -- update component based on route change
-	
-	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {
-	      if (nextProps.params.id !== this.props.params.id) {
-	        this.props.fetchZone(nextProps.params.id);
-	      }
-	
-	      if (nextProps.zone !== this.props.zone) {
-	        this.setState({ zone: nextProps.zone });
-	      }
-	      if (nextProps.coordinates !== this.props.coordinates) {
-	        this.setState({
-	          coordinates: nextProps.coordinates
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'renderMap',
-	    value: function renderMap() {
-	      if (this.props.zone && !this.props.coordinates) {
-	        var zipCode = this.props.zone.zipCodes[0];
-	        this.props.getCoordinates(zipCode);
-	      }
-	
-	      if (this.state.zone && this.state.coordinates) {
-	        return _react2.default.createElement(
-	          _reactStickydiv2.default,
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { style: _styles2.default.map },
-	            _react2.default.createElement(_presentational.Map, {
-	              center: this.state.coordinates
-	            })
-	          )
-	        );
-	      }
-	    }
-	  }, {
-	    key: 'getZone',
-	    value: function getZone() {
-	      this.props.fetchZone(this.props.params.id);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var zone = this.props.zone;
-	
-	
-	      if (!zone) {
-	        return _react2.default.createElement(
-	          'div',
-	          null,
-	          'Loading. from zone show..'
-	        );
-	      }
-	
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'one-half' },
-	          _react2.default.createElement(_containers.Comments, { zoneId: this.props.params.id })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'one-half' },
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            this.renderMap()
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return Zone;
-	}(_react.Component);
-	
-	Zone.propTypes = {
-	  zone: _react2.default.PropTypes.object
-	};
-	
-	function mapStateToProps(state) {
-	  return {
-	    zone: state.zones.zone,
-	    coordinates: state.zones.coordinates
-	  };
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZone: _actions.fetchZone, getCoordinates: _actions.getCoordinates })(Zone);
-
-/***/ },
+/* 670 */,
 /* 671 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -61274,35 +61098,6 @@
 	      });
 	    }
 	  }, {
-	    key: 'getCoordsOfZones',
-	    value: function getCoordsOfZones() {}
-	    // let zipCodes = this.state.zones.reduce((a, b)=>{
-	    //   return a.concat(b.zipCodes[0])
-	    // }, [])
-	
-	    /* need async reduce */
-	    // let coords = zipCodes.reduce((a, zipCode)=>{
-	
-	    //   let geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}`
-	
-	    //   let zips = []
-	    //   let request = axios.get(geocodeUrl).then(res=>{
-	
-	    //     let lat = parseFloat(res.data.results[0].geometry.bounds.northeast.lat)
-	    //     let lng = parseFloat(res.data.results[0].geometry.bounds.northeast.lng)
-	    //     let location = {lat, lng}
-	
-	
-	    //   })
-	
-	    // }, [])
-	
-	    //get multiple coords
-	    // from zones get first zipcode, add to array
-	    // loop through array and add getCoords to new container
-	    //loop through new container as markers
-	
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -61382,98 +61177,11 @@
 	};
 
 /***/ },
-/* 673 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";var React=__webpack_require__(2),ReactDOM=__webpack_require__(33),util=__webpack_require__(674),SimplePageScrollMixin={componentDidMount:function(){window.addEventListener("scroll",this.onScroll,!1)},componentWillUnmount:function(){window.removeEventListener("scroll",this.onScroll,!1)}},SimpleResizeMixin={componentDidMount:function(){window.addEventListener("resize",this.handleResize)},componentWillUnmount:function(){window.removeEventListener("resize",this.handleResize)}},StickyDiv=React.createClass({mixins:[SimplePageScrollMixin,SimpleResizeMixin],displayName:"StickyDiv",propTypes:{offsetTop:React.PropTypes.number,zIndex:React.PropTypes.number,className:React.PropTypes.string},getInitialState:function(){return{fix:!1,width:null}},getDefaultProps:function(){return{offsetTop:0,className:"",zIndex:9999}},handleResize:function(){this.checkWidth(),this.checkPositions()},onScroll:function(){this.checkWidth(),this.checkPositions()},checkPositions:function(){var e=util.findPosRelativeToViewport(ReactDOM.findDOMNode(this));e[1]<=this.props.offsetTop?this.setState({fix:!0}):this.setState({fix:!1})},checkWidth:function(){var e=null;e=this.refs.duplicate?this.refs.duplicate.getBoundingClientRect().width:this.refs.original.getBoundingClientRect().width,this.state.width!==e&&this.setState({width:e})},componentDidMount:function(){this.checkWidth()},render:function(){var e;return this.state.fix?(e={display:"block",position:"fixed",width:this.state.width?this.state.width+"px":null,top:this.props.offsetTop},React.createElement("div",{style:{zIndex:this.props.zIndex,position:"relative",width:"100%"}},React.createElement("div",{ref:"duplicate",key:"duplicate",style:{visibility:"hidden"}},this.props.children),React.createElement("div",{ref:"original",key:"original",className:this.props.className,style:e},this.props.children))):(e={display:"block",position:"relative"},React.createElement("div",{style:{zIndex:this.props.zIndex,position:"relative",width:"100%"}},React.createElement("div",{ref:"original",key:"original",style:e},this.props.children)))}});module.exports=StickyDiv;
-	//# sourceMappingURL=dist/react-stickydiv.min.js.map
-
-/***/ },
-/* 674 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	// findPos() by quirksmode.org
-	// Finds the absolute position of an element on a page
-	var findPos = __webpack_require__(675);
-	exports.findPos = findPos;
-	var getPageScroll = __webpack_require__(676);
-	exports.getPageScroll = getPageScroll;
-	var findPosRelativeToViewport = __webpack_require__(677);
-	exports.findPosRelativeToViewport = findPosRelativeToViewport;
-	
-
-
-/***/ },
-/* 675 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	// findPos() by quirksmode.org
-	// Finds the absolute position of an element on a page
-	module.exports = function (obj) {
-	    var curleft = 0,
-	        curtop = 0;
-	    if (obj.offsetParent) {
-	        do {
-	            curleft += obj.offsetLeft;
-	            curtop += obj.offsetTop;
-	        } while (obj = obj.offsetParent);
-	    }
-	    return [curleft, curtop];
-	};
-	
-
-
-/***/ },
-/* 676 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	// getPageScroll() by quirksmode.org
-	// Finds the scroll position of a page
-	module.exports = function () {
-	    var xScroll, yScroll;
-	    if (self.pageYOffset) {
-	        yScroll = self.pageYOffset;
-	        xScroll = self.pageXOffset;
-	    } else if (document.documentElement && document.documentElement.scrollTop) {
-	        yScroll = document.documentElement.scrollTop;
-	        xScroll = document.documentElement.scrollLeft;
-	    } else if (document.body) {
-	        // all other Explorers
-	        yScroll = document.body.scrollTop;
-	        xScroll = document.body.scrollLeft;
-	    }
-	    return [xScroll, yScroll];
-	};
-	
-
-
-/***/ },
-/* 677 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	var findPos = __webpack_require__(675);
-	var getPageScroll = __webpack_require__(676);
-	
-	// Finds the position of an element relative to the viewport.
-	module.exports = function (obj) {
-	    var objPos = findPos(obj);
-	    var scroll = getPageScroll();
-	    return [objPos[0] - scroll[0], objPos[1] - scroll[1]];
-	};
-	
-
-
-/***/ },
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
 /* 678 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -61622,10 +61330,6 @@
 	    value: function zones() {
 	      var _this2 = this;
 	
-	      {/*if(this.state.zones.length === 0){
-	         return <h1> Loading...from zones index </h1>
-	        }*/}
-	
 	      if (this.state.zones.length === 0) {
 	        return _react2.default.createElement(
 	          'h1',
@@ -61640,7 +61344,6 @@
 	        });
 	      }
 	
-	      // if(this.state.coordinates){
 	      var location = { lat: 32.7269669, lng: -117.1647094 };
 	
 	      return _react2.default.createElement(
@@ -61656,8 +61359,6 @@
 	          )
 	        )
 	      );
-	      // }
-	
 	    }
 	  }, {
 	    key: 'render',
@@ -61665,25 +61366,13 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.zones(),
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          ' hello'
-	        )
+	        this.zones()
 	      );
 	    }
 	  }]);
 	
 	  return ZonesIndex;
 	}(_react.Component);
-	
-	// let zipCodes = this.state.zones.reduce((a, b)=>{
-	//      this.props.getCoordinates(b.zipCodes[0])
-	//      return a.concat(b.zipCodes[0])
-	//    }, [])
-	
-	//prps --zones
 	
 	function mapStateToProps(state) {
 	  return {

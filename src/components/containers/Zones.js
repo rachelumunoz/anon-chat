@@ -23,7 +23,6 @@ class Zones extends Component{
     }
   }
 
-
   renderZones(){
     return this.props.zones.map((zone, i)=>{
       return (
@@ -37,45 +36,15 @@ class Zones extends Component{
             <h3 style={styles.h3} >{zone.title}</h3>
             <p>{zone.zipCodes}</p>
             <p>comments: {zone.numComments}</p>
-            {/*this.getCoordsOfZones()*/}
           </Link> 
         </li>
       )
     })
   }
 
-  getCoordsOfZones(){
-    // let zipCodes = this.state.zones.reduce((a, b)=>{
-    //   return a.concat(b.zipCodes[0])
-    // }, [])
-
-    /* need async reduce */
-    // let coords = zipCodes.reduce((a, zipCode)=>{
-      
-    //   let geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${zipCode}`
-      
-    //   let zips = []
-    //   let request = axios.get(geocodeUrl).then(res=>{
-        
-    //     let lat = parseFloat(res.data.results[0].geometry.bounds.northeast.lat)
-    //     let lng = parseFloat(res.data.results[0].geometry.bounds.northeast.lng)
-    //     let location = {lat, lng}
-        
-      
-    //   })
-      
-    // }, [])
-
-  }
-  //get multiple coords
-  // from zones get first zipcode, add to array
-  // loop through array and add getCoords to new container
-  //loop through new container as markers
-
   render(){
     return (
-      <div>
-        
+      <div> 
         <ol>
           <h1 style={styles.title}>
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
