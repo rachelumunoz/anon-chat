@@ -35,7 +35,7 @@ class ZonesIndex extends Component{
 
   zones(){
     if ( this.state.zones.length === 0){
-       return <h1> Loading...from zones index </h1>
+       return <h1 > Loading...from zones index </h1>
     }
 
     if (this.props.coordinates.length === 0){

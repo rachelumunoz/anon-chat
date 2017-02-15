@@ -4,10 +4,13 @@ import Map from './Map'
 import Nav from './Nav'
 import Zone from './Zone'
 import ZoneForm from './ZoneForm'
+import CollapseControl from './CollapseControl'
+
 
 
 
 export {
+  CollapseControl,
   Comment,
   CommentForm,
   Map,

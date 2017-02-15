@@ -41499,13 +41499,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ZoneForm = exports.Zone = exports.Nav = exports.Map = exports.CommentForm = exports.Comment = undefined;
+	exports.ZoneForm = exports.Zone = exports.Nav = exports.Map = exports.CommentForm = exports.Comment = exports.CollapseControl = undefined;
 	
 	var _Comment = __webpack_require__(510);
 	
 	var _Comment2 = _interopRequireDefault(_Comment);
 	
-	var _CommentForm = __webpack_require__(621);
+	var _CommentForm = __webpack_require__(622);
 	
 	var _CommentForm2 = _interopRequireDefault(_CommentForm);
 	
@@ -41525,8 +41525,13 @@
 	
 	var _ZoneForm2 = _interopRequireDefault(_ZoneForm);
 	
+	var _CollapseControl = __webpack_require__(692);
+	
+	var _CollapseControl2 = _interopRequireDefault(_CollapseControl);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	exports.CollapseControl = _CollapseControl2.default;
 	exports.Comment = _Comment2.default;
 	exports.CommentForm = _CommentForm2.default;
 	exports.Map = _Map2.default;
@@ -41554,7 +41559,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _styles = __webpack_require__(622);
+	var _styles = __webpack_require__(621);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -56500,6 +56505,69 @@
 
 /***/ },
 /* 621 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  comments: {
+	    comment: {
+	      fontSize: '150%',
+	      fontWeight: 200,
+	      details: {
+	        fontWeight: 100
+	      }
+	    },
+	    container: {
+	      padding: 12,
+	      backgroundColor: '#f9f9f9'
+	    },
+	    commentForm: {
+	      marginBottom: 50
+	    }
+	  },
+	  zone: {
+	    container: {
+	      padding: 16,
+	      background: '#f9f9f9',
+	      marginTop: 12
+	    }
+	  },
+	  map: {
+	    width: 'auto',
+	    height: 600,
+	    padding: 10
+	  },
+	  nav: {
+	    backgroundColor: '#f4f8f7',
+	    height: 50,
+	    width: 'auto',
+	    boxShadow: '0 3px 2px -4px black',
+	    marginBottom: 35,
+	    ul: {
+	      paddingTop: 11
+	    },
+	    li: {
+	      margin: 'auto 15px'
+	    },
+	    logo: {
+	      color: '#1a2925',
+	      letterSpacing: '0.1em',
+	      fontSize: '150%',
+	      paddingTop: 15
+	    }
+	  },
+	  commentForm: {
+	    padding: '0 35px',
+	    margin: '0 0 25px 0'
+	  }
+	};
+
+/***/ },
+/* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -56516,7 +56584,7 @@
 	
 	var _reduxForm = __webpack_require__(271);
 	
-	var _styles = __webpack_require__(622);
+	var _styles = __webpack_require__(621);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -56588,69 +56656,6 @@
 	exports.default = (0, _reduxForm.reduxForm)({
 	  form: 'CommentForm' // a unique identifier for this form
 	})(CommentForm);
-
-/***/ },
-/* 622 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  comments: {
-	    comment: {
-	      fontSize: '150%',
-	      fontWeight: 200,
-	      details: {
-	        fontWeight: 100
-	      }
-	    },
-	    container: {
-	      padding: 12,
-	      backgroundColor: '#f9f9f9'
-	    },
-	    commentForm: {
-	      marginBottom: 50
-	    }
-	  },
-	  zone: {
-	    container: {
-	      padding: 16,
-	      background: '#f9f9f9',
-	      marginTop: 12
-	    }
-	  },
-	  map: {
-	    width: 'auto',
-	    height: 600,
-	    padding: 10
-	  },
-	  nav: {
-	    backgroundColor: '#f4f8f7',
-	    height: 50,
-	    width: 'auto',
-	    boxShadow: '0 3px 2px -4px black',
-	    marginBottom: 35,
-	    ul: {
-	      paddingTop: 11
-	    },
-	    li: {
-	      margin: 'auto 15px'
-	    },
-	    logo: {
-	      color: '#1a2925',
-	      letterSpacing: '0.1em',
-	      fontSize: '150%',
-	      paddingTop: 15
-	    }
-	  },
-	  commentForm: {
-	    padding: '0 35px',
-	    margin: '0 0 25px 0'
-	  }
-	};
 
 /***/ },
 /* 623 */
@@ -60948,7 +60953,7 @@
 	
 	var _reactRouter = __webpack_require__(209);
 	
-	var _styles = __webpack_require__(622);
+	var _styles = __webpack_require__(621);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -61031,7 +61036,7 @@
 	
 	var _actions = __webpack_require__(477);
 	
-	var _styles = __webpack_require__(622);
+	var _styles = __webpack_require__(621);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -61206,6 +61211,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// import './containers.css' //need css loader defined
+	
 	/* RENAME to ControlPanel*/
 	var Zones = function (_Component) {
 	  _inherits(Zones, _Component);
@@ -61213,7 +61220,12 @@
 	  function Zones() {
 	    _classCallCheck(this, Zones);
 	
-	    return _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Zones.__proto__ || Object.getPrototypeOf(Zones)).call(this));
+	
+	    _this.state = {
+	      collapsed: false
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(Zones, [{
@@ -61230,6 +61242,9 @@
 	        });
 	      }
 	    }
+	  }, {
+	    key: 'collapseSelf',
+	    value: function collapseSelf() {}
 	  }, {
 	    key: 'renderZones',
 	    value: function renderZones() {
@@ -61270,7 +61285,8 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { style: _styles2.default.controlPanel },
+	        { className: 'control-panel collapsed', style: _styles2.default.controlPanel },
+	        _react2.default.createElement(_presentational.CollapseControl, { click: this.collapseSelf.bind(this) }),
 	        _react2.default.createElement(
 	          'ol',
 	          null,
@@ -62897,6 +62913,61 @@
 	  transformer: undefined
 	};
 	module.exports = exports['default'];
+
+/***/ },
+/* 692 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CollapseControl = function (_Component) {
+	  _inherits(CollapseControl, _Component);
+	
+	  function CollapseControl() {
+	    _classCallCheck(this, CollapseControl);
+	
+	    return _possibleConstructorReturn(this, (CollapseControl.__proto__ || Object.getPrototypeOf(CollapseControl)).call(this));
+	    // this.state = {
+	    //   collapsed: false
+	    // }
+	  }
+	
+	  _createClass(CollapseControl, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { onClick: this.props.click, className: "arrow-container " },
+	        _react2.default.createElement("i", { className: "fa fa-backward", "aria-hidden": "true" })
+	      );
+	    }
+	  }]);
+	
+	  return CollapseControl;
+	}(_react.Component);
+	
+	exports.default = CollapseControl;
+	
+	// onClick of icon
+	// parent container (controlPanel) to collapse
 
 /***/ }
 /******/ ]);

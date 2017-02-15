@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Zone, ZoneForm} from '../presentational'
+import {Zone, ZoneForm, CollapseControl} from '../presentational'
 import {connect} from 'react-redux'
 import {Link, IndexLink} from 'react-router'
 
@@ -8,9 +8,17 @@ import styles from './styles'
 
 import axios from 'axios'
 
+// import './containers.css' //need css loader defined
+
 /* RENAME to ControlPanel*/
 class Zones extends Component{
-  
+  constructor(){
+    super()
+
+    this.state = {
+      collapsed: false
+    }
+  }
   componentWillMount(){
     this.props.fetchZones()
   }
@@ -21,6 +29,10 @@ class Zones extends Component{
         zones: nextProps.zones
       })
     }
+  }
+
+  collapseSelf(){
+      
   }
 
   renderZones(){
@@ -44,7 +56,8 @@ class Zones extends Component{
 
   render(){
     return (
-      <div style={styles.controlPanel}> 
+      <div className="control-panel collapsed" style={styles.controlPanel}> 
+        <CollapseControl click={this.collapseSelf.bind(this)} />
         <ol>
           <h1 style={styles.title}>
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
