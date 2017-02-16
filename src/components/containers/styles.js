@@ -1,8 +1,4 @@
 export default {
-  controlPanel:{
-    backgroundColor: '#f9f9f9',
-    height: '100%'
-  },
   container : {
     padding: 12, 
     backgroundColor: '#f9f9f9',

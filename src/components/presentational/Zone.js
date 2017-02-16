@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Link} from 'react-router'
 import {connect} from 'react-redux'
-import Zones from '../containers/Zones'
+import ControlPanel from '../containers/ControlPanel'
 
 import {Map, CommentForm} from '../presentational'
 import {Comments} from '../containers'

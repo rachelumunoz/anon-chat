@@ -6,10 +6,12 @@
   @include atMedium{
 
   }
-  
+
   &__form {
-    padding: 0 2.1875rem;
+    padding: 2.1875rem 2.1875rem;
     margin: 0 0 1.5625rem 0;
+    width: 100%;
+    background-color: $greyBackground
   }
 
   &__container {

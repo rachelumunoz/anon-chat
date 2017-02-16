@@ -3,14 +3,22 @@ import React, {Component} from 'react'
 class CollapseControl extends Component {
   constructor(){
     super()
-    // this.state = {
-    //   collapsed: false
-    // }
+    
+    this.state = {
+      arrowClicked: false
+    }
+  }
+
+
+  handleClick(){
+    this.setState({arrowClicked: true})
+    
+    this.props.controlPanelToggle(true)
   }
 
   render(){
     return (
-      <div onClick={this.props.click} className= "arrow-container ">
+      <div onClick={this.handleClick.bind(this)} className="control-panel__arrow">
         <i className="fa fa-backward" aria-hidden="true"></i>
       </div>
     )
@@ -19,6 +27,3 @@ class CollapseControl extends Component {
 
 export default CollapseControl;
 
-
-// onClick of icon
-  // parent container (controlPanel) to collapse

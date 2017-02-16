@@ -1,10 +1,10 @@
 import Comments from './Comments'
-import Zones from './Zones'
+import ControlPanel from './ControlPanel'
 import ZonesIndex from './ZonesIndex'
 
 
 export {
   Comments,
-  Zones,
+  ControlPanel,
   ZonesIndex
 }
