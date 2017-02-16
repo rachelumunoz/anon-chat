@@ -8,7 +8,7 @@ import styles from './styles'
 
 import axios from 'axios'
 
-// import './containers.css' //need css loader defined
+import './containers.css' //need css loader defined
 
 /* RENAME to ControlPanel*/
 class Zones extends Component{
@@ -59,7 +59,7 @@ class Zones extends Component{
       <div className="control-panel collapsed" style={styles.controlPanel}> 
         <CollapseControl click={this.collapseSelf.bind(this)} />
         <ol>
-          <h1 style={styles.title}>
+          <h1 id="fish" style={styles.title}>
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
           {this.renderZones()}
         </ol>
