@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+  margin: auto 0;
+  height: 90vh;
+
+  &__one-fourth{
+    width: 25%;
+    float: left;
+    padding: 10px;
+    height: 100%;
+  }
+
+  &__three-fourth {
+    width: 75%;
+    float: left;
+    padding: 10px;
+  }
+
+}
+

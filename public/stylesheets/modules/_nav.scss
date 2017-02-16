@@ -1,0 +1,26 @@
+@import '../base/variables';
+
+.navigation {
+  background-color: $navColor;
+  height: 3.12rem;
+  width: auto;
+  box-shadow: 0 3px 2px -4px black;
+  margin-bottom: 2.18rem;
+
+  &__list {
+    padding-top: .6875rem;
+
+    &__item {
+      margin: auto .9375rem;
+    }
+  }
+
+  &__logo {
+    color: $logoColor;
+    letter-spacing: .1rem;
+    font-size: 150%;
+    padding-top: .9375rem;
+  } 
+
+}
+

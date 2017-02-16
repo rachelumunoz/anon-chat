@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link, IndexLink} from 'react-router'
-import styles from './styles'
+
+import '../../../public/stylesheets/style.scss' 
 
 
 
@@ -8,10 +9,10 @@ class Nav extends Component {
   render(){
     return (
       <div >
-        <nav style={styles.nav}>
-          <ul style={styles.nav.ul}>
-            <li style={styles.nav.li}>
-              <Link style={styles.nav.logo} to="/"> Anon Chat </Link>
+        <nav className="navigation">
+          <ul className="navigation__list">
+            <li className="navigation__list__item">
+              <Link className="navigation__logo" to="/"> Anon Chat </Link>
             </li>
           </ul>
         </nav>

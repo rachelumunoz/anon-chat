@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import{ Zones} from '../containers'
 import { Nav} from '../presentational'
+import '../../../public/stylesheets/style.scss'
 
 export default class App extends Component {
 
@@ -9,10 +10,10 @@ export default class App extends Component {
       <div> 
         <Nav />
         <div className="container">
-          <div className="one-fourth">
+          <div className="container__one-fourth">
             <Zones/>
           </div>
-          <div className="three-fourth">
+          <div className="container__three-fourth">
             {React.cloneElement(this.props.children, this.props)}
           </div>
         </div>

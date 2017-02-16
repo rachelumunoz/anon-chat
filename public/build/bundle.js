@@ -41289,6 +41289,8 @@
 	
 	var _presentational = __webpack_require__(509);
 	
+	__webpack_require__(673);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41318,12 +41320,12 @@
 	          { className: 'container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'one-fourth' },
+	            { className: 'container__one-fourth' },
 	            _react2.default.createElement(_containers.Zones, null)
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'three-fourth' },
+	            { className: 'container__three-fourth' },
 	            _react2.default.cloneElement(this.props.children, this.props)
 	          )
 	        )
@@ -56541,25 +56543,6 @@
 	    height: 600,
 	    padding: 10
 	  },
-	  nav: {
-	    backgroundColor: '#f4f8f7',
-	    height: 50,
-	    width: 'auto',
-	    boxShadow: '0 3px 2px -4px black',
-	    marginBottom: 35,
-	    ul: {
-	      paddingTop: 11
-	    },
-	    li: {
-	      margin: 'auto 15px'
-	    },
-	    logo: {
-	      color: '#1a2925',
-	      letterSpacing: '0.1em',
-	      fontSize: '150%',
-	      paddingTop: 15
-	    }
-	  },
 	  commentForm: {
 	    padding: '0 35px',
 	    margin: '0 0 25px 0'
@@ -60953,9 +60936,7 @@
 	
 	var _reactRouter = __webpack_require__(209);
 	
-	var _styles = __webpack_require__(621);
-	
-	var _styles2 = _interopRequireDefault(_styles);
+	__webpack_require__(673);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -60982,16 +60963,16 @@
 	        null,
 	        _react2.default.createElement(
 	          'nav',
-	          { style: _styles2.default.nav },
+	          { className: 'navigation' },
 	          _react2.default.createElement(
 	            'ul',
-	            { style: _styles2.default.nav.ul },
+	            { className: 'navigation__list' },
 	            _react2.default.createElement(
 	              'li',
-	              { style: _styles2.default.nav.li },
+	              { className: 'navigation__list__item' },
 	              _react2.default.createElement(
 	                _reactRouter.Link,
-	                { style: _styles2.default.nav.logo, to: '/' },
+	                { className: 'navigation__logo', to: '/' },
 	                ' Anon Chat '
 	              )
 	            )
@@ -61213,8 +61194,6 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	//need css loader defined
-	
 	/* RENAME to ControlPanel*/
 	var Zones = function (_Component) {
 	  _inherits(Zones, _Component);
@@ -61383,8 +61362,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/lib/loader.js!./containers.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/lib/loader.js!./containers.scss");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/lib/loader.js!./style.scss", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/lib/loader.js!./style.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -61399,10 +61378,10 @@
 
 	exports = module.exports = __webpack_require__(675)();
 	// imports
-	
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Lato);", ""]);
 	
 	// module
-	exports.push([module.id, "#fish {\n  background-color: blue; }\n", ""]);
+	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  .container__one-fourth {\n    width: 25%;\n    float: left;\n    padding: 10px;\n    height: 100%; }\n  .container__three-fourth {\n    width: 75%;\n    float: left;\n    padding: 10px; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n", ""]);
 	
 	// exports
 
