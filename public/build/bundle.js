@@ -41291,6 +41291,10 @@
 	
 	__webpack_require__(621);
 	
+	var _classnames = __webpack_require__(697);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41305,12 +41309,34 @@
 	  function App() {
 	    _classCallCheck(this, App);
 	
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+	
+	    _this.state = {
+	      collapsed: false,
+	      arrowClicked: false
+	    };
+	    return _this;
 	  }
 	
 	  _createClass(App, [{
+	    key: 'controlPanelToggle',
+	    value: function controlPanelToggle(arrowClickedState) {
+	      var currentCollapsedState = this.state.collapsed;
+	
+	      this.setState({
+	        arrowClicked: arrowClickedState,
+	        collapsed: !currentCollapsedState
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var oneFourthClass = (0, _classnames2.default)({
+	        'container__medium-one-fourth': true,
+	        'slide-out': this.state.collapsed && this.state.arrowClicked,
+	        'slide-in': !this.state.collapsed && this.state.arrowClicked
+	      });
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -41320,12 +41346,12 @@
 	          { className: 'container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container__medium-one-fourth' },
-	            _react2.default.createElement(_containers.ControlPanel, null)
+	            { className: oneFourthClass },
+	            _react2.default.createElement(_containers.ControlPanel, { controlPanelToggle: this.controlPanelToggle.bind(this) })
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container__medium-three-fourth' },
+	            { className: 'container__medium-three-fourth--slide' },
 	            _react2.default.cloneElement(this.props.children, this.props)
 	          )
 	        )
@@ -56534,7 +56560,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Lato);", ""]);
 	
 	// module
-	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  @media (min-width: 800px) {\n    .container__medium-one-fourth {\n      width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-three-fourth {\n      width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-one-half {\n      width: 50%;\n      float: left; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 2.1875rem 2.1875rem;\n  margin: 0 0 1.5625rem 0;\n  width: 100%;\n  background-color: #f9f9f9; }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9; }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-size: 150%;\n  font-weight: 700; }\n\n.comments__comment__details {\n  font-weight: 100; }\n\n.map {\n  display: none; }\n  @media (min-width: 800px) {\n    .map--medium {\n      display: block;\n      width: auto;\n      height: 37.5rem;\n      padding: .625rem; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.control-panel {\n  position: absolute;\n  background-color: #f9f9f9;\n  height: 100%;\n  transform: translateX(0%); }\n  .control-panel__arrow {\n    position: absolute;\n    top: 50%;\n    right: 0;\n    padding-right: .625rem;\n    cursor: pointer;\n    color: black; }\n\n.slide-in {\n  animation: slide-in 0.75s forwards; }\n\n.slide-out {\n  animation: slide-out 0.5s forwards; }\n\n@keyframes slide-out {\n  0% {\n    transform: translateX(0%); }\n  100% {\n    transform: translateX(-95%); } }\n\n@keyframes slide-in {\n  0% {\n    transform: translateX(-95%); }\n  100% {\n    transform: translateX(0%); } }\n", ""]);
+	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  @media (min-width: 800px) {\n    .container__medium-one-fourth {\n      width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-one-fourth--slide {\n      max-width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-three-fourth {\n      width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-three-fourth--slide {\n      min-width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-one-half {\n      width: 50%;\n      float: left; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 2.1875rem 2.1875rem;\n  margin: 0 0 1.5625rem 0;\n  width: 100%;\n  background-color: #f9f9f9; }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9; }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-size: 150%;\n  font-weight: 700; }\n\n.comments__comment__details {\n  font-weight: 100; }\n\n.map {\n  display: none; }\n  @media (min-width: 800px) {\n    .map--medium {\n      display: block;\n      width: auto;\n      height: 37.5rem;\n      padding: .625rem; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.control-panel {\n  position: absolute;\n  background-color: #f9f9f9;\n  height: 100%;\n  transform: translateX(0%); }\n  .control-panel__arrow {\n    position: absolute;\n    top: 50%;\n    right: 0;\n    padding-right: .625rem;\n    cursor: pointer;\n    color: black; }\n\n.slide-in {\n  animation: slide-in 0.75s forwards; }\n\n.slide-out {\n  animation: slide-out 0.5s forwards; }\n\n@keyframes slide-out {\n  0% {\n    transform: translateX(0%); }\n  100% {\n    transform: translateX(-95%); } }\n\n@keyframes slide-in {\n  0% {\n    transform: translateX(-95%); }\n  100% {\n    transform: translateX(0%); } }\n", ""]);
 	
 	// exports
 
@@ -61599,13 +61625,12 @@
 	  function ControlPanel() {
 	    _classCallCheck(this, ControlPanel);
 	
-	    var _this = _possibleConstructorReturn(this, (ControlPanel.__proto__ || Object.getPrototypeOf(ControlPanel)).call(this));
+	    return _possibleConstructorReturn(this, (ControlPanel.__proto__ || Object.getPrototypeOf(ControlPanel)).call(this));
 	
-	    _this.state = {
-	      collapsed: false,
-	      arrowClicked: false
-	    };
-	    return _this;
+	    // this.state = {
+	    //   collapsed: false,
+	    //   arrowClicked: false
+	    // }
 	  }
 	
 	  _createClass(ControlPanel, [{
@@ -61622,16 +61647,16 @@
 	        });
 	      }
 	    }
-	  }, {
-	    key: 'controlPanelToggle',
-	    value: function controlPanelToggle(arrowClickedState) {
-	      var currentCollapsedState = this.state.collapsed;
 	
-	      this.setState({
-	        arrowClicked: arrowClickedState,
-	        collapsed: !currentCollapsedState
-	      });
-	    }
+	    // controlPanelToggle(arrowClickedState){
+	    //   let currentCollapsedState = this.state.collapsed
+	
+	    //   this.setState({
+	    //     arrowClicked: arrowClickedState,
+	    //     collapsed: !currentCollapsedState
+	    //   })
+	    // }   
+	
 	  }, {
 	    key: 'renderZones',
 	    value: function renderZones() {
@@ -61671,16 +61696,10 @@
 	    key: 'render',
 	    value: function render() {
 	
-	      var controlPanelClass = (0, _classnames2.default)({
-	        'control-panel': true,
-	        'slide-out': this.state.collapsed && this.state.arrowClicked,
-	        'slide-in': !this.state.collapsed && this.state.arrowClicked
-	      });
-	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: controlPanelClass },
-	        _react2.default.createElement(_presentational.CollapseControl, { controlPanelToggle: this.controlPanelToggle.bind(this) }),
+	        { className: 'control-panel' },
+	        _react2.default.createElement(_presentational.CollapseControl, { controlPanelToggle: this.props.controlPanelToggle.bind(this) }),
 	        _react2.default.createElement(
 	          'ol',
 	          { className: 'control-panel__list' },

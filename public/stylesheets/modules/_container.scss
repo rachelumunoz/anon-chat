@@ -13,8 +13,21 @@
       height: 100%;
     }
 
+    &__medium-one-fourth--slide{
+      max-width: 25%;
+      float: left;
+      padding: 10px;
+      height: 100%;
+    }
+
     &__medium-three-fourth {
       width: 75%;
+      float: left;
+      padding: 10px;
+    }
+
+    &__medium-three-fourth--slide {
+      min-width: 75%;
       float: left;
       padding: 10px;
     }

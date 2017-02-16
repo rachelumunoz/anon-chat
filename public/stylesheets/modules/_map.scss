@@ -1,0 +1,13 @@
+.map {
+  display: none;
+
+  @include atMedium{
+
+    &--medium {
+      display: block;
+      width: auto;
+      height: 37.5rem;
+      padding: .625rem;
+    }
+  }
+}
