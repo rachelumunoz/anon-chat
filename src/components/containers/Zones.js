@@ -8,7 +8,7 @@ import styles from './styles'
 
 import axios from 'axios'
 
-import './containers.css' //need css loader defined
+import './containers.scss' //need css loader defined
 
 /* RENAME to ControlPanel*/
 class Zones extends Component{
