@@ -3,17 +3,26 @@
   margin: auto 0;
   height: 90vh;
 
-  &__one-fourth{
-    width: 25%;
-    float: left;
-    padding: 10px;
-    height: 100%;
-  }
+  
+  @include atMedium{
 
-  &__three-fourth {
-    width: 75%;
-    float: left;
-    padding: 10px;
+    &__medium-one-fourth{
+      width: 25%;
+      float: left;
+      padding: 10px;
+      height: 100%;
+    }
+
+    &__medium-three-fourth {
+      width: 75%;
+      float: left;
+      padding: 10px;
+    }
+
+    &__medium-one-half{
+      width: 50%;
+      float: left;
+    }
   }
 
 }

@@ -20,7 +20,7 @@ const CommentForm = (props) => {
   const { handleSubmit, pristine, reset, submitting, submitComment } = props
 
   return (
-    <form style={styles.commentForm} onSubmit={handleSubmit(submitComment.bind(this))}>
+    <form className="comments__form" onSubmit={handleSubmit(submitComment.bind(this))}>
       <Field name="username" type="text"
         component={renderField} label="Username"
         validate={required} 

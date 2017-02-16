@@ -41320,12 +41320,12 @@
 	          { className: 'container' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container__one-fourth' },
+	            { className: 'container__medium-one-fourth' },
 	            _react2.default.createElement(_containers.Zones, null)
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'container__three-fourth' },
+	            { className: 'container__medium-three-fourth' },
 	            _react2.default.cloneElement(this.props.children, this.props)
 	          )
 	        )
@@ -41390,10 +41390,6 @@
 	var _reactRedux = __webpack_require__(179);
 	
 	var _reduxForm = __webpack_require__(271);
-	
-	var _styles = __webpack_require__(672);
-	
-	var _styles2 = _interopRequireDefault(_styles);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -41463,7 +41459,7 @@
 	      return this.state.comments.map(function (comment) {
 	        return _react2.default.createElement(
 	          'div',
-	          { style: _styles2.default.container, key: comment._id },
+	          { className: 'comments__container', key: comment._id },
 	          _react2.default.createElement(_presentational.Comment, comment)
 	        );
 	      });
@@ -41565,6 +41561,8 @@
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
+	__webpack_require__(673);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41595,17 +41593,17 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { style: { margin: 55 } },
+	        { className: 'comments__container-2' },
 	        _react2.default.createElement(
 	          'p',
-	          { style: _styles2.default.comments.comment },
+	          { className: 'comments__comment__text' },
 	          ' ',
 	          body,
 	          ' '
 	        ),
 	        _react2.default.createElement(
 	          'span',
-	          { style: _styles2.default.comments.comment.details },
+	          { className: 'comments__comment__details' },
 	          '  ',
 	          username,
 	          ' \u2014 ',
@@ -56515,22 +56513,6 @@
 	  value: true
 	});
 	exports.default = {
-	  comments: {
-	    comment: {
-	      fontSize: '150%',
-	      fontWeight: 200,
-	      details: {
-	        fontWeight: 100
-	      }
-	    },
-	    container: {
-	      padding: 12,
-	      backgroundColor: '#f9f9f9'
-	    },
-	    commentForm: {
-	      marginBottom: 50
-	    }
-	  },
 	  zone: {
 	    container: {
 	      padding: 16,
@@ -56542,10 +56524,6 @@
 	    width: 'auto',
 	    height: 600,
 	    padding: 10
-	  },
-	  commentForm: {
-	    padding: '0 35px',
-	    margin: '0 0 25px 0'
 	  }
 	};
 
@@ -56615,7 +56593,7 @@
 	
 	  return _react2.default.createElement(
 	    'form',
-	    { style: _styles2.default.commentForm, onSubmit: handleSubmit(submitComment.bind(undefined)) },
+	    { className: 'comments__form', onSubmit: handleSubmit(submitComment.bind(undefined)) },
 	    _react2.default.createElement(_reduxForm.Field, { name: 'username', type: 'text',
 	      component: renderField, label: 'Username',
 	      validate: required
@@ -61120,12 +61098,12 @@
 	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'one-half' },
+	          { className: 'container__medium-one-half' },
 	          _react2.default.createElement(_containers.Comments, { zoneId: this.props.params.id })
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'one-half' },
+	          { className: 'container__medium-one-half' },
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -61381,7 +61359,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Lato);", ""]);
 	
 	// module
-	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  .container__one-fourth {\n    width: 25%;\n    float: left;\n    padding: 10px;\n    height: 100%; }\n  .container__three-fourth {\n    width: 75%;\n    float: left;\n    padding: 10px; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n", ""]);
+	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  @media (min-width: 800px) {\n    .container__medium-one-fourth {\n      width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-three-fourth {\n      width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-one-half {\n      width: 50%;\n      float: left; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 0 2.1875rem;\n  margin: 0 0 1.5625rem 0; }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9; }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-size: 150%;\n  font-weight: 700; }\n\n.comments__comment__details {\n  font-weight: 100; }\n", ""]);
 	
 	// exports
 

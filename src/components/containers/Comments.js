@@ -6,7 +6,6 @@ import {fetchComments, createZoneComment} from '../../actions'
 import {connect} from 'react-redux'
 import {reset} from 'redux-form';
 
-import styles from './styles'
 
 class Comments extends Component {
 
@@ -50,7 +49,7 @@ class Comments extends Component {
     }
       return this.state.comments.map((comment)=>{
         return (
-          <div style={styles.container}key={comment._id}>
+          <div className="comments__container" key={comment._id}>
             <Comment {...comment}/>
           </div>
         )

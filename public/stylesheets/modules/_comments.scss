@@ -1,0 +1,28 @@
+@import '../base/variables';
+
+.comments {
+  
+  &__form {
+    padding: 0 2.1875rem;
+    margin: 0 0 1.5625rem 0;
+  }
+
+  &__container {
+    padding: .75rem; 
+    background-color: $greyBackground;
+
+  }
+
+  &__container-2 {
+    margin: 3.4375rem;
+  }
+
+  &__comment__text {
+    font-size: 150%;
+    font-weight: 700;
+  }
+
+  &__comment__details {
+    font-weight: 100;
+  }
+}

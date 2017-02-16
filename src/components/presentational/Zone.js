@@ -75,10 +75,10 @@ class Zone extends Component{
 
     return (
       <div>
-        <div className="one-half">
+        <div className="container__medium-one-half">
           <Comments zoneId={this.props.params.id} />
         </div>
-        <div className="one-half">
+        <div className="container__medium-one-half">
           <div>{this.renderMap()}</div>
         </div>
       </div>

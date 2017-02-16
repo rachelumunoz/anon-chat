@@ -10,10 +10,10 @@ export default class App extends Component {
       <div> 
         <Nav />
         <div className="container">
-          <div className="container__one-fourth">
+          <div className="container__medium-one-fourth">
             <Zones/>
           </div>
-          <div className="container__three-fourth">
+          <div className="container__medium-three-fourth">
             {React.cloneElement(this.props.children, this.props)}
           </div>
         </div>

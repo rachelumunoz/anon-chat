@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import moment from 'moment'
 import styles from './styles'
 
+import '../../../public/stylesheets/style.scss' 
+
 class Comment extends Component {
   
   render(){
@@ -10,9 +12,9 @@ class Comment extends Component {
     const formattedTime = moment(timestamp).calendar()
 
     return(
-      <div style={{margin: 55}}>
-        <p style={styles.comments.comment}> {body} </p>
-        <span style={styles.comments.comment.details}>  {username} &mdash; {formattedTime}</span>
+      <div className="comments__container-2">
+        <p className="comments__comment__text"> {body} </p>
+        <span className="comments__comment__details">  {username} &mdash; {formattedTime}</span>
         <hr/>
       </div>
     )
