@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import moment from 'moment'
-import styles from './styles'
 
 import '../../../public/stylesheets/style.scss' 
 

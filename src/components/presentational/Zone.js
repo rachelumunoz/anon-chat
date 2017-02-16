@@ -54,8 +54,9 @@ class Zone extends Component{
     if(this.state.zone && this.state.coordinates.length > 0){
       return (
         <StickyDiv>
-          <div style={styles.map}>
+          <div className="map map--medium">
             <Map 
+              
               center={this.state.coordinates[0]}
               coordinates={this.state.coordinates}
             />
