@@ -18,7 +18,8 @@
     
     &__icon {
       transform: rotate(0deg);
-      transition: transform 1s;
+      transition: transform .5s;
+      // transform-origin: ;
       
       &.backwards {
         transform: rotate(180deg);
