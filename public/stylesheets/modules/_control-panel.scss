@@ -8,13 +8,22 @@
   // width: auto;
   transform: translateX(0%);
   
-  &__arrow {
+  &__arrow-container {
     position: absolute;
     top:50%;
     right: 0;
     padding-right: .625rem;
     cursor: pointer;
     color: black;
+    
+    &__icon {
+      transform: rotate(0deg);
+      transition: transform 1s;
+      
+      &.backwards {
+        transform: rotate(180deg);
+      }
+    }
   }
 }
 

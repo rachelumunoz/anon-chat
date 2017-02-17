@@ -56566,7 +56566,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Lato);", ""]);
 	
 	// module
-	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  @media (min-width: 800px) {\n    .container__medium-one-fourth {\n      width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-one-fourth--slide {\n      max-width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-three-fourth {\n      width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-three-fourth--slide {\n      min-width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-one-half {\n      width: 50%;\n      float: left; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 2.1875rem 2.1875rem;\n  margin: 0 0 1.5625rem 0;\n  width: 100%;\n  background-color: #f9f9f9; }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9; }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-size: 150%;\n  font-weight: 700; }\n\n.comments__comment__details {\n  font-weight: 100; }\n\n.map {\n  display: none; }\n  @media (min-width: 800px) {\n    .map--medium {\n      display: block;\n      width: auto;\n      height: 37.5rem;\n      padding: .625rem; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.control-panel {\n  padding: 0.9375rem;\n  position: absolute;\n  background-color: #f9f9f9;\n  height: 100%;\n  transform: translateX(0%); }\n  .control-panel__arrow {\n    position: absolute;\n    top: 50%;\n    right: 0;\n    padding-right: .625rem;\n    cursor: pointer;\n    color: black; }\n\n.slide-in {\n  animation: slide-in 0.75s forwards; }\n\n.slide-out {\n  animation: slide-out 0.5s forwards; }\n\n@keyframes slide-out {\n  0% {\n    transform: translateX(0%); }\n  100% {\n    transform: translateX(-75%); } }\n\n@keyframes slide-in {\n  0% {\n    transform: translateX(-75%); }\n  100% {\n    transform: translateX(0%); } }\n\n.slide-over-left {\n  animation: slide-over-left 0.5s forwards; }\n\n@keyframes slide-over-left {\n  0% {\n    transform: translateX(0); }\n  100% {\n    transform: translateX(-274px); } }\n\n.slide-over-right {\n  animation: slide-over-right 0.5s forwards; }\n\n@keyframes slide-over-right {\n  0% {\n    transform: translateX(-274px); }\n  100% {\n    transform: translateX(0); } }\n", ""]);
+	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  @media (min-width: 800px) {\n    .container__medium-one-fourth {\n      width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-one-fourth--slide {\n      max-width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-three-fourth {\n      width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-three-fourth--slide {\n      min-width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-one-half {\n      width: 50%;\n      float: left; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 2.1875rem 2.1875rem;\n  margin: 0 0 1.5625rem 0;\n  width: 100%;\n  background-color: #f9f9f9; }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9; }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-size: 150%;\n  font-weight: 700; }\n\n.comments__comment__details {\n  font-weight: 100; }\n\n.map {\n  display: none; }\n  @media (min-width: 800px) {\n    .map--medium {\n      display: block;\n      width: auto;\n      height: 37.5rem;\n      padding: .625rem; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.control-panel {\n  padding: 0.9375rem;\n  position: absolute;\n  background-color: #f9f9f9;\n  height: 100%;\n  transform: translateX(0%); }\n  .control-panel__arrow-container {\n    position: absolute;\n    top: 50%;\n    right: 0;\n    padding-right: .625rem;\n    cursor: pointer;\n    color: black; }\n    .control-panel__arrow-container__icon {\n      transform: rotate(0deg);\n      transition: transform 1s; }\n      .control-panel__arrow-container__icon.backwards {\n        transform: rotate(180deg); }\n\n.slide-in {\n  animation: slide-in 0.75s forwards; }\n\n.slide-out {\n  animation: slide-out 0.5s forwards; }\n\n@keyframes slide-out {\n  0% {\n    transform: translateX(0%); }\n  100% {\n    transform: translateX(-75%); } }\n\n@keyframes slide-in {\n  0% {\n    transform: translateX(-75%); }\n  100% {\n    transform: translateX(0%); } }\n\n.slide-over-left {\n  animation: slide-over-left 0.5s forwards; }\n\n@keyframes slide-over-left {\n  0% {\n    transform: translateX(0); }\n  100% {\n    transform: translateX(-274px); } }\n\n.slide-over-right {\n  animation: slide-over-right 0.5s forwards; }\n\n@keyframes slide-over-right {\n  0% {\n    transform: translateX(-274px); }\n  100% {\n    transform: translateX(0); } }\n", ""]);
 	
 	// exports
 
@@ -61865,7 +61865,7 @@
 /* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -61876,6 +61876,10 @@
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(697);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -61900,19 +61904,28 @@
 	  }
 	
 	  _createClass(CollapseControl, [{
-	    key: "handleClick",
+	    key: 'handleClick',
 	    value: function handleClick() {
-	      this.setState({ arrowClicked: true });
+	      var arrowClickedStatus = this.state.arrowClicked ? false : true;
+	
+	      this.setState({ arrowClicked: arrowClickedStatus });
 	
 	      this.props.controlPanelToggle(true);
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
+	      var arrowClass = (0, _classnames2.default)({
+	        "fa": true,
+	        "fa-backward": true,
+	        "control-panel__arrow-container__icon": true,
+	        "backwards": this.state.arrowClicked
+	      });
+	
 	      return _react2.default.createElement(
-	        "div",
-	        { onClick: this.handleClick.bind(this), className: "control-panel__arrow" },
-	        _react2.default.createElement("i", { className: "fa fa-backward", "aria-hidden": "true" })
+	        'div',
+	        { onClick: this.handleClick.bind(this), className: 'control-panel__arrow-container' },
+	        _react2.default.createElement('i', { className: arrowClass, 'aria-hidden': 'true' })
 	      );
 	    }
 	  }]);
