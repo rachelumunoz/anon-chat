@@ -1,6 +1,7 @@
 @import "./base/variables";
 
 .control-panel {
+  padding: 0.9375rem;
   position:  absolute;
   background-color: $greyBackground;
   height: 100%;
@@ -18,21 +19,3 @@
 }
 
 
-.slide-in {
-  animation: slide-in 0.75s forwards;
-}
-
-.slide-out{
-  animation: slide-out 0.5s forwards;
-}
-
-@keyframes slide-out {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-95%); }
-}
-
-@keyframes slide-in {
-    0% { transform: translateX(-95%); }
-    
-    100% { transform: translateX(0%); }
-}

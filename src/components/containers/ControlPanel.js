@@ -12,14 +12,6 @@ import axios from 'axios'
 import '../../../public/stylesheets/style.scss' 
 
 class ControlPanel extends Component{
-  constructor(){
-    super()
-
-    // this.state = {
-    //   collapsed: false,
-    //   arrowClicked: false
-    // }
-  }
   componentWillMount(){
     this.props.fetchZones()
   }
@@ -31,15 +23,6 @@ class ControlPanel extends Component{
       })
     }
   }
-
-  // controlPanelToggle(arrowClickedState){
-  //   let currentCollapsedState = this.state.collapsed
-    
-  //   this.setState({
-  //     arrowClicked: arrowClickedState,
-  //     collapsed: !currentCollapsedState
-  //   })
-  // }   
 
   renderZones(){
     return this.props.zones.map((zone, i)=>{

@@ -32,6 +32,12 @@ export default class App extends Component {
       'slide-in': !this.state.collapsed && this.state.arrowClicked
     })
 
+    const threeFourthClass = classNames({
+      'container__medium-three-fourth': true,
+      'slide-over-left': this.state.collapsed && this.state.arrowClicked,
+      'slide-over-right': !this.state.collapsed && this.state.arrowClicked
+    })
+
 
     return (
       <div> 
@@ -40,7 +46,7 @@ export default class App extends Component {
           <div className={oneFourthClass}>
             <ControlPanel controlPanelToggle={this.controlPanelToggle.bind(this)} />
           </div>
-          <div className="container__medium-three-fourth--slide">
+          <div className={threeFourthClass}>
             {React.cloneElement(this.props.children, this.props)}
           </div>
         </div>
