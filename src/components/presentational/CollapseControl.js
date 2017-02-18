@@ -24,7 +24,8 @@ class CollapseControl extends Component {
       "fa": true,
       "fa-backward": true,
       "control-panel__arrow-container__icon": true,
-      "backwards": this.state.arrowClicked
+      "backwards": this.state.arrowClicked,
+      "hidden": true // size?
     })
 
     return (

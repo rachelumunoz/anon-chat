@@ -1,10 +1,10 @@
 .container {
-  width: 100%;
-  margin: auto 0;
-  height: 90vh;
-
+  position: relative;
   
-  @include atMedium{
+  @include atMedium {
+    width: 100%;
+    margin: auto 0;
+    height: 90vh;
 
     &__medium-one-fourth{
       width: 25%;
@@ -21,12 +21,14 @@
     }
 
     &__medium-three-fourth {
+      display: block;
       width: 75%;
       float: left;
-      padding: 10px;
+      padding: 10px 10px 10px 1px;
     }
 
     &__medium-three-fourth--slide {
+      display: block;
       min-width: 75%;
       float: left;
       padding: 10px;
@@ -35,10 +37,14 @@
     &__medium-one-half{
       width: 50%;
       float: left;
-    }
 
-   
+      &--padding-top-left {
+        padding-top: 9px;
+        padding-left:10px;
+      }
+    }
   }
+
 
 }
 

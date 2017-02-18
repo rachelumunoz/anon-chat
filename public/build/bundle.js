@@ -75,15 +75,15 @@
 	
 	var _routes2 = _interopRequireDefault(_routes);
 	
-	var _reduxPromise = __webpack_require__(685);
+	var _reduxPromise = __webpack_require__(686);
 	
 	var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 	
-	var _reduxThunk = __webpack_require__(690);
+	var _reduxThunk = __webpack_require__(691);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(691);
+	var _reduxLogger = __webpack_require__(692);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -41237,7 +41237,7 @@
 	
 	var _presentational = __webpack_require__(509);
 	
-	var _ZonesIndex = __webpack_require__(684);
+	var _ZonesIndex = __webpack_require__(685);
 	
 	var _ZonesIndex2 = _interopRequireDefault(_ZonesIndex);
 	
@@ -41291,7 +41291,7 @@
 	
 	__webpack_require__(621);
 	
-	var _classnames = __webpack_require__(697);
+	var _classnames = __webpack_require__(681);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -41332,12 +41332,14 @@
 	    key: 'render',
 	    value: function render() {
 	      var oneFourthClass = (0, _classnames2.default)({
+	        'container__one-fourth': true,
 	        'container__medium-one-fourth': true,
 	        'slide-out': this.state.collapsed && this.state.arrowClicked,
 	        'slide-in': !this.state.collapsed && this.state.arrowClicked
 	      });
 	
 	      var threeFourthClass = (0, _classnames2.default)({
+	        'container__three-fourth': true,
 	        'container__medium-three-fourth': true,
 	        'slide-over-left': this.state.collapsed && this.state.arrowClicked,
 	        'slide-over-right': !this.state.collapsed && this.state.arrowClicked
@@ -41389,7 +41391,7 @@
 	
 	var _ControlPanel2 = _interopRequireDefault(_ControlPanel);
 	
-	var _ZonesIndex = __webpack_require__(684);
+	var _ZonesIndex = __webpack_require__(685);
 	
 	var _ZonesIndex2 = _interopRequireDefault(_ZonesIndex);
 	
@@ -41551,11 +41553,11 @@
 	
 	var _Zone2 = _interopRequireDefault(_Zone);
 	
-	var _ZoneForm = __webpack_require__(682);
+	var _ZoneForm = __webpack_require__(683);
 	
 	var _ZoneForm2 = _interopRequireDefault(_ZoneForm);
 	
-	var _CollapseControl = __webpack_require__(683);
+	var _CollapseControl = __webpack_require__(684);
 	
 	var _CollapseControl2 = _interopRequireDefault(_CollapseControl);
 	
@@ -56566,7 +56568,7 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Lato);", ""]);
 	
 	// module
-	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.container {\n  width: 100%;\n  margin: auto 0;\n  height: 90vh; }\n  @media (min-width: 800px) {\n    .container__medium-one-fourth {\n      width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-one-fourth--slide {\n      max-width: 25%;\n      float: left;\n      padding: 10px;\n      height: 100%; }\n    .container__medium-three-fourth {\n      width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-three-fourth--slide {\n      min-width: 75%;\n      float: left;\n      padding: 10px; }\n    .container__medium-one-half {\n      width: 50%;\n      float: left; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 2.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 2.1875rem 2.1875rem;\n  margin: 0 0 1.5625rem 0;\n  width: 100%;\n  background-color: #f9f9f9; }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9; }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-size: 150%;\n  font-weight: 700; }\n\n.comments__comment__details {\n  font-weight: 100; }\n\n.map {\n  display: none; }\n  @media (min-width: 800px) {\n    .map--medium {\n      display: block;\n      width: auto;\n      height: 37.5rem;\n      padding: .625rem; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.control-panel {\n  padding: 0.9375rem;\n  position: absolute;\n  background-color: #f9f9f9;\n  height: 100%;\n  transform: translateX(0%); }\n  .control-panel__arrow-container {\n    position: absolute;\n    top: 50%;\n    right: 0;\n    padding-right: .625rem;\n    cursor: pointer;\n    color: black; }\n    .control-panel__arrow-container__icon {\n      transform: rotate(0deg);\n      transition: transform .5s; }\n      .control-panel__arrow-container__icon.backwards {\n        transform: rotate(180deg); }\n\n.slide-in {\n  animation: slide-in 0.75s forwards; }\n\n.slide-out {\n  animation: slide-out 0.5s forwards; }\n\n@keyframes slide-out {\n  0% {\n    transform: translateX(0%); }\n  100% {\n    transform: translateX(-75%); } }\n\n@keyframes slide-in {\n  0% {\n    transform: translateX(-75%); }\n  100% {\n    transform: translateX(0%); } }\n\n.slide-over-left {\n  animation: slide-over-left 0.5s forwards; }\n\n@keyframes slide-over-left {\n  0% {\n    transform: translateX(0); }\n  100% {\n    transform: translateX(-274px); } }\n\n.slide-over-right {\n  animation: slide-over-right 0.5s forwards; }\n\n@keyframes slide-over-right {\n  0% {\n    transform: translateX(-274px); }\n  100% {\n    transform: translateX(0); } }\n", ""]);
+	exports.push([module.id, "/* --==--==-=-=-Colors =--==--==-=-=-*/\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  box-sizing: border-box; }\n\nbody {\n  margin: 0;\n  font-family: 'Lato', sans-serif;\n  background-color: #feffff;\n  color: #95BEB8; }\n\na {\n  text-decoration: none; }\n\na:visited {\n  color: #95BEB8; }\n\nol, ul {\n  list-style: none; }\n\n.hidden {\n  display: none; }\n\n.container {\n  position: relative; }\n  @media (min-width: 830px) {\n    .container {\n      width: 100%;\n      margin: auto 0;\n      height: 90vh; }\n      .container__medium-one-fourth {\n        width: 25%;\n        float: left;\n        padding: 10px;\n        height: 100%; }\n      .container__medium-one-fourth--slide {\n        max-width: 25%;\n        float: left;\n        padding: 10px;\n        height: 100%; }\n      .container__medium-three-fourth {\n        display: block;\n        width: 75%;\n        float: left;\n        padding: 10px 10px 10px 1px; }\n      .container__medium-three-fourth--slide {\n        display: block;\n        min-width: 75%;\n        float: left;\n        padding: 10px; }\n      .container__medium-one-half {\n        width: 50%;\n        float: left; }\n        .container__medium-one-half--padding-top-left {\n          padding-top: 9px;\n          padding-left: 10px; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.navigation {\n  background-color: #f4f8f7;\n  height: 3.12rem;\n  width: auto;\n  box-shadow: 0 3px 2px -4px black;\n  margin-bottom: 0.18rem; }\n  .navigation__list {\n    padding-top: .6875rem; }\n    .navigation__list__item {\n      margin: auto .9375rem; }\n  .navigation__logo {\n    color: #1a2925;\n    letter-spacing: .1rem;\n    font-size: 150%;\n    padding-top: .9375rem; }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.comments__form {\n  padding: 2.1875rem 2.1875rem;\n  margin: 0.3125rem 0 0.3125rem 0;\n  width: 100%;\n  background-color: #f9f9f9;\n  box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.33); }\n  .comments__form__input {\n    width: 100%; }\n  .comments__form__button {\n    width: 100%; }\n  @media (min-width: 530px) {\n    .comments__form {\n      margin-top: 10px;\n      margin-bottom: 10px; } }\n\n.comments__container {\n  padding: .75rem;\n  background-color: #f9f9f9;\n  box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.33); }\n\n.comments__container-2 {\n  margin: 3.4375rem; }\n\n.comments__comment__text {\n  font-weight: 700;\n  font-size: 125%; }\n  @media (min-width: 830px) {\n    .comments__comment__text {\n      font-size: 135%; } }\n\n.comments__comment__details {\n  font-weight: 100;\n  font-size: 75%; }\n  @media (min-width: 830px) {\n    .comments__comment__details {\n      font-size: 85%; } }\n\n.map {\n  display: none; }\n  @media (min-width: 830px) {\n    .map--medium {\n      display: block;\n      width: auto;\n      height: 37.5rem; } }\n\n/* --==--==-=-=-Colors =--==--==-=-=-*/\n.control-panel {\n  padding: 0.9375rem;\n  position: relative;\n  background-color: #f9f9f9;\n  height: 100%;\n  margin: 0 auto;\n  transform: translateX(0%);\n  font-size: 80%;\n  box-shadow: 0px 0px 3px -1px rgba(0, 0, 0, 0.33); }\n  @media (min-width: 530px) {\n    .control-panel {\n      font-size: 90%; } }\n  @media (min-width: 830px) {\n    .control-panel {\n      font-size: 100%; }\n      .control-panel__arrow-container {\n        position: absolute;\n        top: 50%;\n        right: 0;\n        padding-right: .625rem;\n        cursor: pointer;\n        color: black; }\n        .control-panel__arrow-container__icon {\n          transform: rotate(0deg);\n          transition: transform .5s; }\n          .control-panel__arrow-container__icon.backwards {\n            transform: rotate(180deg); } }\n\n.slide-in {\n  animation: slide-in 0.75s forwards; }\n\n.slide-out {\n  animation: slide-out 0.5s forwards; }\n\n@keyframes slide-out {\n  0% {\n    transform: translateX(0%); }\n  100% {\n    transform: translateX(-75%); } }\n\n@keyframes slide-in {\n  0% {\n    transform: translateX(-75%); }\n  100% {\n    transform: translateX(0%); } }\n\n.slide-over-left {\n  animation: slide-over-left 0.5s forwards; }\n\n@keyframes slide-over-left {\n  0% {\n    transform: translateX(0); }\n  100% {\n    transform: translateX(-274px); } }\n\n.slide-over-right {\n  animation: slide-over-right 0.5s forwards; }\n\n@keyframes slide-over-right {\n  0% {\n    transform: translateX(-274px); }\n  100% {\n    transform: translateX(0); } }\n", ""]);
 	
 	// exports
 
@@ -56921,7 +56923,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement('input', _extends({}, input, { placeholder: label, type: type })),
+	      _react2.default.createElement('input', _extends({ className: 'comments__form__input' }, input, { placeholder: label, type: type })),
 	      touched && (error && _react2.default.createElement(
 	        'span',
 	        null,
@@ -56962,7 +56964,7 @@
 	        null,
 	        _react2.default.createElement(
 	          'button',
-	          { type: 'submit', disabled: submitting },
+	          { className: 'comments__form__button', type: 'submit', disabled: submitting },
 	          'Submit'
 	        )
 	      )
@@ -57104,7 +57106,7 @@
 	  _createClass(Map, [{
 	    key: 'render',
 	    value: function render() {
-	      var mapContainer = _react2.default.createElement('div', { style: { height: '100%', width: '100%' } });
+	      var mapContainer = _react2.default.createElement('div', { style: { height: '100%', width: '100%', margin: '0 auto' } });
 	
 	      var markers = this.props.coordinates.map(function (coord, i) {
 	        return _react2.default.createElement(_reactGoogleMaps.Marker, { key: i, position: coord });
@@ -61443,7 +61445,7 @@
 	
 	var _actions = __webpack_require__(477);
 	
-	var _styles = __webpack_require__(681);
+	var _styles = __webpack_require__(682);
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
@@ -61520,7 +61522,6 @@
 	            'div',
 	            { className: 'map map--medium' },
 	            _react2.default.createElement(_presentational.Map, {
-	
 	              center: this.state.coordinates[0],
 	              coordinates: this.state.coordinates
 	            })
@@ -61552,7 +61553,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'container__medium-one-half' },
+	          { className: 'container__medium-one-half container__medium-one-half--padding-top-left' },
 	          _react2.default.createElement(
 	            'div',
 	            null,
@@ -61607,7 +61608,7 @@
 	
 	var _styles2 = _interopRequireDefault(_styles);
 	
-	var _classnames = __webpack_require__(697);
+	var _classnames = __webpack_require__(681);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -61767,6 +61768,60 @@
 
 /***/ },
 /* 681 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 682 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -61785,7 +61840,7 @@
 	};
 
 /***/ },
-/* 682 */
+/* 683 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61862,7 +61917,7 @@
 	exports.default = ZoneForm;
 
 /***/ },
-/* 683 */
+/* 684 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -61877,7 +61932,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(697);
+	var _classnames = __webpack_require__(681);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -61919,7 +61974,8 @@
 	        "fa": true,
 	        "fa-backward": true,
 	        "control-panel__arrow-container__icon": true,
-	        "backwards": this.state.arrowClicked
+	        "backwards": this.state.arrowClicked,
+	        "hidden": true // size?
 	      });
 	
 	      return _react2.default.createElement(
@@ -61936,7 +61992,7 @@
 	exports.default = CollapseControl;
 
 /***/ },
-/* 684 */
+/* 685 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62060,7 +62116,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchZones: _actions.fetchZones, getCoordinates: _actions.getCoordinates })(ZonesIndex);
 
 /***/ },
-/* 685 */
+/* 686 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62071,7 +62127,7 @@
 	
 	exports['default'] = promiseMiddleware;
 	
-	var _fluxStandardAction = __webpack_require__(686);
+	var _fluxStandardAction = __webpack_require__(687);
 	
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -62098,7 +62154,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 686 */
+/* 687 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62109,7 +62165,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _lodashIsplainobject = __webpack_require__(687);
+	var _lodashIsplainobject = __webpack_require__(688);
 	
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 	
@@ -62128,7 +62184,7 @@
 	}
 
 /***/ },
-/* 687 */
+/* 688 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62139,9 +62195,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(688),
+	var baseFor = __webpack_require__(689),
 	    isArguments = __webpack_require__(454),
-	    keysIn = __webpack_require__(689);
+	    keysIn = __webpack_require__(690);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -62237,7 +62293,7 @@
 
 
 /***/ },
-/* 688 */
+/* 689 */
 /***/ function(module, exports) {
 
 	/**
@@ -62291,7 +62347,7 @@
 
 
 /***/ },
-/* 689 */
+/* 690 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -62429,7 +62485,7 @@
 
 
 /***/ },
-/* 690 */
+/* 691 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -62457,7 +62513,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 691 */
+/* 692 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62468,11 +62524,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(692);
+	var _core = __webpack_require__(693);
 	
-	var _helpers = __webpack_require__(693);
+	var _helpers = __webpack_require__(694);
 	
-	var _defaults = __webpack_require__(696);
+	var _defaults = __webpack_require__(697);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -62575,7 +62631,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 692 */
+/* 693 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62585,9 +62641,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(693);
+	var _helpers = __webpack_require__(694);
 	
-	var _diff = __webpack_require__(694);
+	var _diff = __webpack_require__(695);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -62716,7 +62772,7 @@
 	}
 
 /***/ },
-/* 693 */
+/* 694 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -62740,7 +62796,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 694 */
+/* 695 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62750,7 +62806,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(695);
+	var _deepDiff = __webpack_require__(696);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -62836,7 +62892,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 695 */
+/* 696 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -63265,7 +63321,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 696 */
+/* 697 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -63314,60 +63370,6 @@
 	  transformer: undefined
 	};
 	module.exports = exports['default'];
-
-/***/ },
-/* 697 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-	
-	(function () {
-		'use strict';
-	
-		var hasOwn = {}.hasOwnProperty;
-	
-		function classNames () {
-			var classes = [];
-	
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-	
-				var argType = typeof arg;
-	
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-	
-			return classes.join(' ');
-		}
-	
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
 
 /***/ }
 /******/ ]);

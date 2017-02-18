@@ -2,27 +2,38 @@
 
 .control-panel {
   padding: 0.9375rem;
-  position:  absolute;
+  position:  relative;
   background-color: $greyBackground;
   height: 100%;
-  // width: auto;
+  margin: 0 auto;
   transform: translateX(0%);
-  
-  &__arrow-container {
-    position: absolute;
-    top:50%;
-    right: 0;
-    padding-right: .625rem;
-    cursor: pointer;
-    color: black;
-    
-    &__icon {
-      transform: rotate(0deg);
-      transition: transform .5s;
-      // transform-origin: ;
+  font-size: 80%;
+  box-shadow: 0px 0px 3px -1px rgba(0,0,0,0.33);
+    // hide arrows when small
+
+  @include atSmall {
+    font-size: 90%;
+  }
+
+  @include atMedium {
+    font-size: 100%;
+
+    &__arrow-container {
+      position: absolute;
+      top:50%;
+      right: 0;
+      padding-right: .625rem;
+      cursor: pointer;
+      color: black;
       
-      &.backwards {
-        transform: rotate(180deg);
+      &__icon {
+        transform: rotate(0deg);
+        transition: transform .5s;
+        // transform-origin: ;
+        
+        &.backwards {
+          transform: rotate(180deg);
+        }
       }
     }
   }

@@ -10,7 +10,7 @@ const renderField = ({ input, label, type, meta: { touched, error, warning } }) 
   <div>
     {/*<label>{label}</label>*/}
     <div>
-      <input {...input} placeholder={label} type={type}/>
+      <input className="comments__form__input" {...input} placeholder={label} type={type}/>
       {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
     </div>
   </div>
@@ -31,7 +31,7 @@ const CommentForm = (props) => {
           validate={required}
         />
         <div>
-          <button type="submit" disabled={submitting}>Submit</button>
+          <button className="comments__form__button" type="submit" disabled={submitting}>Submit</button>
         </div>
       </form>
     </StickyDiv>

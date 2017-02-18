@@ -27,12 +27,14 @@ export default class App extends Component {
 
   render(){
     const oneFourthClass = classNames({
+      'container__one-fourth': true,
       'container__medium-one-fourth': true,
       'slide-out': this.state.collapsed && this.state.arrowClicked,
       'slide-in': !this.state.collapsed && this.state.arrowClicked
     })
 
     const threeFourthClass = classNames({
+      'container__three-fourth': true,
       'container__medium-three-fourth': true,
       'slide-over-left': this.state.collapsed && this.state.arrowClicked,
       'slide-over-right': !this.state.collapsed && this.state.arrowClicked

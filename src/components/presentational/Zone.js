@@ -54,9 +54,8 @@ class Zone extends Component{
     if(this.state.zone && this.state.coordinates.length > 0){
       return (
         <StickyDiv>
-          <div className="map map--medium">
+          <div className="map map--medium" >
             <Map 
-              
               center={this.state.coordinates[0]}
               coordinates={this.state.coordinates}
             />
@@ -79,7 +78,7 @@ class Zone extends Component{
         <div className="container__medium-one-half">
           <Comments zoneId={this.props.params.id} />
         </div>
-        <div className="container__medium-one-half">
+        <div className="container__medium-one-half container__medium-one-half--padding-top-left">
           <div>{this.renderMap()}</div>
         </div>
       </div>
