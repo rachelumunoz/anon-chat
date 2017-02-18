@@ -5,6 +5,7 @@ import {fetchComments, createZoneComment} from '../../actions'
 
 import {connect} from 'react-redux'
 import {reset} from 'redux-form';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 class Comments extends Component {
@@ -49,9 +50,15 @@ class Comments extends Component {
     }
       return this.state.comments.map((comment)=>{
         return (
-          <div className="comments__container" key={comment._id}>
-            <Comment {...comment}/>
-          </div>
+          <ReactCSSTransitionGroup 
+            transitionName="fade"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}
+            >
+            <div className="comments__container" key={comment._id}>
+              <Comment {...comment}/>
+            </div>
+          </ReactCSSTransitionGroup>
         )
       })
   }
