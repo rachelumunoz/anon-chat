@@ -1,5 +1,5 @@
 .slide-in {
-  animation: slide-in 0.75s forwards;
+  animation: slide-in 0.5s forwards;
 }
 
 .slide-out{
@@ -23,7 +23,7 @@
 
 @keyframes slide-over-left {
   0% {transform: translateX(0);}
-  100% {transform: translateX(-274px);}
+  100% {transform: translateX(-27%);}
 }
 
 .slide-over-right {
@@ -31,7 +31,7 @@
 }
 
 @keyframes slide-over-right {
-  0% {transform: translateX(-274px);}
+  0% {transform: translateX(-27%);}
   100% {transform: translateX(0);}
 }
 

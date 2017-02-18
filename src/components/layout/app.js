@@ -31,6 +31,7 @@ export default class App extends Component {
       'container__medium-one-fourth': true,
       'slide-out': this.state.collapsed && this.state.arrowClicked,
       'slide-in': !this.state.collapsed && this.state.arrowClicked
+      
     })
 
     const threeFourthClass = classNames({
