@@ -51,7 +51,9 @@ class ControlPanel extends Component{
         <ol className="control-panel__list">
           <h1 className="control-panel__list__title">
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
-          {this.renderZones()}
+          <div>
+            {this.renderZones()}
+          </div>
         </ol>
 
       </div>

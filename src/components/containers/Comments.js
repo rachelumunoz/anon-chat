@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Comment, CommentForm} from '../presentational'
+import {Comment, CommentForm, Loading} from '../presentational'
 import {fetchComments, createZoneComment} from '../../actions'
 
 
@@ -45,7 +45,7 @@ class Comments extends Component {
   renderComments(){
     if (this.state.comments.length === 0){
       return (
-        <div> <h1> Fetching comments</h1></div>
+        <Loading />
       )
     }
       return this.state.comments.map((comment)=>{

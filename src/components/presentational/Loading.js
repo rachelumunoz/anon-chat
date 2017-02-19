@@ -4,7 +4,7 @@ import React from 'react';
  const Loading = () => {
   return (
     <div> 
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
+      <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px" viewBox="0 0 496 496">
         <g className="bubbles">
           <path d="M248 92c-13.6 0-24-10.4-24-24V24c0-13.6 10.4-24 24-24s24 10.4 24 24v44c0 12.8-10.4 24-24 24z" fill="#76FFE5"/>
           <path d="M248 496c-13.6 0-24-10.4-24-24v-44c0-13.6 10.4-24 24-24s24 10.4 24 24v44c0 13.6-10.4 24-24 24z" fill="#0DBFBA"/>
