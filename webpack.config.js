@@ -23,6 +23,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!sass-loader'
+      },
+      { 
+        test: /\.svg$/, 
+        loader: 'url-loader?limit=100000' 
       }
       
     ]

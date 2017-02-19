@@ -8,7 +8,7 @@ export default {
     fontSize: '200%',
     marginBottom: 20,
     letterSpacing: '.1em',
-    textAlign: 'center ',
+    textAlign: 'center',
     paddingTop: 20
   },
   oneHalf:{

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 // import Zones from './Zones'
-import {Map} from '../presentational'
+import {Map, Loading} from '../presentational'
 
 import styles from './styles'
 import {connect} from 'react-redux'
@@ -35,7 +35,7 @@ class ZonesIndex extends Component{
 
   zones(){
     if ( this.state.zones.length === 0){
-       return <h1 > Loading...from zones index </h1>
+       return <Loading />
     }
 
     if (this.props.coordinates.length === 0){

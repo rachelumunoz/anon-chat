@@ -3,7 +3,7 @@ import {Link} from 'react-router'
 import {connect} from 'react-redux'
 import ControlPanel from '../containers/ControlPanel'
 
-import {Map, CommentForm} from '../presentational'
+import {Map, CommentForm, Loading} from '../presentational'
 import {Comments} from '../containers'
 import {fetchZone, getCoordinates} from '../../actions'
 import styles from './styles'
@@ -70,7 +70,7 @@ class Zone extends Component{
     const {zone} = this.props
     
     if(!zone){
-      return <div>Loading. from zone show..</div>
+      return <Loading />
     }
 
     return (

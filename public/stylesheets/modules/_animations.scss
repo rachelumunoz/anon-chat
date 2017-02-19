@@ -23,7 +23,7 @@
 
 @keyframes slide-over-left {
   0% {transform: translateX(0);}
-  100% {transform: translateX(-27%);}
+  100% {transform: translateX(-25%);}
 }
 
 .slide-over-right {
@@ -31,7 +31,7 @@
 }
 
 @keyframes slide-over-right {
-  0% {transform: translateX(-27%);}
+  0% {transform: translateX(-25%);}
   100% {transform: translateX(0);}
 }
 
