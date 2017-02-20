@@ -2,9 +2,10 @@
   position: relative;
   
   @include atMedium {
-    width: 100%;
+    width: 100vw;
     margin: auto 0;
     height: 90vh;
+    max-width: 100%;
 
     &__medium-one-fourth{
       width: 25%;

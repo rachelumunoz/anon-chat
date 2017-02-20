@@ -29,8 +29,6 @@ class ZonesIndex extends Component{
       zones: nextProps.zones,
       coordinates: nextProps.coordinates
     })
-
-
   }
 
   zones(){
