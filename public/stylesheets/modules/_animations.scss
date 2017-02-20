@@ -36,9 +36,26 @@
 }
 
 .expand-zone-map {
-  margin-left: 23.4375rem;
-  width: 90-%;
-  float: none;
+  float: left;
+  width: 75%;
+
+  
+
+  @include atMedium {
+    width: 95%;
+    float: none;
+    margin-left: 17.4375rem;
+  }
+
+
+  @include atLarge {
+    margin-left: 16.4375rem;
+  }
+
+  @include atLargest {
+    margin-left: 23.4375rem;
+    width: 93%;
+  }
 }
 
 // React CSS Transitions
