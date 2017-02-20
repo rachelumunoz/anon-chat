@@ -7,13 +7,13 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 
-var dbURL = 'mongodb://localhost:27017/yakyik'
+// var dbURL = 'mongodb://localhost:27017/yakyik'
 // process.env.MONGODB_URI
-mongoose.connect(dbURL, function(err, res){
+mongoose.connect(process.env.MONGODB_URI, function(err, res){
   if(err){
     console.log('DB connection failed', err)
   }else {
-    console.log('DB connection success', dbURL)
+    console.log('DB connection success', process.env.MONGODB_URI)
   }
 })
 
