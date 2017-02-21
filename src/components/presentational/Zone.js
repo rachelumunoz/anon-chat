@@ -56,6 +56,7 @@ class Zone extends Component{
         <StickyDiv>
           <div className="map map--medium" >
             <Map 
+              zoom={17}
               center={this.state.coordinates[0]}
               coordinates={this.state.coordinates}
             />

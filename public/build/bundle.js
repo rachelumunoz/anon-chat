@@ -57302,7 +57302,7 @@
 	        googleMapElement: _react2.default.createElement(
 	          _reactGoogleMaps.GoogleMap,
 	          {
-	            defaultZoom: 13,
+	            defaultZoom: this.props.zoom,
 	            defaultCenter: this.props.center },
 	          markers
 	        ) });
@@ -61720,6 +61720,7 @@
 	            'div',
 	            { className: 'map map--medium' },
 	            _react2.default.createElement(_presentational.Map, {
+	              zoom: 17,
 	              center: this.state.coordinates[0],
 	              coordinates: this.state.coordinates
 	            })
@@ -61867,12 +61868,6 @@
 	              'p',
 	              { className: 'control-panel__list__detail' },
 	              zone.zipCodes
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { className: 'control-panel__list__detail' },
-	              'comments: ',
-	              zone.numComments
 	            )
 	          )
 	        );
@@ -64255,7 +64250,8 @@
 	        });
 	      }
 	
-	      var location = { lat: 32.7269669, lng: -117.1647094 };
+	      var location = { lat: 34.0925084,
+	        lng: -118.4289687 };
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -64266,7 +64262,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { style: _styles2.default.map },
-	            _react2.default.createElement(_presentational.Map, { center: location, coordinates: this.state.coordinates })
+	            _react2.default.createElement(_presentational.Map, { zoom: 13, center: location, coordinates: this.state.coordinates })
 	          )
 	        )
 	      );

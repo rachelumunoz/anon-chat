@@ -42,13 +42,14 @@ class ZonesIndex extends Component{
       })
     }
 
-    const location = {lat: 32.7269669, lng:-117.1647094}
+    const location = {lat: 34.0925084
+, lng: -118.4289687}
 
     return (
       <div>
         <div style={styles.map}>
           <div style={styles.map}>
-            <Map center={location} coordinates={this.state.coordinates}/>
+            <Map zoom={13} center={location} coordinates={this.state.coordinates}/>
           </div>
         </div>
       </div>

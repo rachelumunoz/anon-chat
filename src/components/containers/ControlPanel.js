@@ -36,7 +36,7 @@ class ControlPanel extends Component{
             to={`/zone/${zone._id}`} >
             <h3 className="control-panel__list__item__title">{zone.title}</h3>
             <p className="control-panel__list__detail">{zone.zipCodes}</p>
-            <p className="control-panel__list__detail">comments: {zone.numComments}</p>
+            {/* <p className="control-panel__list__detail">comments: {zone.numComments}</p> */}
           </Link> 
         </li>
       )
