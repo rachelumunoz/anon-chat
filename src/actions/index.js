@@ -35,6 +35,7 @@ export function fetchZone(id){
 
 export function createComment(props){
   const request = axios.post(`${ROOT_URL}/comment`, props)
+  
   return {
     type: CREATE_COMMENT,
     payload: request

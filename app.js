@@ -7,16 +7,10 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 require('dotenv').config()
-// const MongoClient = require('mongodb').MongoClient;
 
-// MongoClient.connect(process.env.MONGODB_URI, (err, db) => {  
-//   if (err) {
-//     return console.log(err);
-//   }
-// })
 
 var dbURL = 'mongodb://localhost:27017/yakyik'
-process.env.MONGODB_URI
+// process.env.MONGODB_URI
 mongoose.connect(process.env.MONGODB_URI, function(err, res){
   if(err){
     console.log('DB connection failed', err)

@@ -17,7 +17,7 @@ export default function ZonesReducer(state=INITIAL_STATE, action){
       let lng = parseFloat(action.payload.data.results[0].geometry.location.lng)
       
  
-      console.log('state',state)
+      // console.log('state',state)
       
       let coords = Object.assign([], state.coordinates)
 
