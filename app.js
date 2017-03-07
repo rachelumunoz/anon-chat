@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 
 require('dotenv').config();
 
@@ -24,9 +24,16 @@ var api = require('./routes/api');
 
 var app = express();
 
+// app.options('*', cors({credentials: true, origin: true}))
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(express.static('public')); 
 
-app.options('*', cors({credentials: true, origin: true}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
