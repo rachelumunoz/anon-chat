@@ -4,16 +4,27 @@ import { Nav} from '../presentational'
 import '../../../public/stylesheets/style.scss'
 import classNames from 'classnames'
 
+import {connect} from 'react-redux'
+import {fetchZone} from '../../actions'
 
 
-export default class App extends Component {
+class App extends Component {
 
   constructor(){
     super()
 
     this.state = {
       collapsed: false,
-      arrowClicked: false
+      arrowClicked: false,
+      zone: []
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.zone !== nextProps.zone){
+      this.setState({
+        zone: nextProps.zone
+      })
     }
   }
 
@@ -25,6 +36,10 @@ export default class App extends Component {
       collapsed: !currentCollapsedState
     })
   } 
+
+  handleZoneClick(zoneID){
+    this.props.fetchZone(zoneId)
+  }
 
   render(){
     const oneFourthClass = classNames({
@@ -51,6 +66,9 @@ export default class App extends Component {
               controlPanelToggle={
                 this.controlPanelToggle.bind(this)
               } 
+              handleZoneClick={
+                this.handleZoneClick.bind(this)
+              }
             />
           </div>
           <div className={threeFourthClass}>
@@ -62,8 +80,10 @@ export default class App extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return {
+    zone: state.zones.zone
+  }
+}
 
-// make smart
-// make handleZoneClick
-  // pass down to ControlPanel
-  // will setState of currentZone
+export default connect(mapStateToProps, {fetchZone})(App)
