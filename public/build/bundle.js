@@ -39609,7 +39609,9 @@
 	var CLEAR_COMMENT_FORM = exports.CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM';
 	var CREATE_ZONE_COMMENT = exports.CREATE_ZONE_COMMENT = 'CREATE_ZONE_COMMENT';
 	
+	// process.env.port
 	var ROOT_URL = 'http://localhost:3000/api';
+	// const ROOT_URL = `https://the-anon-chat.herokuapp.com/api`
 	
 	function fetchZones() {
 	  var request = _axios2.default.get(ROOT_URL + '/zone');
@@ -39633,6 +39635,7 @@
 	
 	function createComment(props) {
 	  var request = _axios2.default.post(ROOT_URL + '/comment', props);
+	
 	  return {
 	    type: CREATE_COMMENT,
 	    payload: request
@@ -41194,7 +41197,7 @@
 	      var lat = parseFloat(action.payload.data.results[0].geometry.location.lat);
 	      var lng = parseFloat(action.payload.data.results[0].geometry.location.lng);
 	
-	      console.log('state', state);
+	      // console.log('state',state)
 	
 	      var coords = Object.assign([], state.coordinates);
 	

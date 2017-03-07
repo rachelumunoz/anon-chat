@@ -49,6 +49,7 @@ module.exports = {
             return
           }
         })
+      
       Zone
       .findById(zoneId)
       .populate('comments', null, null, {sort: {'timestamp': -1}})

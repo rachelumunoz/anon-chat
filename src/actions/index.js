@@ -9,9 +9,10 @@ export const CLEAR_COMMENT_FORM = 'CLEAR_COMMENT_FORM'
 export const CREATE_ZONE_COMMENT = 'CREATE_ZONE_COMMENT'
 
 
-const ROOT_URL = 'http://localhost:3000/api'
-
-
+// process.env.port
+const ROOT_URL = `http://localhost:3000/api`;
+// const ROOT_URL = `https://the-anon-chat.herokuapp.com/api`
+  
 export function fetchZones(){
   const request = axios.get(`${ROOT_URL}/zone`)
   

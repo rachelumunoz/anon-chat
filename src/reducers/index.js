@@ -4,7 +4,6 @@ import {ACCOUNT_SAVE_SUCCESS} from '../actions';
 
 import ZonesReducer from './ZonesReducer'
 
-
 const rootReducer = combineReducers({
   zones: ZonesReducer,
   form: formReducer

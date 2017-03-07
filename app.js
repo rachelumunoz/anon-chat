@@ -5,12 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+const cors = require('cors');
 
-require('dotenv').config()
-
+require('dotenv').config();
 
 var dbURL = 'mongodb://localhost:27017/yakyik'
-// process.env.MONGODB_URI
+
 mongoose.connect(process.env.MONGODB_URI, function(err, res){
   if(err){
     console.log('DB connection failed', err)
@@ -19,8 +19,6 @@ mongoose.connect(process.env.MONGODB_URI, function(err, res){
   }
 })
 
-
-
 var index = require('./routes/index');
 var api = require('./routes/api');
 
@@ -28,10 +26,10 @@ var app = express();
 
 app.use(express.static('public')); 
 
-
+app.options('*', cors({credentials: true, origin: true}))
 // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hjs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hjs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

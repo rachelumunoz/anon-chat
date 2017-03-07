@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router()
 // const ZoneController = require('../controllers/ZoneController')
 const controllers = require('../controllers');
+const cors = require('cors');
 
 router.get('/:resource', (req, res, next)=>{
   let resource = req.params.resource;
