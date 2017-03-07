@@ -22,6 +22,12 @@ class ControlPanel extends Component{
         zones: nextProps.zones
       })
     }
+
+    if(this.props.zone !== nextProps.zone){
+      this.setState({
+        zone: nextProps.zone
+      })
+    }
   }
 
   renderZones(){
@@ -33,6 +39,9 @@ class ControlPanel extends Component{
           <Link 
             activeStyle={styles.activeLink}
             key={i}
+            onClick={ () =>
+              this.props.fetchZone(zone._id)
+            }
             to={`/zone/${zone._id}`} >
             <h3 className="control-panel__list__item__title">{zone.title}</h3>
             <p className="control-panel__list__detail">{zone.zipCodes}</p>
@@ -51,9 +60,7 @@ class ControlPanel extends Component{
         <ol className="control-panel__list">
           <h1 className="control-panel__list__title">
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
-          <div>
             {this.renderZones()}
-          </div>
         </ol>
 
       </div>

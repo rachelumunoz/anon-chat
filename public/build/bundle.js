@@ -41334,7 +41334,6 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	
 	      var oneFourthClass = (0, _classnames2.default)({
 	        'container__one-fourth': true,
 	        'container__medium-one-fourth': true,
@@ -41360,12 +41359,14 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: oneFourthClass },
-	            _react2.default.createElement(_containers.ControlPanel, { controlPanelToggle: this.controlPanelToggle.bind(this) })
+	            _react2.default.createElement(_containers.ControlPanel, {
+	              controlPanelToggle: this.controlPanelToggle.bind(this)
+	            })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            { className: threeFourthClass },
-	            _react2.default.cloneElement(this.props.children, this.props)
+	            this.props.children
 	          )
 	        )
 	      );
@@ -41374,6 +41375,12 @@
 	
 	  return App;
 	}(_react.Component);
+	
+	// make smart
+	// make handleZoneClick
+	// pass down to ControlPanel
+	// will setState of currentZone
+	
 	
 	exports.default = App;
 
@@ -61846,10 +61853,18 @@
 	          zones: nextProps.zones
 	        });
 	      }
+	
+	      if (this.props.zone !== nextProps.zone) {
+	        this.setState({
+	          zone: nextProps.zone
+	        });
+	      }
 	    }
 	  }, {
 	    key: 'renderZones',
 	    value: function renderZones() {
+	      var _this2 = this;
+	
 	      return this.props.zones.map(function (zone, i) {
 	        return _react2.default.createElement(
 	          'li',
@@ -61861,6 +61876,9 @@
 	            {
 	              activeStyle: _styles2.default.activeLink,
 	              key: i,
+	              onClick: function onClick() {
+	                return _this2.props.fetchZone(zone._id);
+	              },
 	              to: '/zone/' + zone._id },
 	            _react2.default.createElement(
 	              'h3',
@@ -61897,11 +61915,7 @@
 	            ),
 	            ' '
 	          ),
-	          _react2.default.createElement(
-	            'div',
-	            null,
-	            this.renderZones()
-	          )
+	          this.renderZones()
 	        )
 	      );
 	    }

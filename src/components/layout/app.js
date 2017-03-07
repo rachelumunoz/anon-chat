@@ -4,6 +4,8 @@ import { Nav} from '../presentational'
 import '../../../public/stylesheets/style.scss'
 import classNames from 'classnames'
 
+
+
 export default class App extends Component {
 
   constructor(){
@@ -25,7 +27,6 @@ export default class App extends Component {
   } 
 
   render(){
-    
     const oneFourthClass = classNames({
       'container__one-fourth': true,
       'container__medium-one-fourth': true,
@@ -46,10 +47,14 @@ export default class App extends Component {
         <Nav />
         <div className="container">
           <div className={oneFourthClass}>
-            <ControlPanel controlPanelToggle={this.controlPanelToggle.bind(this)} />
+            <ControlPanel 
+              controlPanelToggle={
+                this.controlPanelToggle.bind(this)
+              } 
+            />
           </div>
           <div className={threeFourthClass}>
-            {React.cloneElement(this.props.children, this.props)}
+            {this.props.children}
           </div>
         </div>
       </div>
@@ -58,3 +63,7 @@ export default class App extends Component {
 }
 
 
+// make smart
+// make handleZoneClick
+  // pass down to ControlPanel
+  // will setState of currentZone
