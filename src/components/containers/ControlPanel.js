@@ -3,11 +3,10 @@ import {Zone, ZoneForm, CollapseControl} from '../presentational'
 import {connect} from 'react-redux'
 import {Link, IndexLink} from 'react-router'
 
-import {fetchZones, fetchZone} from '../../actions'
+import {fetchZones} from '../../actions'
 import styles from './styles'
 
 import classNames from 'classnames'
-import axios from 'axios'
 
 import '../../../public/stylesheets/style.scss' 
 
@@ -33,6 +32,9 @@ class ControlPanel extends Component{
           <Link 
             activeStyle={styles.activeLink}
             key={i}
+            onClick={ () =>
+              this.props.handleZoneClick(zone._id)
+            }
             to={`/zone/${zone._id}`} >
             <h3 className="control-panel__list__item__title">{zone.title}</h3>
             <p className="control-panel__list__detail">{zone.zipCodes}</p>
@@ -51,9 +53,7 @@ class ControlPanel extends Component{
         <ol className="control-panel__list">
           <h1 className="control-panel__list__title">
             <IndexLink to="/" activeClassName="active" activeStyle={styles.activeLink}> Current Zones</IndexLink> </h1>
-          <div>
             {this.renderZones()}
-          </div>
         </ol>
 
       </div>
@@ -63,9 +63,8 @@ class ControlPanel extends Component{
 
 function mapStateToProps(state){
   return { 
-    zones: state.zones.all,
-    zone: state.zones.zone
+    zones: state.zones.all
   }
 }
 
-export default connect(mapStateToProps, {fetchZones, fetchZone})(ControlPanel)
+export default connect(mapStateToProps, {fetchZones})(ControlPanel)

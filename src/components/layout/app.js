@@ -4,14 +4,27 @@ import { Nav} from '../presentational'
 import '../../../public/stylesheets/style.scss'
 import classNames from 'classnames'
 
-export default class App extends Component {
+import {connect} from 'react-redux'
+import {fetchZone} from '../../actions'
+
+
+class App extends Component {
 
   constructor(){
     super()
 
     this.state = {
       collapsed: false,
-      arrowClicked: false
+      arrowClicked: false,
+      zone: []
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.props.zone !== nextProps.zone){
+      this.setState({
+        zone: nextProps.zone
+      })
     }
   }
 
@@ -24,8 +37,11 @@ export default class App extends Component {
     })
   } 
 
+  handleZoneClick(zoneID){
+    this.props.fetchZone(zoneId)
+  }
+
   render(){
-    
     const oneFourthClass = classNames({
       'container__one-fourth': true,
       'container__medium-one-fourth': true,
@@ -46,10 +62,17 @@ export default class App extends Component {
         <Nav />
         <div className="container">
           <div className={oneFourthClass}>
-            <ControlPanel controlPanelToggle={this.controlPanelToggle.bind(this)} />
+            <ControlPanel 
+              controlPanelToggle={
+                this.controlPanelToggle.bind(this)
+              } 
+              handleZoneClick={
+                this.handleZoneClick.bind(this)
+              }
+            />
           </div>
           <div className={threeFourthClass}>
-            {React.cloneElement(this.props.children, this.props)}
+            {this.props.children}
           </div>
         </div>
       </div>
@@ -57,4 +80,10 @@ export default class App extends Component {
   }
 }
 
+function mapStateToProps(state){
+  return {
+    zone: state.zones.zone
+  }
+}
 
+export default connect(mapStateToProps, {fetchZone})(App)
