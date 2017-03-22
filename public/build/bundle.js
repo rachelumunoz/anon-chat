@@ -41331,7 +41331,7 @@
 	    }
 	  }, {
 	    key: 'handleZoneClick',
-	    value: function handleZoneClick(zoneID) {
+	    value: function handleZoneClick(zoneId) {
 	      this.props.fetchZone(zoneId);
 	    }
 	  }, {
@@ -41505,13 +41505,14 @@
 	        return _react2.default.createElement(
 	          _reactAddonsCssTransitionGroup2.default,
 	          {
+	            key: comment._id,
 	            transitionName: 'fade',
 	            transitionEnterTimeout: 500,
 	            transitionLeaveTimeout: 300
 	          },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'comments__container', key: comment._id },
+	            { className: 'comments__container' },
 	            _react2.default.createElement(_presentational.Comment, comment)
 	          )
 	        );

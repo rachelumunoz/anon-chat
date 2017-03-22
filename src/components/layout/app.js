@@ -37,7 +37,7 @@ class App extends Component {
     })
   } 
 
-  handleZoneClick(zoneID){
+  handleZoneClick(zoneId){
     this.props.fetchZone(zoneId)
   }
 

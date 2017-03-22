@@ -51,11 +51,12 @@ class Comments extends Component {
       return this.state.comments.map((comment)=>{
         return (
           <ReactCSSTransitionGroup 
+            key={comment._id}
             transitionName="fade"
             transitionEnterTimeout={500}
             transitionLeaveTimeout={300}
             >
-            <div className="comments__container" key={comment._id}>
+            <div className="comments__container" >
               <Comment {...comment}/>
             </div>
           </ReactCSSTransitionGroup>
