@@ -10,9 +10,9 @@ import promise from 'redux-promise'
 import thunk from 'redux-thunk'
 import createLogger from 'redux-logger';
 
-const logger = createLogger()
+// const logger = createLogger()
 
-const createStoreWithMiddleware = applyMiddleware(promise, thunk, logger)(createStore);
+const createStoreWithMiddleware = applyMiddleware(promise, thunk)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
