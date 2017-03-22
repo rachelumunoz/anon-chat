@@ -39610,8 +39610,8 @@
 	var CREATE_ZONE_COMMENT = exports.CREATE_ZONE_COMMENT = 'CREATE_ZONE_COMMENT';
 	
 	// process.env.port
-	var ROOT_URL = 'http://localhost:3000/api';
-	// const ROOT_URL = `https://the-anon-chat.herokuapp.com/api`
+	// const ROOT_URL = `http://localhost:3000/api`;
+	var ROOT_URL = 'https://the-anon-chat.herokuapp.com/api';
 	
 	function fetchZones() {
 	  var request = _axios2.default.get(ROOT_URL + '/zone');
