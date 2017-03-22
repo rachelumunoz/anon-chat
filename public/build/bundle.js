@@ -41196,24 +41196,8 @@
 	    case _index.GET_COORDINATES:
 	      var lat = parseFloat(action.payload.data.results[0].geometry.location.lat);
 	      var lng = parseFloat(action.payload.data.results[0].geometry.location.lng);
-	
-	      // console.log('state',state)
-	
 	      var coords = Object.assign([], state.coordinates);
-	
-	      // check if coord in state already
-	
-	
-	      // coords.forEach(coord=>{
-	      //   if(coord[lat] !== lat && coord.lng !== lng){
 	      coords.push({ lat: lat, lng: lng });
-	      //   }
-	      // })
-	
-	
-	      // console.log('coords', coords)
-	      // console.log('state coords',state.coordinates)
-	
 	      return _extends({}, state, { coordinates: coords });
 	    default:
 	      return state;

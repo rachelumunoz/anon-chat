@@ -15,25 +15,8 @@ export default function ZonesReducer(state=INITIAL_STATE, action){
     case GET_COORDINATES:
       let lat = parseFloat(action.payload.data.results[0].geometry.location.lat)
       let lng = parseFloat(action.payload.data.results[0].geometry.location.lng)
-      
- 
-      // console.log('state',state)
-      
       let coords = Object.assign([], state.coordinates)
-
-      // check if coord in state already
-
-
-      // coords.forEach(coord=>{
-      //   if(coord[lat] !== lat && coord.lng !== lng){
-          coords.push({lat, lng})
-      //   }
-      // })
-
-
-      // console.log('coords', coords)
-      // console.log('state coords',state.coordinates)
-
+      coords.push({lat, lng})
       return {...state, coordinates: coords}
     default:
       return state
