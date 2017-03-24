@@ -41332,7 +41332,7 @@
 	  }, {
 	    key: 'handleZoneClick',
 	    value: function handleZoneClick(zoneId) {
-	      this.props.fetchZone(zoneId);
+	      this.props.fetchZone(zoneID);
 	    }
 	  }, {
 	    key: 'render',
@@ -61703,17 +61703,9 @@
 	        });
 	      }
 	    }
-	
-	    // BUG -- update component based on route change
-	
 	  }, {
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
-	      // if(nextProps.params.id !== this.props.params.id){
-	      //   this.props.fetchZone(nextProps.params.id)
-	      // }
-	
-	      // need check like if nextProps.zone !== this.props.zone?  
 	      this.setState({
 	        zone: nextProps.zone,
 	        coordinates: nextProps.coordinates

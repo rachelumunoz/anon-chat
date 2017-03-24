@@ -31,14 +31,7 @@ class Zone extends Component{
     }  
   }
 
-
-  // BUG -- update component based on route change
   componentWillReceiveProps(nextProps){
-    // if(nextProps.params.id !== this.props.params.id){
-    //   this.props.fetchZone(nextProps.params.id)
-    // }
-
-    // need check like if nextProps.zone !== this.props.zone?  
     this.setState({
       zone: nextProps.zone,
       coordinates: nextProps.coordinates
